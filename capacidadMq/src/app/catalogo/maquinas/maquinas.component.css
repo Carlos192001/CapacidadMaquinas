@@ -1,0 +1,119 @@
+body{
+    font-family: Arial;
+}
+h1{
+    font-family: Arial Black;
+}
+.form-control, .form-select{
+    border-color: rgb(0, 132, 255);
+}
+.contenido1{
+    margin: 5% 10% 1% 10%;
+}
+.contenido2{
+    margin: 0 5%;
+    background-color: rgba(191, 189, 192, 0.596);
+    padding: 1%;
+    border-radius: 10px;
+}
+.titulo{
+    display: flex;
+    justify-content: center;
+}
+
+/*PARA LA TABLA*/
+.table-wrapper {
+    overflow-x: auto;
+    max-height: 500px;
+}
+
+.table-wrapper table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.table-wrapper th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    font-family: Arial Black;
+}
+
+.table-wrapper th,
+.table-wrapper td {
+    padding: 10px;
+    text-align: left;
+    white-space: nowrap; /* Evita que el texto se ajuste automáticamente y cause la expansión de las celdas */
+    overflow: hidden; /* Oculta el contenido que desborda las celdas */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) cuando el texto desborda las celdas */
+}
+/*para la tarjeta*/
+.fondo-oscuro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
+    z-index: 9998; /* Z-index inferior para asegurar que esté detrás de la tarjeta flotante */
+}
+
+.tarjeta-flotante {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 9999; /* Z-index superior para asegurar que esté encima del fondo oscuro */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formulario-maquina {
+   
+}
+
+
+/*Estilos para pantallas medianas*/
+@media screen and (max-width: 992px) {
+    .contenido1{
+        margin-top:10%;
+    }
+    .table-wrapper {
+        margin: 1% 3%; /* Ajusta el margen para pantallas medianas */
+    }
+
+}
+/* Estilos para dispositivos con una pantalla más pequeña */
+@media screen and (max-width: 768px) {
+    .contenido1{
+        margin-top:10%;
+    }
+    .table-wrapper {
+        margin: 1% 2%; /* Ajusta el margen para pantallas más pequeñas */
+    }
+    
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 6px; /* Reduce el espacio entre celdas para pantallas más pequeñas */
+    }
+}
+
+/* Estilos para pantallas extra pequeñas */
+@media screen and (max-width: 576px) {
+    .table-wrapper {
+        margin: 1% 1%; /* Ajusta el margen para pantallas extra pequeñas */
+    }
+    
+    .table-wrapper th,
+    .table-wrapper td {
+        padding: 4px; /* Reduce aún más el espacio entre celdas para pantallas extra pequeñas */
+    }
+}
+
+
