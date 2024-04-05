@@ -1,41 +1,39 @@
-<nav class="navbar bg-body-tertiary fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Offcanvas navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-        <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-          <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex mt-3" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-        </div>
+<nav class="navbar">
+  <!-- Botón de menú -->
+  <button class="menu-btn" (click)="toggleMenu()">
+    <!--<span class="menu-icon">&#9776;</span>  Icono de menú (las tres líneas horizontales) -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"><path fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+  
+  <!-- Menú vertical -->
+  <div class="menu-vertical" [ngClass]="{'open': menuAbierto}">
+    <div class="d-flex flex-row-reverse">
+      <div class="p-2">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="toggleMenu()"></button>
       </div>
     </div>
-  </nav>
+    <div class="d-flex flex-column mb-3" id="d-flex">
+      <div class="p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19,98048780487805" viewBox="0 0 1025 1024"><path fill="#005ba2" d="M960.428 576h-512q-27 0-45.5-19t-18.5-45.5t18.5-45t45.5-18.5h512q27 0 45.5 18.5t18.5 45t-18.5 45.5t-45.5 19m0-384h-512q-27 0-45.5-19t-18.5-45.5t18.5-45t45.5-18.5h512q27 0 45.5 18.5t18.5 45t-18.5 45.5t-45.5 19m-832 832q-53 0-90.5-37.5T.428 896t37.5-90.5t90.5-37.5t90.5 37.5t37.5 90.5t-37.5 90.5t-90.5 37.5m0-384q-53 0-90.5-37.5T.428 512t37.5-90.5t90.5-37.5t90.5 37.5t37.5 90.5t-37.5 90.5t-90.5 37.5m0-384q-53 0-90.5-37.5T.428 128t37.5-90.5t90.5-37.5t90.5 37.5t37.5 90.5t-37.5 90.5t-90.5 37.5m320 576h512q27 0 45.5 18.5t18.5 45.5t-18.5 45.5t-45.5 18.5h-512q-27 0-45.5-18.5t-18.5-45.5t18.5-45.5t45.5-18.5"/></svg>
+        Catalagó
+      </div>
+      <div class="p-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 17 16"><path fill="#005ba2" fill-rule="evenodd" d="M15.689.041h-5.606v6.876h6.875V1.299c0-.694-.567-1.258-1.269-1.258m-.645 4.004h-3.106V2.938h3.106zM10 15.958h5.674c.71 0 1.284-.569 1.284-1.274V9.042H10zm1.953-4.989h3.07v1.062h-3.07zm0 1.984H15v1.094h-3.047zM7.898.041H2.326A1.25 1.25 0 0 0 1.083 1.3v5.623h6.815zM6 4.023h-.984v1.039H3.98V4.023H2.959V2.982H3.98V1.98h1.036v1.002H6zM1.083 14.676c0 .709.562 1.282 1.255 1.282h5.62V9H1.083zm2.36-3.967l1.046 1.047l1.048-1.049l.732.732l-1.048 1.049l1.061 1.061l-.735.736l-1.062-1.061l-1.022 1.021l-.732-.732l1.021-1.021l-1.045-1.047z"/></svg>
+        Calcular Ocupación
+      </div>
+      <div class="p-2">Salir</div>
+    </div>
+    
+  </div>
+  
+  <!-- Contenido -->
+  <div class="contenido" [ngClass]="{'desplazado': menuAbierto}">
+    <!-- Contenido principal -->
+    <h3>Bienvenido</h3>
+    <!-- Otro contenido -->
+  </div>
+</nav>
+<div class="contenido" [ngClass]="{'desplazado': menuAbierto}">
+  <app-maquinas></app-maquinas>
+</div>
+

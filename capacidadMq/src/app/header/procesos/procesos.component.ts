@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class ProcesosComponent {
 
+  menuAbierto: boolean = false;
+
+  toggleMenu() {
+    this.menuAbierto = !this.menuAbierto;
+  }
+
 }

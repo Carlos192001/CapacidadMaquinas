@@ -9,6 +9,9 @@ import { PlantasComponent } from './catalogo/plantas/plantas.component';
 import { PartesComponent } from './catalogo/partes/partes.component';
 import { FuncionesComponent } from './catalogo/funciones/funciones.component';
 import { DepartamentosComponent } from './catalogo/departamentos/departamentos.component';
+import { CalcularCapacidadComponent } from './ocupacionMq/calcular-capacidad/calcular-capacidad.component';
+import { FormsModule} from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,11 +21,14 @@ import { DepartamentosComponent } from './catalogo/departamentos/departamentos.c
     PlantasComponent,
     PartesComponent,
     FuncionesComponent,
-    DepartamentosComponent
+    DepartamentosComponent,
+    CalcularCapacidadComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

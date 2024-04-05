@@ -8,7 +8,7 @@ h1{
     border-color: rgb(0, 132, 255);
 }
 .contenido1{
-    margin: 5% 10% 1% 10%;
+    margin: 1% 10% 1% 10%;
 }
 .contenido2{
     margin: 0 5%;
@@ -74,9 +74,9 @@ h1{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.formulario-maquina {
+/*.formulario-maquina {
    
-}
+}*/
 
 
 /*Estilos para pantallas medianas*/
