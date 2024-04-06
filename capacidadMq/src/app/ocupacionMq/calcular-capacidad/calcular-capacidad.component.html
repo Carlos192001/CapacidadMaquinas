@@ -3,10 +3,10 @@
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-              <a class="nav-link active">Pestaña 1</a>
+              <a class="nav-link active">Datos a registrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Pestaña 2</a>
+              <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculadoss</a>
             </li>
             <!-- Agrega más pestañas si es necesario -->
           </ul>
@@ -76,7 +76,7 @@
                     <div class="card d-flex align-items-center" id="cardporcentaje">
                         <h4>Proyectado de ocupacion anual</h4>
                         <div class="porcentaje d-flex align-items-center justify-content-center">
-                            70%
+                            {{ProyectadoOcupacionAnual}}%
                         </div>
                     </div>
                 </div>
@@ -88,17 +88,24 @@
         <div class="card-header">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-              <a class="nav-link" (click)="verPestania(true)">Pestaña 1</a>
+              <a class="nav-link" (click)="verPestania(true)">Datos a registrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active">Pestaña 2</a>
+              <a class="nav-link active">Datos calculados</a>
             </li>
             <!-- Agrega más pestañas si es necesario -->
           </ul>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Contenido de la card</h5>
-          <p class="card-text">Aquí puedes colocar cualquier contenido para la card.</p>
+          <h5 class="card-title">Datos Procesados</h5>
+          <p class="card-text">Horas por semana por turno: {{HoraSemanaTurno}}</p>
+          <p class="card-text">Ensambles por minuto: {{ensamblesXminuto}}</p>
+          <p class="card-text">Ensambles por hora: {{ensamblesXhora}}</p>
+          <p class="card-text">Requerimiento semanal: {{requerimientoSem}}</p>
+          <p class="card-text">Horas necesarias para requerimiento diario: {{hrsNcesRequeDiario}}</p>
+          <p class="card-text">Tiempo efectivo diario: {{tiempoEfecDiario}} seg</p>
+          <p class="card-text">Ensambles requeridos por día: {{ensamReqXdia}}</p>
+          <p class="card-text">Ensambles requeridos por día mas Scrap: {{ensamXdiaMasScrap}}</p>
         </div>
     </div>
       
