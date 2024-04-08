@@ -21,11 +21,11 @@ export class CalcularCapacidadComponent {
   demorasInevitables:number=0;
   cavidades:number=0;
   scrapLiberado:number=0;
-  vendedorEncargado:string='';
+  observaciones:string='';
   estatus:boolean=true;
 
   //variables para el calculo de la ocupacion de la máquina
-  HoraSemanaTurno:number=0;
+  horaSemanaTurno:number=0;
   ensamblesXminuto:number=0;
   ensamblesXhora:number=0;
   requerimientoSem:number=0;
@@ -54,7 +54,7 @@ export class CalcularCapacidadComponent {
       "demorasInevitables" : this.demorasInevitables,
       "cavidades" : this.cavidades,
       "scrapLiberado" : this.scrapLiberado,
-      "vendedorEncargado" : this.vendedorEncargado,
+      "vendedorEncargado" : this.observaciones,
       "estatus" : this.estatus
     }
     this.calcularUso(bodyData);
@@ -62,8 +62,8 @@ export class CalcularCapacidadComponent {
   }
 
   calcularUso(dato:any){
-    this.HoraSemanaTurno = dato.horasDelTurno * dato.diasAlaborarSemana * dato.turnosAlDia;
-    console.log("horas por semana por turno:",this.HoraSemanaTurno);
+    this.horaSemanaTurno = dato.horasDelTurno * dato.diasAlaborarSemana * dato.turnosAlDia;
+    console.log("horas por semana por turno:",this.horaSemanaTurno);
 
     let ensamblesPorminuto = dato.cortesXminuto / 46; //aqui se va a cambiar los 46, pero eso viene del catalogo
     this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); // o Number(ensamblesPorminuto.toFixed(3));

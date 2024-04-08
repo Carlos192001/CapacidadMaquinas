@@ -6,7 +6,7 @@
               <a class="nav-link active">Datos a registrar</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculadoss</a>
+              <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculados</a>
             </li>
             <!-- Agrega más pestañas si es necesario -->
           </ul>
@@ -62,8 +62,8 @@
                             <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPorcentajeScrap" required>
                         </div>
                         <div class="col-md-4">
-                            <label for="validarVendedor" class="form-label">Vendedor Encargado</label>
-                            <input type="text" [(ngModel)]="vendedorEncargado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarVendedor" required>
+                            <label for="validarVendedor" class="form-label">Observaciones</label>
+                            <input type="text" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" class="form-control" id="validarVendedor" required>
                         </div>
                         <div class="col-12">
                           <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Submit form</button>
@@ -98,7 +98,7 @@
         </div>
         <div class="card-body">
           <h5 class="card-title">Datos Procesados</h5>
-          <p class="card-text">Horas por semana por turno: {{HoraSemanaTurno}}</p>
+          <p class="card-text">Horas por semana por turno: {{horaSemanaTurno}}</p>
           <p class="card-text">Ensambles por minuto: {{ensamblesXminuto}}</p>
           <p class="card-text">Ensambles por hora: {{ensamblesXhora}}</p>
           <p class="card-text">Requerimiento semanal: {{requerimientoSem}}</p>
