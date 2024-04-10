@@ -13,6 +13,8 @@ import { CalcularCapacidadComponent } from './ocupacionMq/calcular-capacidad/cal
 import { FormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { InyectorasComponent } from './ocupacionMq/inyectoras/inyectoras.component';
+import { TroqueladorasComponent } from './ocupacionMq/troqueladoras/troqueladoras.component';
+import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { InyectorasComponent } from './ocupacionMq/inyectoras/inyectoras.compone
     FuncionesComponent,
     DepartamentosComponent,
     CalcularCapacidadComponent,
-    InyectorasComponent
+    InyectorasComponent,
+    TroqueladorasComponent,
+    HornosComponent
   ],
   imports: [
     BrowserModule,

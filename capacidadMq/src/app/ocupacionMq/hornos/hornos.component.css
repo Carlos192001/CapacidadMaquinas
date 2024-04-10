@@ -1,0 +1,19 @@
+.nav-link{
+    cursor: pointer;
+}
+
+#cardporcentaje{
+    padding: 3%;
+}
+.porcentaje{
+    background-color: #005ba2;
+    color: #f5f9fb;
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+    font-size: 40px;
+    font-weight: bold;
+}
+.card-text{
+    font-weight: bold;
+}

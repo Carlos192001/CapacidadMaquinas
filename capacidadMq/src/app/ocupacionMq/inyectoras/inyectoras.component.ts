@@ -107,12 +107,14 @@ export class InyectorasComponent {
       this.pzaTeoricasXprimerTurno = 0;
       console.log(this.pzaTeoricasXsegundoTurno);
     }
-    this.numTurnosRequeridos = Number((this.turnoInicial + this.turnoConsecutivo).toFixed(1));
+    
+    this.numTurnosRequeridos = this.turnoInicial + this.turnoConsecutivo;                   //Number((this.turnoInicial + this.turnoConsecutivo).toFixed(1));
     console.log(this.numTurnosRequeridos);
 
     if (this.pzaTeoricasXprimerTurno) {
-      this.pzaProdEnTurnos = (dato.turnoInicial*calculoPzaTeoricas)+(dato.turnoConsecutivo*this.pzaTeoricasXsegundoTurno);
-      console.log(this.pzaProdEnTurnos);
+      let calculoPzaProdEnTurnos = (dato.turnoInicial*calculoPzaTeoricas)+(dato.turnoConsecutivo*this.pzaTeoricasXsegundoTurno)
+      this.pzaProdEnTurnos = Number(calculoPzaProdEnTurnos.toFixed(3));
+      console.log(calculoPzaProdEnTurnos);
     } else {
       this.pzaProdEnTurnos=0;
       console.log(this.pzaProdEnTurnos);
@@ -126,8 +128,10 @@ export class InyectorasComponent {
       console.log(this.requerimientoSem);
     }
 
+    let calculoProyectadoAnual = this.numTurnosRequeridos / (dato.diasAlaborarSemana * dato.turnosAlDia);
+    let calculoConPorcentaje = calculoProyectadoAnual * 100;
     if (this.numTurnosRequeridos) {
-      this.proyectadoOcupAnual = (this.numTurnosRequeridos / dato.diasAlaborarSemana) * dato.turnosAlDia;
+      this.proyectadoOcupAnual = Number(calculoConPorcentaje.toFixed(2));
     } else {
       this.proyectadoOcupAnual=0;
     }
