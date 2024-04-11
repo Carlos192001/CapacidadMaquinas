@@ -7,11 +7,13 @@ import { InyectorasComponent } from './ocupacionMq/inyectoras/inyectoras.compone
 import { TroqueladorasComponent } from './ocupacionMq/troqueladoras/troqueladoras.component';
 import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
 import { FluxeadorasComponent } from './ocupacionMq/fluxeadoras/fluxeadoras.component';
+import { FinpressComponent } from './ocupacionMq/finpress/finpress.component';
 
 const routes: Routes = [
   {path:'catalogo/maquinas',component:MaquinasComponent},
   {path:'header',component:ProcesosComponent},
   {path:'calcular',component:CalcularCapacidadComponent},
+  {path:'finpress',component:FinpressComponent},
   {path:'inyectoras',component:InyectorasComponent},
   {path:'troqueladoras',component:TroqueladorasComponent},
   {path:'hornos',component:HornosComponent},

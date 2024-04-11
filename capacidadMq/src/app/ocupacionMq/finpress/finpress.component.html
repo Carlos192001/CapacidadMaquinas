@@ -1,0 +1,115 @@
+<body>
+    <div class="card" *ngIf="pestania1">
+      <h5 class="card-header">CAPACIDAD DE MÁQUINAS</h5>
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link active">Datos a registrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculados</a>
+            </li>
+            <!-- Agrega más pestañas si es necesario -->
+          </ul>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">Datos de ocupación de la máquina</h2>
+          <section class="contenido d-flex">
+            <div class="p-2 w-50">
+                <div class="finpress" style="padding: 0 5%;">
+                    <form class="row g-3">
+                        <div class="col-md-4">
+                          <label for="validarCortes" class="form-label">Cortes por minutos</label>
+                          <input type="number" [(ngModel)]="cortesXminuto" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCortes" required>
+                        </div>
+                        <div class="col-md-4">
+                          <label for="validarRequerimiento" class="form-label">Requerimiento anual</label>
+                          <input type="number" [(ngModel)]="requeriAnualAutilizar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarRequerimiento"  required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarSemanas" class="form-label">Semanas a laborar</label>
+                            <input type="number" [(ngModel)]="semanasAlaborar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarSemanas" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarDias" class="form-label">Días a laborar en la semana</label>
+                            <input type="number" [(ngModel)]="diasAlaborarSemana" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDias" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarHoras" class="form-label">Horas del turno</label>
+                            <input type="number" [(ngModel)]="horasDelTurno" [ngModelOptions]="{standalone: true}" class="form-control" id="validarHoras" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarTurnos" class="form-label">Turnos al día</label>
+                            <input type="number" [(ngModel)]="turnosAlDia" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnos" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarTiempoST" class="form-label">Tiempo Set-Up</label>
+                            <input type="number" [(ngModel)]="tiempoSetUp" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoST" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarTiempoMP" class="form-label">Tiempo muerto planeado</label>
+                            <input type="number" [(ngModel)]="tiempoMuertoPlan" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoMP" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarDemoras" class="form-label">Demoras inevitables</label>
+                            <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarCavidades" class="form-label">Cavidades (piezas por corte)</label>
+                            <input type="number" [(ngModel)]="cavidades" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCavidades" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarPorcentajeScrap" class="form-label">Porcentaje Scrap liberado</label>
+                            <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPorcentajeScrap" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="validarVendedor" class="form-label">Observaciones</label>
+                            <textarea class="form-control" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" id="validarVendedor" rows="1"></textarea>
+                        </div>
+                        <div class="col-12">
+                          <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Calcular</button>
+                        </div>
+                      </form>
+                </div>
+            </div>
+            <div class="p-2 w-50 ">
+                <div class="d-flex justify-content-center">
+                    <div class="card d-flex align-items-center" id="cardporcentaje">
+                        <h4>Proyectado de ocupacion anual</h4>
+                        <div class="porcentaje d-flex align-items-center justify-content-center">
+                            {{ProyectadoOcupacionAnual}}%
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </section>
+        </div>
+    </div>
+    <div class="card" *ngIf="pestania2">
+      <h5 class="card-header">CAPACIDAD DE MÁQUINAS</h5>
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link" (click)="verPestania(true)">Datos a registrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active">Datos calculados</a>
+            </li>
+            <!-- Agrega más pestañas si es necesario -->
+          </ul>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Resultados de los cálculos</h5>
+          <p class="card-text"><strong>Horas por semana por turno:</strong> {{horaSemanaTurno}}</p>
+          <p class="card-text"><strong>Ensambles por minuto:</strong> {{ensamblesXminuto}}</p>
+          <p class="card-text"><strong>Ensambles por hora:</strong> {{ensamblesXhora}}</p>
+          <p class="card-text"><strong>Requerimiento semanal: </strong>{{requerimientoSem}}</p>
+          <p class="card-text"><strong>Horas necesarias para requerimiento diario:</strong> {{hrsNcesRequeDiario}}</p>
+          <p class="card-text"><strong>Tiempo efectivo diario:</strong> {{tiempoEfecDiario}}</p>
+          <p class="card-text"><strong>Ensambles requeridos por día:</strong> {{ensamReqXdia}}</p>
+          <p class="card-text"><strong>Ensambles requeridos por día mas Scrap:</strong> {{ensamXdiaMasScrap}}</p>
+        </div>
+    </div>
+      
+      
+</body>

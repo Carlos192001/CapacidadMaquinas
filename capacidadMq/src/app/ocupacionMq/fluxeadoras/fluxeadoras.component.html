@@ -74,6 +74,10 @@
                             <input type="number" [(ngModel)]="numLadosAfluxear" [ngModelOptions]="{standalone: true}" class="form-control" id="validarLadosFluxear" required>
                           </div>
                           <div class="col-md-4">
+                            <label for="validarScrapLiberado" class="form-label">Porcentaje de Scrap liberado</label>
+                            <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarScrapLiberado" required>
+                          </div>
+                          <div class="col-md-4">
                             <label for="validarObservaciones" class="form-label">Observaciones</label>
                             <input type="text" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" class="form-control" id="validarObservaciones" required>
                           </div>
@@ -108,25 +112,16 @@
             <!-- Agrega más pestañas si es necesario -->
           </ul>
         </div>
-        <!--<div class="card-body">
-          <h3 class="card-title">Datos Procesados</h3>
-          <p class="card-text">Horas por semana por turno: {{}}</p>
-          <p class="card-text">Longitud total JIG DUMMY: {{}} </p>
-          <p class="card-text">Longitud total JIG producto: {{}}</p>
-          <p class="card-text">Requerimiento semanal: {{}} </p>
-          <p class="card-text">Requerimiento diario: {{}} </p>
-          <p class="card-text">Número de columnas DUMMY'S: {{}} </p>
-          <p class="card-text">Número de columnas de JIG producto: {{}} </p>
-          <p class="card-text">Tiempo disponible de horno al día: {{}}</p>
-          <p class="card-text">Tiempo de horneado por pza 1er DUMMY: {{}}</p>
-          <p class="card-text">Tiempo de horneado por pza resto de DUMMY: {{}}</p>
-          <p class="card-text">Tiempo de horneado por pieza producto: {{}}</p>
-          <p class="card-text">Tiempo del recorrido del 1er DUMMY: {{}}</p>
-          <p class="card-text">Tiempo del recorrido de resto de DUMMY'S: {{}}</p>
-          <p class="card-text">Tiempo del recorrido de producto: {{}}</p>
-          <p class="card-text">Ocupacion 1er DUMMY: {{}}</p>
-          <p class="card-text">Ocupacion resto de DUMMY'S: {{}}</p>
-          <p class="card-text">Ocupacion producto: {{}}</p>
-        </div>-->
+        <div class="card-body">
+          <h3 class="card-title">Resultados de los cálculos</h3>
+          <p class="card-text"><strong>Horas por semana por turno:</strong> {{HoraSemanaTurno}}</p>
+          <p class="card-text"><strong>Tiempo muerto primera columna de piezas:</strong> {{timeMuertoPrimeraColum}} </p>
+          <p class="card-text"><strong>Tiempo ciclo:</strong> {{tiempoCiclo}}</p>
+          <p class="card-text"><strong>Piezas por hora:</strong> {{pzaXhora}} </p>
+          <p class="card-text"><strong>Horas efectivas por turno:</strong> {{horasEfectivasXturno}} </p>
+          <p class="card-text"><strong>Horas por día para requerimiento semanal:</strong> {{hrsXdiaRequeriSemanal}} </p>
+          <p class="card-text"><strong>Piezas por turno:</strong> {{pzaXturno}} </p>
+          <p class="card-text"><strong>Requerimiento semanal:</strong> {{requerimientoSem}}</p>
+        </div>
     </div>
 </body>

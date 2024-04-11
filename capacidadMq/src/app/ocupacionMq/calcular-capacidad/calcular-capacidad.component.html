@@ -1,113 +1,48 @@
 <body>
-    <div class="card" *ngIf="pestania1">
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class="nav-link active">Datos a registrar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculados</a>
-            </li>
-            <!-- Agrega más pestañas si es necesario -->
-          </ul>
+  <div class="d-flex flex-column mb-3 " id="contenedor">
+    <div class="p-2" id="maquina" *ngIf="datosMaquina">
+      <div class="card">
+        <h5 class="card-header">CAPACIDAD DE MÁQUINAS</h5>
+        <div class="card-body d-flex ">
+          <!--<h5 class="card-title">Special title treatment</h5>-->
+          <div class="p-2 flex-fill d-flex justify-content-center" >
+            <select class="form-select" size="6" style="width: 80%;"  aria-label="Default select example">
+              <option disabled>Seleccione una máquina</option>
+              <option value="1">FIN PRESS ECKO</option>
+              <option value="2">FIN PRESS LIVERNOIS F275 S/S</option>
+              <option value="3">ThYree</option>
+              <option value="1">OTDne</option>
+              <option value="2">TwoG</option>
+              <option value="3">TFShree</option>
+              <option value="1">TDOne</option>
+              <option value="2">TJwo</option>
+              <option value="3">ThrTDee</option>
+            </select>
+          </div>
+          <div class="p-2 flex-fill d-flex justify-content-center" >
+            <select class="form-select" size="6" style="width: 80%;"  aria-label="Default select example">
+              <option disabled>Seleccione un número de parte</option>
+              <option value="1">ALETA RADIADOR VERSA</option>
+              <option value="2">ALETA CONDENSADOR VERSA L02BE</option>
+              <option value="3">Three</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="p-5 ">
+            <button class="btn btn-primary" (click)="calcularCapacidad()">Calcular</button>
+          </div>
         </div>
-        <div class="card-body">
-          <h2 class="card-title">Datos de ocupación de la máquina</h2>
-          <section class="contenido d-flex">
-            <div class="p-2 w-50">
-                <div class="finpress" style="padding: 0 5%;">
-                    <form class="row g-3">
-                        <div class="col-md-4">
-                          <label for="validarCortes" class="form-label">Cortes por minutos</label>
-                          <input type="number" [(ngModel)]="cortesXminuto" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCortes" required>
-                        </div>
-                        <div class="col-md-4">
-                          <label for="validarRequerimiento" class="form-label">Requerimiento anual</label>
-                          <input type="number" [(ngModel)]="requeriAnualAutilizar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarRequerimiento"  required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarSemanas" class="form-label">Semanas a laborar</label>
-                            <input type="number" [(ngModel)]="semanasAlaborar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarSemanas" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarDias" class="form-label">Días a laborar en la semana</label>
-                            <input type="number" [(ngModel)]="diasAlaborarSemana" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDias" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarHoras" class="form-label">Horas del turno</label>
-                            <input type="number" [(ngModel)]="horasDelTurno" [ngModelOptions]="{standalone: true}" class="form-control" id="validarHoras" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarTurnos" class="form-label">Turnos al día</label>
-                            <input type="number" [(ngModel)]="turnosAlDia" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnos" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarTiempoST" class="form-label">Tiempo Set-Up</label>
-                            <input type="number" [(ngModel)]="tiempoSetUp" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoST" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarTiempoMP" class="form-label">Tiempo muerto planeado</label>
-                            <input type="number" [(ngModel)]="tiempoMuertoPlan" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoMP" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarDemoras" class="form-label">Demoras inevitables</label>
-                            <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarCavidades" class="form-label">Cavidades (piezas por corte)</label>
-                            <input type="number" [(ngModel)]="cavidades" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCavidades" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarPorcentajeScrap" class="form-label">Porcentaje Scrap liberado</label>
-                            <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPorcentajeScrap" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="validarVendedor" class="form-label">Observaciones</label>
-                            <input type="text" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" class="form-control" id="validarVendedor" required>
-                        </div>
-                        <div class="col-12">
-                          <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Submit form</button>
-                        </div>
-                      </form>
-                </div>
-            </div>
-            <div class="p-2 w-50 ">
-                <div class="d-flex justify-content-center">
-                    <div class="card d-flex align-items-center" id="cardporcentaje">
-                        <h4>Proyectado de ocupacion anual</h4>
-                        <div class="porcentaje d-flex align-items-center justify-content-center">
-                            {{ProyectadoOcupacionAnual}}%
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </section>
-        </div>
+      </div>
     </div>
-    <div class="card" *ngIf="pestania2">
-        <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class="nav-link" (click)="verPestania(true)">Datos a registrar</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active">Datos calculados</a>
-            </li>
-            <!-- Agrega más pestañas si es necesario -->
-          </ul>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Datos Procesados</h5>
-          <p class="card-text">Horas por semana por turno: {{horaSemanaTurno}}</p>
-          <p class="card-text">Ensambles por minuto: {{ensamblesXminuto}}</p>
-          <p class="card-text">Ensambles por hora: {{ensamblesXhora}}</p>
-          <p class="card-text">Requerimiento semanal: {{requerimientoSem}}</p>
-          <p class="card-text">Horas necesarias para requerimiento diario: {{hrsNcesRequeDiario}}</p>
-          <p class="card-text">Tiempo efectivo diario: {{tiempoEfecDiario}} seg</p>
-          <p class="card-text">Ensambles requeridos por día: {{ensamReqXdia}}</p>
-          <p class="card-text">Ensambles requeridos por día mas Scrap: {{ensamXdiaMasScrap}}</p>
-        </div>
+    <div class="p-2" id="interactivo" *ngIf="!datosMaquina">
+      <div class="card-body">
+        <app-finpress *ngIf="formFinPress"></app-finpress>
+      </div>
     </div>
-      
-      
+  </div>
 </body>

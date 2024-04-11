@@ -16,6 +16,7 @@ import { InyectorasComponent } from './ocupacionMq/inyectoras/inyectoras.compone
 import { TroqueladorasComponent } from './ocupacionMq/troqueladoras/troqueladoras.component';
 import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
 import { FluxeadorasComponent } from './ocupacionMq/fluxeadoras/fluxeadoras.component';
+import { FinpressComponent } from './ocupacionMq/finpress/finpress.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FluxeadorasComponent } from './ocupacionMq/fluxeadoras/fluxeadoras.comp
     InyectorasComponent,
     TroqueladorasComponent,
     HornosComponent,
-    FluxeadorasComponent
+    FluxeadorasComponent,
+    FinpressComponent
   ],
   imports: [
     BrowserModule,
