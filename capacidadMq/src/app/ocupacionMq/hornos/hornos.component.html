@@ -58,7 +58,7 @@
                               <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required>
                           </div>
                           <div class="col-md-4">
-                              <label for="validarDummys" class="form-label">Cantidad de DUMMY'S</label>
+                              <label for="validarDummys" class="form-label">Cantidad de DUMMY'S a usar</label>
                               <input type="number" [(ngModel)]="cantidadDummys" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDummys" required>
                           </div>
                           <div class="col-md-4">
@@ -129,15 +129,24 @@
           </ul>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Datos Procesados</h5>
+          <h3 class="card-title">Datos Procesados</h3>
           <p class="card-text">Horas por semana por turno: {{horaSemanaTurno}}</p>
-          <p class="card-text">Tiempo Set-Up: </p>
-          <p class="card-text">Requerimiento diario: {{requerimientoDiario}}</p>
-          <p class="card-text">Piezas teoricas para primer turno: </p>
-          <p class="card-text">Piezas teoricas para segundo turno: </p>
-          <p class="card-text">Porcentaje turno requeridios: </p>
-          <p class="card-text">Piezas producidas en turnos para requerimiento semanal: </p>
-          <p class="card-text">Requerimiento semanal: {{requerimientoSem}}</p>
+          <p class="card-text">Longitud total JIG DUMMY: {{longTotalJigDummy}} </p>
+          <p class="card-text">Longitud total JIG producto: {{longTotalJigProducto}}</p>
+          <p class="card-text">Requerimiento semanal: {{requerimientoSem}} </p>
+          <p class="card-text">Requerimiento diario: {{requerimientoDiario}} </p>
+          <p class="card-text">Número de columnas DUMMY'S: {{numColDummys}} </p>
+          <p class="card-text">Número de columnas de JIG producto: {{numColJigProducto}} </p>
+          <p class="card-text">Tiempo disponible de horno al día: {{timeDisponibleHornoAlDia}}</p>
+          <p class="card-text">Tiempo de horneado por pza 1er DUMMY: {{horneadoXpzaPrimerDummy}}</p>
+          <p class="card-text">Tiempo de horneado por pza resto de DUMMY: {{horneadoXpzaRestoDummys}}</p>
+          <p class="card-text">Tiempo de horneado por pieza producto: {{horneadoXpzaProducto}}</p>
+          <p class="card-text">Tiempo del recorrido del 1er DUMMY: {{timeRecorriPrimerDummy}}</p>
+          <p class="card-text">Tiempo del recorrido de resto de DUMMY'S: {{timeRecorriRestoDummys}}</p>
+          <p class="card-text">Tiempo del recorrido de producto: {{timeRecorridoProducto}}</p>
+          <p class="card-text">Ocupacion 1er DUMMY: {{ocupacionPrimerDummy}}</p>
+          <p class="card-text">Ocupacion resto de DUMMY'S: {{OcupacionRestoDummys}}</p>
+          <p class="card-text">Ocupacion producto: {{ocupacionProducto}}</p>
         </div>
     </div>
 </body>

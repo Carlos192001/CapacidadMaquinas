@@ -1,0 +1,132 @@
+<body>
+    <div class="card" *ngIf="pestania1">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link active">Datos a registrar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculados</a>
+              </li>
+              <!-- Agrega más pestañas si es necesario -->
+            </ul>
+        </div>
+        <div class="card-body">
+            <h2 class="card-title">Datos de ocupación de la máquina</h2>
+            <section class="contenido d-flex">
+              <div class="p-2 w-50">
+                  <div class="finpress" style="padding: 0 5%;">
+                      <form class="row g-3">
+                          <div class="col-md-4">
+                            <label for="validarRequerimiento" class="form-label">Requerimiento anual</label>
+                            <input type="number" [(ngModel)]="requeriAnualAutilizar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarRequerimiento" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarLogTrabajoBanda" class="form-label">Longitud de trabajo de banda</label>
+                            <input type="number" [(ngModel)]="longTrabajoBanda" [ngModelOptions]="{standalone: true}" class="form-control" id="validarLogTrabajoBanda" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="validarVelocidad" class="form-label">Velocidad de banda asignado</label>
+                              <input type="number" [(ngModel)]="velocidadBanda" [ngModelOptions]="{standalone: true}" class="form-control" id="validarVelocidad" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarLongPza" class="form-label">Longitud de pieza</label>
+                            <input type="number" [(ngModel)]="longDePza" [ngModelOptions]="{standalone: true}" class="form-control" id="validarLongPza" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarEspacios" class="form-label">Espacio entre piezas</label>
+                            <input type="number" [(ngModel)]="espacioEntrePza" [ngModelOptions]="{standalone: true}" class="form-control" id="validarEspacios" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="validarSemanasLaborar" class="form-label">Semanas a laborar</label>
+                              <input type="number" [(ngModel)]="semanasAlaborar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarSemanasLaborar" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="validarDiasLaborar" class="form-label">Días a laborar</label>
+                              <input type="number" [(ngModel)]="diasAlaborarSemana" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDiasLaborar" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="validarHorasTurno" class="form-label">Horas del turno</label>
+                              <input type="number" [(ngModel)]="horasDelTurno" [ngModelOptions]="{standalone: true}" class="form-control" id="validarHorasTurno" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarTurnosDia" class="form-label">Turnos al día</label>
+                            <input type="number" [(ngModel)]="turnosAlDia" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnosDia" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarCavidades" class="form-label">Cavidades</label>
+                            <input type="number" [(ngModel)]="cavidades" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCavidades" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarTiempoSetUp" class="form-label">Tiempo Set-Up</label>
+                            <input type="number" [(ngModel)]="tiempoSetUp" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoSetUp" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="validarParadas" class="form-label">Paradas programadas</label>
+                              <input type="number" [(ngModel)]="paradasProgramadas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarNumCambioH" required>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="validarDemoras" class="form-label">Demoras inevitables</label>
+                              <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarLadosFluxear" class="form-label">Número de lados a fluxear</label>
+                            <input type="number" [(ngModel)]="numLadosAfluxear" [ngModelOptions]="{standalone: true}" class="form-control" id="validarLadosFluxear" required>
+                          </div>
+                          <div class="col-md-4">
+                            <label for="validarObservaciones" class="form-label">Observaciones</label>
+                            <input type="text" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" class="form-control" id="validarObservaciones" required>
+                          </div>
+                          <div class="col-12">
+                            <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Submit form</button>
+                          </div>
+                        </form>
+                  </div>
+              </div>
+              <div class="p-2 w-50 ">
+                  <div class="d-flex justify-content-center">
+                      <div class="card d-flex align-items-center" id="cardporcentaje">
+                          <h4>Proyectado de ocupacion anual</h4>
+                          <div class="porcentaje d-flex align-items-center justify-content-center">
+                              {{proyectadoOcupAnual}}%
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </section>
+        </div>
+    </div>
+    <div class="card" *ngIf="pestania2">
+        <div class="card-header">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+              <a class="nav-link" (click)="verPestania(true)">Datos a registrar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active">Datos calculados</a>
+            </li>
+            <!-- Agrega más pestañas si es necesario -->
+          </ul>
+        </div>
+        <!--<div class="card-body">
+          <h3 class="card-title">Datos Procesados</h3>
+          <p class="card-text">Horas por semana por turno: {{}}</p>
+          <p class="card-text">Longitud total JIG DUMMY: {{}} </p>
+          <p class="card-text">Longitud total JIG producto: {{}}</p>
+          <p class="card-text">Requerimiento semanal: {{}} </p>
+          <p class="card-text">Requerimiento diario: {{}} </p>
+          <p class="card-text">Número de columnas DUMMY'S: {{}} </p>
+          <p class="card-text">Número de columnas de JIG producto: {{}} </p>
+          <p class="card-text">Tiempo disponible de horno al día: {{}}</p>
+          <p class="card-text">Tiempo de horneado por pza 1er DUMMY: {{}}</p>
+          <p class="card-text">Tiempo de horneado por pza resto de DUMMY: {{}}</p>
+          <p class="card-text">Tiempo de horneado por pieza producto: {{}}</p>
+          <p class="card-text">Tiempo del recorrido del 1er DUMMY: {{}}</p>
+          <p class="card-text">Tiempo del recorrido de resto de DUMMY'S: {{}}</p>
+          <p class="card-text">Tiempo del recorrido de producto: {{}}</p>
+          <p class="card-text">Ocupacion 1er DUMMY: {{}}</p>
+          <p class="card-text">Ocupacion resto de DUMMY'S: {{}}</p>
+          <p class="card-text">Ocupacion producto: {{}}</p>
+        </div>-->
+    </div>
+</body>

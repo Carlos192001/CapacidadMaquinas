@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { InyectorasComponent } from './ocupacionMq/inyectoras/inyectoras.component';
 import { TroqueladorasComponent } from './ocupacionMq/troqueladoras/troqueladoras.component';
 import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
+import { FluxeadorasComponent } from './ocupacionMq/fluxeadoras/fluxeadoras.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
     CalcularCapacidadComponent,
     InyectorasComponent,
     TroqueladorasComponent,
-    HornosComponent
+    HornosComponent,
+    FluxeadorasComponent
   ],
   imports: [
     BrowserModule,

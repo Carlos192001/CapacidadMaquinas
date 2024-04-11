@@ -6,6 +6,7 @@ import { CalcularCapacidadComponent } from './ocupacionMq/calcular-capacidad/cal
 import { InyectorasComponent } from './ocupacionMq/inyectoras/inyectoras.component';
 import { TroqueladorasComponent } from './ocupacionMq/troqueladoras/troqueladoras.component';
 import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
+import { FluxeadorasComponent } from './ocupacionMq/fluxeadoras/fluxeadoras.component';
 
 const routes: Routes = [
   {path:'catalogo/maquinas',component:MaquinasComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path:'inyectoras',component:InyectorasComponent},
   {path:'troqueladoras',component:TroqueladorasComponent},
   {path:'hornos',component:HornosComponent},
+  {path:'fluxeadoras',component:FluxeadorasComponent},
 ];
 
 @NgModule({
