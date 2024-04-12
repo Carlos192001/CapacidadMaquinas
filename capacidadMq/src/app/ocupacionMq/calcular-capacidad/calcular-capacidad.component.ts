@@ -14,6 +14,12 @@ export class CalcularCapacidadComponent {
     this.datosMaquina=false;
     this.formFinPress=true;
   }
+  manejarNuevoCalculo(evento: boolean): void {
+    this.formFinPress = !evento; // Actualiza el estado en el componente padre
+    this.datosMaquina = evento;
+
+    console.log('ESTE ESTADO RECIBI DE MI HIJO:', evento);
+  }
 
 
 }

@@ -36,15 +36,7 @@
     display: grid;
     grid-template-columns: 20% 80%;
  }
-  /*.menu-vertical ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .menu-vertical ul li {
-    padding: 10px;
-  }*/
-  
+
   .menu-vertical.open {
     display: block;
   }
@@ -57,6 +49,37 @@
   .desplazado {
     margin-left: 200px; /* Ancho del menú para desplazar el contenido hacia un lado */
   }
-  
+  h4{
+    font-weight: bold;
+    color: black;
+  }
 
-  
+/*estilos para el toltip*/
+.p-4{
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  /* Ajusta la posición del tooltip aquí */
+  top: -10px; /* Ejemplo de ajuste de la posición hacia arriba */
+  left: 50%; /* Centro horizontalmente */
+  transform: translateX(-50%); /* Centra horizontalmente */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip.visible {
+  visibility: visible;
+  opacity: 1;
+}

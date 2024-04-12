@@ -17,6 +17,9 @@ import { TroqueladorasComponent } from './ocupacionMq/troqueladoras/troqueladora
 import { HornosComponent } from './ocupacionMq/hornos/hornos.component';
 import { FluxeadorasComponent } from './ocupacionMq/fluxeadoras/fluxeadoras.component';
 import { FinpressComponent } from './ocupacionMq/finpress/finpress.component';
+import { ClienteComponent } from './catalogo/cliente/cliente.component';
+import { DatogeneralComponent } from './catalogo/datogeneral/datogeneral.component';
+import { CapacidadMqComponent } from './panels/capacidad-mq/capacidad-mq.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { FinpressComponent } from './ocupacionMq/finpress/finpress.component';
     TroqueladorasComponent,
     HornosComponent,
     FluxeadorasComponent,
-    FinpressComponent
+    FinpressComponent,
+    ClienteComponent,
+    DatogeneralComponent,
+    CapacidadMqComponent
   ],
   imports: [
     BrowserModule,

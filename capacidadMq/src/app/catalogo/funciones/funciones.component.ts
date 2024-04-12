@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class FuncionesComponent {
 
+  verTarjeta:boolean=false;
+
+  mostrarTarjeta(){
+    this.verTarjeta=!this.verTarjeta;
+  }
+  ocultarTarjeta(){
+    this.verTarjeta=false;
+  }
+
 }

@@ -10,8 +10,8 @@
               <option disabled>Seleccione una máquina</option>
               <option value="1">FIN PRESS ECKO</option>
               <option value="2">FIN PRESS LIVERNOIS F275 S/S</option>
-              <option value="3">ThYree</option>
-              <option value="1">OTDne</option>
+              <option value="3">FIN PRESS LIVERNOIS F275 S/S</option>
+              <option value="1">FIN PRESS LIVERNOIS F275 S/S</option>
               <option value="2">TwoG</option>
               <option value="3">TFShree</option>
               <option value="1">TDOne</option>
@@ -24,8 +24,8 @@
               <option disabled>Seleccione un número de parte</option>
               <option value="1">ALETA RADIADOR VERSA</option>
               <option value="2">ALETA CONDENSADOR VERSA L02BE</option>
-              <option value="3">Three</option>
-              <option value="1">One</option>
+              <option value="3">ALETA CONDENSADOR T255</option>
+              <option value="1">ALETA CONDENSADOR NP300</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
               <option value="1">One</option>
@@ -41,7 +41,7 @@
     </div>
     <div class="p-2" id="interactivo" *ngIf="!datosMaquina">
       <div class="card-body">
-        <app-finpress *ngIf="formFinPress"></app-finpress>
+        <app-finpress *ngIf="formFinPress" (nuevoCalculoEvent)="manejarNuevoCalculo($event)"></app-finpress>
       </div>
     </div>
   </div>

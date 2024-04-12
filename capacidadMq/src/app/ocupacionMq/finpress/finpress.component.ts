@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-finpress',
@@ -35,6 +35,10 @@ export class FinpressComponent {
   ensamReqXdia:number=0;
   ensamXdiaMasScrap:number=0;
   ProyectadoOcupacionAnual:number=0;
+
+  //variable que mandara datos al componente padre
+  @Output() nuevoCalculoEvent = new EventEmitter<boolean>();
+
 
   verPestania(estado:boolean){
     this.pestania1=estado;
@@ -119,6 +123,9 @@ export class FinpressComponent {
       this.ProyectadoOcupacionAnual = 0;
     }
 
+  }
+  enviarEstado(): void {
+    this.nuevoCalculoEvent.emit(true); // Envía true al componente padre
   }
 
 

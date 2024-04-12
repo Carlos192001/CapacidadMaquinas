@@ -1,14 +1,15 @@
+
 <body>
     <section class="contenido1">
         <div class="titulo">
-            <h1 style="text-decoration: underline;">Plantas</h1>
+            <h1 style="text-decoration: underline;">Clientes</h1>
         </div>
         <div class="d-flex" role="search">
             <div class="me-auto p-2">
                 <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
             </div>
             <div class="ms-auto p-2">
-                <button class="btn btn-outline-primary" type="submit" (click)="mostrarTarjeta()">Agregar Planta</button>
+                <button class="btn btn-outline-primary" type="submit" (click)="mostrarTarjeta()">Agregar Cliente</button>
             </div>
         </div>
     </section>
@@ -17,83 +18,70 @@
             <table class="table table-hover ">
                 <thead class="table-secondary">
                   <tr>
-                    <th scope="col">Planta</th>
-                    <th scope="col">Base</th>
+                    <th scope="col">Nombre</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
                   <tr>
-                    <td>1</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
                     <td>mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
+                    <td>Mark</td>
                     <td>Otto</td>
                   </tr>
                   <tr>
-                    <td>3</td>
                     <td>Larry the Bird</td>
                     <td>twitter</td>
                     <td>Larry the Bird</td>
                   </tr>
                   <tr>
-                    <td>1</td>
-                    <td>Otto</td>
                     <td>Larry the Bird</td>
+                    <td>twitter</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
                     <td>mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Larry the Bird</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
                     <td>Mark</td>
                     <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>twitter</td>
                     <td>Larry the Bird</td>
                   </tr>
                   <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
                     <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
+                    <td>twitter</td>
                     <td>Larry the Bird</td>
                   </tr>
                   <tr>
-                    <td>1</td>
+                    <td>mdo</td>
                     <td>Mark</td>
-                    <td>Larry the Bird</td>
                     <td>Otto</td>
                   </tr>
                   <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
                     <td>Larry the Bird</td>
+                    <td>twitter</td>
                     <td>Larry the Bird</td>
                   </tr>
                   <tr>
-                    <td>3</td>
                     <td>Larry the Bird</td>
+                    <td>twitter</td>
                     <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>twitter</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>twitter</td>
                     <td>Larry the Bird</td>
                   </tr>
                 </tbody>
@@ -106,7 +94,7 @@
             <div class="formulario-maquina">
                 <div class="d-flex" role="search">
                     <div class="me-auto p-2">
-                        <h4>Agregar Una Planta Nueva</h4>
+                        <h4>Agregar Un Cliente Nuevo</h4>
                     </div>
                     <div class="ms-auto p-2">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="ocultarTarjeta()"></button>
@@ -114,21 +102,9 @@
                 </div>
                 <form class="row g-3">
                     <div class="col-md-6">
-                      <label for="validarTipo" class="form-label">Planta</label>
-                      <select class="form-select" id="validarTipo" required>
-                        <option selected disabled value="">Choose...</option>
-                        <option>Matriz</option>
-                        <option>Pluebla</option>
-                      </select>
+                      <label for="validarNombre" class="form-label">Nombre del cliente</label>
+                      <input type="text" class="form-control" id="nombre" required>
                     </div>
-                    <div class="col-md-6">
-                        <label for="validarTipo" class="form-label">Base</label>
-                        <select class="form-select" id="validarTipo" required>
-                          <option selected disabled value="">Choose...</option>
-                          <option>Matriz</option>
-                          <option>Pluebla</option>
-                        </select>
-                      </div>
                     <div class="col-12">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-partes',
-  templateUrl: './partes.component.html',
-  styleUrl: './partes.component.css'
+  selector: 'app-cliente',
+  templateUrl: './cliente.component.html',
+  styleUrl: './cliente.component.css'
 })
-export class PartesComponent {
+export class ClienteComponent {
 
   verTarjeta:boolean=false;
 

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-partes',
-  templateUrl: './partes.component.html',
-  styleUrl: './partes.component.css'
+  selector: 'app-datogeneral',
+  templateUrl: './datogeneral.component.html',
+  styleUrl: './datogeneral.component.css'
 })
-export class PartesComponent {
+export class DatogeneralComponent {
 
   verTarjeta:boolean=false;
 

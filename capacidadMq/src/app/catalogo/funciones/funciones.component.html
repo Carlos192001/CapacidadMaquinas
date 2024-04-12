@@ -1,1 +1,119 @@
-<p>funciones works!</p>
+<body>
+    <section class="contenido1">
+        <div class="titulo">
+            <h1 style="text-decoration: underline;">Funciones</h1>
+        </div>
+        <div class="d-flex" role="search">
+            <div class="me-auto p-2">
+                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+            </div>
+            <div class="ms-auto p-2">
+                <button class="btn btn-outline-primary" type="submit" (click)="mostrarTarjeta()">Agregar Función</button>
+            </div>
+        </div>
+    </section>
+    <section class="contenido2 ">
+        <div class="table-wrapper table-responsive">
+            <table class="table table-hover ">
+                <thead class="table-secondary">
+                  <tr>
+                    <th scope="col">Función general</th>
+                    <th scope="col">Función especifica</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>Otto</td>
+                    <td>mdo</td>
+                  </tr>
+                  <tr>
+                    <td>Thornton</td>
+                    <td>Larry the Bird</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>twitter</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Otto</td>
+                    <td>Larry the Bird</td>
+                    <td>mdo</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>Thornton</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Jacob</td>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Mark</td>
+                    <td>Larry the Bird</td>
+                    <td>Otto</td>
+                  </tr>
+                  <tr>
+                    <td>Jacob</td>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                  <tr>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                    <td>Larry the Bird</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </section>
+    <!-- Tarjeta flotante con formulario y fondo oscuro -->
+    <div class="fondo-oscuro" *ngIf="verTarjeta" >
+        <div class="tarjeta-flotante">
+            <div class="formulario-maquina">
+                <div class="d-flex" role="search">
+                    <div class="me-auto p-2">
+                        <h4>Agregar Una Función Nueva</h4>
+                    </div>
+                    <div class="ms-auto p-2">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="ocultarTarjeta()"></button>
+                    </div>
+                </div>
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label for="validarDescripcion" class="form-label">Función general</label>
+                        <textarea class="form-control" id="validarDescripcion" rows="4"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validarDescripcion" class="form-label">Función especifica</label>
+                        <textarea class="form-control" id="validarDescripcion" rows="4"></textarea>
+                      </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary" type="submit">Agregar</button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+
+</body>
