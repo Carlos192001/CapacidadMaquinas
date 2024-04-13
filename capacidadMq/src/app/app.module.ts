@@ -20,6 +20,7 @@ import { FinpressComponent } from './ocupacionMq/finpress/finpress.component';
 import { ClienteComponent } from './catalogo/cliente/cliente.component';
 import { DatogeneralComponent } from './catalogo/datogeneral/datogeneral.component';
 import { CapacidadMqComponent } from './panels/capacidad-mq/capacidad-mq.component';
+import { RealizarCalculosComponent } from './header/realizar-calculos/realizar-calculos.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CapacidadMqComponent } from './panels/capacidad-mq/capacidad-mq.compone
     FinpressComponent,
     ClienteComponent,
     DatogeneralComponent,
-    CapacidadMqComponent
+    CapacidadMqComponent,
+    RealizarCalculosComponent
   ],
   imports: [
     BrowserModule,

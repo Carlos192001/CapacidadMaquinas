@@ -1,0 +1,21 @@
+.navbar{
+    background-color: #005ba2;
+}
+.card {
+    width: 18rem; /* Establece un ancho fijo para todas las tarjetas */
+    padding: 5% 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra */
+    transition: box-shadow 0.3s ease; /* Agrega una transición suave */
+}
+.card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.568); /* Cambia la sombra al pasar el mouse */
+}
+
+.card-img-top {
+    width: 50%; /* Hace que todas las imágenes ocupen el 100% del ancho de la tarjeta */
+    height: 50%; /* Mantiene la proporción de la imagen */
+}
+.d-flex{
+    /*background-color: cornflowerblue;*/
+    margin-top: 5%;
+}

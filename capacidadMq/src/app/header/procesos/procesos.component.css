@@ -1,37 +1,31 @@
 .navbar {
-    display: flex;
-    background-color: #005ba2;
-  }
+  display: flex;
+  background-color: #005ba2;
+}
   
-  .menu-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    margin-right: 10px;
-  }
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 10px;
+}
+
+h3{
+  color: white;
+}
   
-  /*.menu-icon {
-    font-size: 2.5rem;
-  }*/
-  h3{
-    color: white;
-  }
-  
-  .menu-vertical {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 100%;
-    background-color: #ededed;
-    color: white;
-  }
- #d-flex{
-    color: #1f1f11;
-    font-family: Arial Black;
- }
+.menu-vertical {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background-color: #ededed;
+  color: white;
+}
+ 
  .p-2{
     display: grid;
     grid-template-columns: 20% 80%;

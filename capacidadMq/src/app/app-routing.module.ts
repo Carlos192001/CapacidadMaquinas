@@ -15,6 +15,7 @@ import { DepartamentosComponent } from './catalogo/departamentos/departamentos.c
 import { ClienteComponent } from './catalogo/cliente/cliente.component';
 import { DatogeneralComponent } from './catalogo/datogeneral/datogeneral.component';
 import { CapacidadMqComponent } from './panels/capacidad-mq/capacidad-mq.component';
+import { RealizarCalculosComponent } from './header/realizar-calculos/realizar-calculos.component';
 
 const routes: Routes = [
   {path:'maquinas',component:MaquinasComponent},
@@ -24,14 +25,15 @@ const routes: Routes = [
   {path:'departamento',component:DepartamentosComponent},
   {path:'cliente',component:ClienteComponent},
   {path:'datos',component:DatogeneralComponent},
-  {path:'header',component:ProcesosComponent},
+  {path:'datos-maquinas',component:ProcesosComponent},
   {path:'calcular',component:CalcularCapacidadComponent},
   {path:'finpress',component:FinpressComponent},
   {path:'inyectoras',component:InyectorasComponent},
   {path:'troqueladoras',component:TroqueladorasComponent},
   {path:'hornos',component:HornosComponent},
   {path:'fluxeadoras',component:FluxeadorasComponent},
-  {path:'panels',component:CapacidadMqComponent},
+  {path:'panel-principal',component:CapacidadMqComponent},
+  {path:'calcular-capacidad',component:RealizarCalculosComponent},
 ];
 
 @NgModule({
