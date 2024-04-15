@@ -20,9 +20,14 @@ nav{
 	display: flex;
 	justify-content: space-around;
 }
+#menu{
+	color: white;
+	cursor: pointer;
+	padding: 10px 0;
+}
 .menu-horizontal > li > a{
 	display: block;
-	padding: 15px 20px;
+	padding: 15px 18px;
 	color: white;
 	text-decoration: none;
 }

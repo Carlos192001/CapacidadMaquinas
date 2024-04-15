@@ -11,9 +11,6 @@
   margin-right: 10px;
 }
 
-h3{
-  color: white;
-}
   
 .menu-vertical {
   display: none;
@@ -22,8 +19,8 @@ h3{
   left: 0;
   width: 200px;
   height: 100%;
-  background-color: #ededed;
-  color: white;
+  background-color: #005ba2;
+  /*color: white;*/
 }
  
  .p-2{
@@ -76,4 +73,38 @@ h3{
 .tooltip.visible {
   visibility: visible;
   opacity: 1;
+}
+
+/*estilos que se quedaran*/
+.menutxt{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}
+.texto{
+  margin-left: 30%;
+  margin-top: 5%;
+  font-size: 30px;
+}
+.close{
+  margin-left: 70%;
+  margin-top: 5%;
+}
+.iconosMenu{
+  display: grid;
+  grid-template-rows: repeat(5,1fr);
+  color: black;
+  grid-row-gap: 10%;
+  padding: 10% 5%;
+}
+/*.datosGral, .maquinas, .plantas, .departamentos, .partes{
+  background-color: #ffffff;
+}*/
+.btn{
+  background-color: white;
+  font-weight: bold;
+  width: 100%;
+}
+.btn:hover{
+  background-color: #34adfc;
+  color: white;
 }

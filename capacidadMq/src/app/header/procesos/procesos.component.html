@@ -6,44 +6,40 @@
   </button>
   <!-- Menú vertical -->
   <div class="menu-vertical" [ngClass]="{'open': menuAbierto}">
-    <div class="d-flex flex-row-reverse">
+    <section class="menutxt">
+      <div class="texto" style="font-weight: bold; color: rgb(255, 255, 255);">
+        Menú
+      </div>
+      <div class="close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="toggleMenu()"></button>
+      </div>
+    </section>
+    <section class="iconosMenu">
+      <div class="datosGral">
+        <button class="btn">Datos generales</button>
+      </div>
+      <div class="maquinas">
+        <button class="btn">Máquinas</button>
+      </div>
+      <div class="plantas">
+        <button class="btn">Plantas</button>
+      </div>
+      <div class="departamentos">
+        <button class="btn">Departamentos</button>
+      </div>
+      <div class="partes">
+        <button class="btn">Partes</button>
+      </div>
+    </section>
+    <!--<div class="d-flex flex-row-reverse">
       <div class="p-2">
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="toggleMenu()"></button>
       </div>
-    </div>
-    <div class="p-2 d-flex justify-content-center" >
+    </div>-->
+    <!--<div class="p-2 d-flex justify-content-center" >
       <h4>Menú</h4>
-    </div>
-    <div class="d-flex flex-column mb-3">
-      <div class="p-4 d-flex justify-content-center" (mouseover)="datoGeneralTooltip()" (mouseleave)="ocultarDatoTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" (click)="datosGenerales(true)" width="50" height="50" viewBox="0 0 36 36"><path fill="#333333" d="M26.5 4.08c-3.73 0-7.5 1.32-7.5 3.83v1.57c5.3.26 9 2.6 9 5.76v6.7l.05.06c3.13-.32 5.9-1.6 5.9-3.75V7.91C34 5.4 30.23 4.08 26.5 4.08" class="clr-i-solid clr-i-solid-path-1"/><path fill="#333333" d="M17 9.48V7.91c0-2.52-3.77-3.84-7.5-3.84S2 5.4 2 7.91v10.33C2 20.4 4.77 21.67 7.9 22l.1-.07v-6.7c0-3.15 3.7-5.49 9-5.75" class="clr-i-solid clr-i-solid-path-2"/><path fill="#333333" d="M18 10.85c-4.93 0-8.65 1.88-8.65 4.38v12.31c0 2.5 3.72 4.38 8.65 4.38s8.65-1.88 8.65-4.38v-2.16A13.58 13.58 0 0 1 18 28a16.77 16.77 0 0 1-6-1v-1.73a14.5 14.5 0 0 0 6 1.17c4.21 0 7.65-1.23 8.63-3.23v-2.74C24.8 22 21.72 23 18 23a16.77 16.77 0 0 1-6-1v-1.77a14.5 14.5 0 0 0 6 1.17c4.21 0 7.65-1.11 8.63-3.11v-3.06c.02-2.5-3.7-4.38-8.63-4.38" class="clr-i-solid clr-i-solid-path-3"/><path fill="none" d="M0 0h36v36H0z"/></svg>
-        <span class="tooltip" [class.visible]="showTooltipDatoGral">Datos generales</span>
-      </div>
-      <div class="p-4 d-flex justify-content-center" (mouseover)="maquinaTooltip()" (mouseleave)="ocultarMaquinaTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" (click)="catalogoMaquinas(true)" width="50" height="50" viewBox="0 0 24 24"><path fill="#005ba2" d="M3 9V5q0-.825.588-1.412T5 3h14q.825 0 1.413.588T21 5v4zm2 12q-.825 0-1.412-.587T3 19v-9h18v9q0 .825-.587 1.413T19 21zM8 7q.425 0 .713-.288T9 6q0-.425-.288-.712T8 5q-.425 0-.712.288T7 6q0 .425.288.713T8 7m2 7h4v-2h-4zm2-7q.425 0 .713-.288T13 6q0-.425-.288-.712T12 5q-.425 0-.712.288T11 6q0 .425.288.713T12 7m4 0q.425 0 .713-.288T17 6q0-.425-.288-.712T16 5q-.425 0-.712.288T15 6q0 .425.288.713T16 7"/></svg>
-        <span class="tooltip" [class.visible]="showTooltipMaquina">Máquinas</span>
-      </div>
-      <div class="p-4 d-flex justify-content-center" (mouseover)="plantaTooltip()" (mouseleave)="ocultarPlantaTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" (click)="catalogoPlantas(true)" width="50" height="50" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022m-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="#005ba2" d="M15 3a2 2 0 0 1 2 2v4h2a2 2 0 0 1 2 2v8a1 1 0 1 1 0 2H3a1 1 0 1 1 0-2V9a2 2 0 0 1 2-2h2V5a2 2 0 0 1 2-2zM7 9H5v10h2zm12 2h-2v8h2zm-6 4h-2v2h2zm0-4h-2v2h2zm0-4h-2v2h2z"/></g></svg>
-        <span class="tooltip" [class.visible]="showTooltipPlanta">Plantas</span>
-      </div>
-      <div class="p-4 d-flex justify-content-center" (mouseover)="departamentoTooltip()" (mouseleave)="ocultarDepartamentoTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" (click)="catalogoDepartamentos(true)" width="50" height="50" viewBox="0 0 24 24"><path fill="#005ba2" d="M2.923 4.129A2.25 2.25 0 0 1 5.17 2h1.158a2.25 2.25 0 0 1 2.246 2.129l.838 15.5A2.25 2.25 0 0 1 7.166 22H4.332a2.25 2.25 0 0 1-2.247-2.371zM9.511 22h10.238a2.25 2.25 0 0 0 2.25-2.25V6a.75.75 0 0 0-1.259-.551l-5.24 4.838V6a.75.75 0 0 0-1.259-.551L9.866 9.487l.545 10.088c.05.938-.3 1.8-.9 2.425m3.488-6a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4.5h-6z"/></svg>
-        <span class="tooltip" [class.visible]="showTooltipDepartamento">Departamentos</span>
-      </div>
-      <div class="p-4 d-flex justify-content-center" (mouseover)="parteTooltip()" (mouseleave)="ocultarParteTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" (click)="catalogoPartes(true)" width="50" height="50" viewBox="0 0 14 14"><path fill="#005ba2" fill-rule="evenodd" d="M1.5 0h4.875v1.158a2.125 2.125 0 1 0 0 4.184v1.033H4.368a.625.625 0 0 0-.466 1.042a.875.875 0 1 1-1.305 0a.625.625 0 0 0-.465-1.042H0V1.5A1.5 1.5 0 0 1 1.5 0M0 7.625V12.5A1.5 1.5 0 0 0 1.5 14h4.875v-2.132a.625.625 0 0 1 1.042-.466a.875.875 0 1 0 0-1.305a.625.625 0 0 1-1.042-.465V7.625H5.342a2.125 2.125 0 1 1-4.184 0zm7.625 0v1.033a2.125 2.125 0 1 1 0 4.184V14H12.5a1.5 1.5 0 0 0 1.5-1.5V7.625h-2.132a.625.625 0 0 1-.466-1.042a.875.875 0 1 0-1.305 0a.625.625 0 0 1-.465 1.042zM14 6.375V1.5A1.5 1.5 0 0 0 12.5 0H7.625v2.132a.625.625 0 0 1-1.042.466a.875.875 0 1 0 0 1.305a.625.625 0 0 1 1.042.465v2.007h1.033a2.125 2.125 0 1 1 4.184 0z" clip-rule="evenodd"/></svg>
-        <span class="tooltip" [class.visible]="showTooltipParte">Partes</span>
-      </div>
-      <div class="p-4 d-flex justify-content-center" (mouseover)="funcionTooltip()" (mouseleave)="ocultarFuncionTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" (click)="catalogoFunciones(true)" width="50" height="50" viewBox="0 0 24 24"><path fill="#005ba2" d="m17.3 18.75l-1.025-1.025q-.15-.15-.375-.15t-.375.15q-.15.15-.15.375t.15.375L16.6 19.55q.3.3.7.3t.7-.3l2.475-2.475q.15-.15.15-.375t-.15-.375q-.15-.15-.375-.15t-.375.15zM18 23q-2.075 0-3.537-1.463T13 18q0-2.075 1.463-3.537T18 13q2.075 0 3.538 1.463T23 18q0 2.075-1.463 3.538T18 23m-7.5-2V7H14V4h-1q-.425 0-.712-.288T12 3q0-.425.288-.712T13 2h2q.425 0 .713.288T16 3v8.3q-2.225.725-3.613 2.55T11 18q0 .8.175 1.538T11.7 21zM8 21q-.825 0-1.412-.587T6 19V9q0-.825.588-1.412T8 7h1v14z"/></svg>
-        <span class="tooltip" [class.visible]="showTooltipFuncion">Funciones</span>
-      </div>
-      <div class="p-4 d-flex justify-content-center" (mouseover)="panelTooltip()" (mouseleave)="ocultarPanelTooltip()">
-        <svg xmlns="http://www.w3.org/2000/svg" routerLink="/panel-principal" width="50" height="50" viewBox="0 0 48 48"><path fill="#005ba2" fill-rule="evenodd" stroke="#005ba2" stroke-linejoin="round" stroke-width="4" d="M44 40.836c-4.893-5.973-9.238-9.362-13.036-10.168c-3.797-.805-7.412-.927-10.846-.365V41L4 23.545L20.118 7v10.167c6.349.05 11.746 2.328 16.192 6.833c4.445 4.505 7.009 10.117 7.69 16.836Z" clip-rule="evenodd"/></svg>
-        <span class="tooltip" [class.visible]="showTooltipPanel">Panel principal</span>
-      </div>
-    </div>
+    </div>-->
+    
     
   </div>
   
