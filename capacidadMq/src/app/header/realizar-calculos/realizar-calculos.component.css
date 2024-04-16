@@ -3,56 +3,27 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Open Sans';
+	/*font-family: 'Open Sans';*/
 }
-/*body{
-	background-size: cover;
-}*/
-nav{
-	max-width: 100%;
-	margin: auto;
-	background-color: #005ba2;
-	font-size: 20px;
-	/*margin-top: 50px;*/
-}
-.menu-horizontal{
-	list-style: none;
+
+.navbar {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
+	align-items: center;
+	/*padding: 10px 20px;*/
+	background-color: #005ba2; /* Color de fondo de la barra de navegación */
+	color: white; /* Color del texto */
 }
-#menu{
-	color: white;
-	cursor: pointer;
-	padding: 10px 0;
+  
+.navbar-logo img {
+	height: 33%; /* El logo tendrá un 15% de la altura de su contenedor */
+	width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
+	max-width: 33%; /* Limita el ancho máximo al 15% del contenedor */
+	margin-left: 2%;
 }
-.menu-horizontal > li > a{
-	display: block;
-	padding: 15px 18px;
-	color: white;
-	text-decoration: none;
-}
+  
+.navbar-buttons{
+	margin-right: 5%;
+}  
 
-.menu-horizontal > li:hover{
-	background-color: #0074cb;
-}
-.menu-vertical{
-	position: absolute;
-	display: none;
-	list-style: none;
-	width: 200px;
-	background-color: rgba(0, 0, 0, .5);
-}
-.menu-horizontal li:hover .menu-vertical{
-	display: block;
-}
-.menu-vertical li:hover{
-	background-color: black;
-}
-
-.menu-vertical li a{
-	display: block;
-	color: white;
-	text-decoration: none;
-	padding: 15px 15px 15px 20px;
-}
-
+  

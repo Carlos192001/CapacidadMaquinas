@@ -1,6 +1,15 @@
+
 .navbar{
+    margin: 0;
+	padding: 0;
     background-color: #005ba2;
 }
+.navbar-logo img {
+	height: 33%; /* El logo tendrá un 15% de la altura de su contenedor */
+	width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
+	max-width: 33%; /* Limita el ancho máximo al 15% del contenedor */
+	margin-left: 2%;
+  }
 .card {
     width: 18rem; /* Establece un ancho fijo para todas las tarjetas */
     padding: 5% 2%;

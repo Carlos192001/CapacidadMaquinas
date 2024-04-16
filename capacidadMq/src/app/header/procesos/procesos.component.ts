@@ -17,12 +17,13 @@ export class ProcesosComponent {
   showTooltipDatoGral:boolean=false;
 
   //variables para ver los distintos formularios
-  datoGeneral:boolean=true;
-  maquinasForm:boolean=false;
+  datoGeneral:boolean=false;
+  maquinasForm:boolean=true;
   plantasForm:boolean=false;
   departamentosForm:boolean=false;
   parteForm:boolean=false;
   funcionForm:boolean=false;
+  clienteForm:boolean=false;
 
   toggleMenu() {
     this.menuAbierto = !this.menuAbierto;
@@ -91,6 +92,7 @@ export class ProcesosComponent {
     this.parteForm = !estado;
     this.funcionForm = !estado;
     this.menuAbierto = !estado;
+    this.clienteForm = !estado;
   }
 
   catalogoMaquinas(estado:boolean){
@@ -101,6 +103,7 @@ export class ProcesosComponent {
     this.parteForm = !estado;
     this.funcionForm = !estado;
     this.menuAbierto = !estado;
+    this.clienteForm = !estado;
   }
   catalogoPlantas(estado:boolean){
     this.datoGeneral   = !estado;
@@ -110,6 +113,7 @@ export class ProcesosComponent {
     this.parteForm = !estado;
     this.funcionForm = !estado;
     this.menuAbierto = !estado;
+    this.clienteForm = !estado;
   }
   catalogoDepartamentos(estado:boolean){
     this.datoGeneral   = !estado;
@@ -119,6 +123,7 @@ export class ProcesosComponent {
     this.parteForm = !estado;
     this.funcionForm = !estado;
     this.menuAbierto = !estado;
+    this.clienteForm = !estado;
   }
   catalogoPartes(estado:boolean){
     this.datoGeneral   = !estado;
@@ -128,6 +133,7 @@ export class ProcesosComponent {
     this.parteForm = estado;
     this.funcionForm = !estado;
     this.menuAbierto = !estado;
+    this.clienteForm = !estado;
   }
   catalogoFunciones(estado:boolean){
     this.datoGeneral   = !estado;
@@ -137,6 +143,17 @@ export class ProcesosComponent {
     this.parteForm = !estado;
     this.funcionForm = estado;
     this.menuAbierto = !estado;
+    this.clienteForm = !estado;
+  }
+  catalogoClientes(estado:boolean){
+    this.datoGeneral   = !estado;
+    this.maquinasForm = !estado;
+    this.plantasForm = !estado;
+    this.departamentosForm = !estado;
+    this.parteForm = !estado;
+    this.funcionForm = !estado;
+    this.menuAbierto = !estado;
+    this.clienteForm = estado;
   }
 
 }

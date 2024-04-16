@@ -32,7 +32,7 @@ export class FluxeadorasComponent {
 
   //variables que contendran los resultados de los calculos
   proyectadoOcupAnual:number=0;
-  HoraSemanaTurno:number=0;
+  horaSemanaTurno:number=0;
   timeMuertoPrimeraColum:number=0;
   tiempoCiclo:number=0;
   pzaXhora:number=0;
@@ -70,7 +70,7 @@ export class FluxeadorasComponent {
   }
   calcularUso(dato:any){
     //console.log(dato);
-    this.horasDelTurno = dato.diasAlaborarSemana * dato.horasDelTurno * dato.turnosAlDia;
+    this.horaSemanaTurno = dato.diasAlaborarSemana * dato.horasDelTurno * dato.turnosAlDia;
     console.log('Horas por semana por turno:',this.horasDelTurno);
 
     if (dato.velocidadBanda != 0) {
@@ -130,6 +130,16 @@ export class FluxeadorasComponent {
       this.proyectadoOcupAnual = 0;
     }
     
+  }
+
+  getBackgroundColor(): string {
+    if (this.proyectadoOcupAnual <= 85) {
+      return '#008000'; // Verde
+    } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
   }
 
 }

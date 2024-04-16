@@ -15,6 +15,7 @@ export class RealizarCalculosComponent {
   parteForm:boolean=false;
   funcionForm:boolean=false;
 
+
   datosGenerales(estado:boolean){
     this.datoGeneral   = estado;
     this.maquinasForm = !estado;

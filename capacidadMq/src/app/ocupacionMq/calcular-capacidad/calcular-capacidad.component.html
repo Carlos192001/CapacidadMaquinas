@@ -2,17 +2,17 @@
   <div class="d-flex flex-column mb-3 " id="contenedor">
     <div class="p-2" id="maquina" *ngIf="datosMaquina">
       <div class="card">
-        <h5 class="card-header">CAPACIDAD DE MÁQUINAS</h5>
+        <h5 class="card-header">OCUPACIÓN DE MÁQUINAS</h5>
         <div class="card-body d-flex ">
           <!--<h5 class="card-title">Special title treatment</h5>-->
           <div class="p-2 flex-fill d-flex justify-content-center" >
-            <select class="form-select" size="6" style="width: 80%;"  aria-label="Default select example">
+            <select class="form-select" [(ngModel)]="maquinaSelect" size="6" style="width: 80%;"  aria-label="Default select example">
               <option disabled>Seleccione una máquina</option>
-              <option value="1">FIN PRESS ECKO</option>
-              <option value="2">FIN PRESS LIVERNOIS F275 S/S</option>
-              <option value="3">FIN PRESS LIVERNOIS F275 S/S</option>
-              <option value="1">FIN PRESS LIVERNOIS F275 S/S</option>
-              <option value="2">TwoG</option>
+              <option value="finpress">FIN PRESS ECKO</option>
+              <option value="inyectoras">INYECTORA BORCHE BS-1501203N029</option>
+              <option value="troqueladoras">PRENSA BLISS 300 TON</option>
+              <option value="hornos">HORNO CALTECH</option>
+              <option value="fluxeadoras">PAINT FLUX MACHINE</option>
               <option value="3">TFShree</option>
               <option value="1">TDOne</option>
               <option value="2">TJwo</option>
@@ -20,13 +20,13 @@
             </select>
           </div>
           <div class="p-2 flex-fill d-flex justify-content-center" >
-            <select class="form-select" size="6" style="width: 80%;"  aria-label="Default select example">
+            <select class="form-select" [(ngModel)]="parteSelect" size="6" style="width: 80%;"  aria-label="Default select example">
               <option disabled>Seleccione un número de parte</option>
-              <option value="1">ALETA RADIADOR VERSA</option>
-              <option value="2">ALETA CONDENSADOR VERSA L02BE</option>
-              <option value="3">ALETA CONDENSADOR T255</option>
-              <option value="1">ALETA CONDENSADOR NP300</option>
-              <option value="2">Two</option>
+              <option value="finpress">ALETA RADIADOR VERSA</option>
+              <option value="INYECTORAS">FLAG BIG MAGNA</option>
+              <option value="troqueladoras">REINFORCEMENT CORE PLATE EA888 EVO3</option>
+              <option value="hornos">OIL COOLER R5 MOTOR 5 CIL 2.5L</option>
+              <option value="fluxeadoras">WATER PLATE EA888 EVO 3</option>
               <option value="3">Three</option>
               <option value="1">One</option>
               <option value="2">Two</option>
@@ -35,6 +35,7 @@
           </div>
           <div class="p-5 ">
             <button class="btn btn-primary" (click)="calcularCapacidad()">Calcular</button>
+            <button class="btn btn-danger" (click)="elementosSelecionados()">ver</button>
           </div>
         </div>
       </div>
@@ -42,6 +43,10 @@
     <div class="p-2" id="interactivo" *ngIf="!datosMaquina">
       <div class="card-body">
         <app-finpress *ngIf="formFinPress" (nuevoCalculoEvent)="manejarNuevoCalculo($event)"></app-finpress>
+        <app-inyectoras *ngIf="formInyectoras"></app-inyectoras>
+        <app-troqueladoras *ngIf="formTroqueladoras"></app-troqueladoras>
+        <app-hornos *ngIf="formHornos"></app-hornos>
+        <app-fluxeadoras *ngIf="formFluxeadoras"></app-fluxeadoras>
       </div>
     </div>
   </div>

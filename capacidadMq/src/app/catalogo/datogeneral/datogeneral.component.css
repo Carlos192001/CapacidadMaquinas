@@ -12,7 +12,8 @@ h2{
 }
 .contenido2{
     margin: 0 5%;
-    background-color: rgba(191, 189, 192, 0.596);
+    border: 2px solid #ededed;
+    /*background-color: rgba(191, 189, 192, 0.596);*/
     padding: 1%;
     border-radius: 10px;
 }

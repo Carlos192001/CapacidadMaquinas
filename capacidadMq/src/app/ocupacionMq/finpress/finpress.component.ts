@@ -128,5 +128,15 @@ export class FinpressComponent {
     this.nuevoCalculoEvent.emit(true); // Envía true al componente padre
   }
 
+  getBackgroundColor(): string {
+    if (this.ProyectadoOcupacionAnual <= 85) {
+      return '#008000'; // Verde
+    } else if (this.ProyectadoOcupacionAnual > 85 && this.ProyectadoOcupacionAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
+  }
+
 
 }
