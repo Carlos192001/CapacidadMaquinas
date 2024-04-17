@@ -9,11 +9,13 @@ export class TroqueladorasComponent {
   //variables para activar las pestañas
   pestania1:boolean=true;
   pestania2:boolean=false;
+  pestania3:boolean=false;
   activarPestania:boolean=false;
 
   //variables para los datos a ingresar
   requeriAnualAutilizar:number=0;
   golpesXminutos:number=0;
+  pzaRequeridas:number=0;
   semanasAlaborar:number=0;
   diasAlaborarSemana:number=0;
   horasDelTurno:number=0;
@@ -43,9 +45,20 @@ export class TroqueladorasComponent {
   requerimientoSem:number=0;
 
   //
-  verPestania(estado:boolean){
+  verPestania1(estado:boolean){
     this.pestania1=estado;
     this.pestania2=!estado;
+    this.pestania3=!estado;
+  }
+  verPestania2(estado:boolean){
+    this.pestania1=!estado;
+    this.pestania2=estado;
+    this.pestania3=!estado;
+  }
+  verPestania3(estado:boolean){
+    this.pestania1=!estado;
+    this.pestania2=!estado;
+    this.pestania3=estado;
   }
 
   registrarDatos(estado:boolean){
@@ -53,6 +66,7 @@ export class TroqueladorasComponent {
     let bodyData = {
       "requeriAnualAutilizar" : this.requeriAnualAutilizar,
       "golpesXminutos" : this.golpesXminutos,
+      "pzaRequeridas" : this.pzaRequeridas,
       "semanasAlaborar" : this.semanasAlaborar,
       "diasAlaborarSemana" : this.diasAlaborarSemana,
       "horasDelTurno" : this.horasDelTurno,
@@ -77,9 +91,16 @@ export class TroqueladorasComponent {
     this.horaSemanaTurno = dato.diasAlaborarSemana*dato.horasDelTurno*dato.turnosAlDia;
     console.log('Horas por semana por turno:',this.horaSemanaTurno);
 
-    let calculorequerimiento = (1*dato.requeriAnualAutilizar)/(dato.semanasAlaborar*dato.diasAlaborarSemana);
+    /*let calculorequerimiento = (dato.pzaRequeridas*dato.requeriAnualAutilizar)/(dato.semanasAlaborar*dato.diasAlaborarSemana);
     this.requerimientoDiario = Number(calculorequerimiento.toFixed(3));
-    console.log('requerimiento diario:',this.requerimientoDiario);
+    console.log('requerimiento diario:',this.requerimientoDiario);*/
+    if (dato.semanasAlaborar && dato.diasAlaborarSemana) {
+      this.requerimientoDiario = Number(((dato.pzaRequeridas*dato.requeriAnualAutilizar)/(dato.semanasAlaborar*dato.diasAlaborarSemana)).toFixed(3));
+      console.log('requerimiento diario:',this.requerimientoDiario);
+    } else {
+      this.requerimientoDiario = 0;
+      console.log('requerimiento diario:',this.requerimientoDiario);
+    }
 
     if (dato.golpesXminutos) {
       this.timeCicloXgolpe = 60/dato.golpesXminutos;
@@ -101,22 +122,22 @@ export class TroqueladorasComponent {
     }
 
     if (this.timeCicloXgolpe && this.cavidadesXgolpe) {
-      this.pzaTeoricasXsegundoTurno = (dato.horasDelTurno-(dato.paradasProgramadas+dato.demorasInevitables)/60) / ((this.timeCicloXgolpe/60/60)*this.cavidadesXgolpe);
-      console.log('piezas teoricas por segundo turno',this.pzaTeoricasXsegundoTurno);
+      this.pzaTeoricasXsegundoTurno = Number((((dato.horasDelTurno-((dato.paradasProgramadas+dato.demorasInevitables)/60))/(this.timeCicloXgolpe/60/60))*this.cavidadesXgolpe).toFixed(3));
+      console.log('piezas teoricas por segundo turno',this.pzaTeoricasXsegundoTurno); //chececar
     } else {
       this.pzaTeoricasXsegundoTurno =0;
       console.log('piezas teoricas por segundo turno',this.pzaTeoricasXsegundoTurno);
     }
 
-    this.numTurnosRequeridos = dato.turnoInicial + dato.turnoConsecutivo;
-    console.log('turnos consecutivos:',this.numTurnosRequeridos);
+    this.numTurnosRequeridos = Number((dato.turnoInicial + dato.turnoConsecutivo).toFixed(3));
+    console.log('Numero de turnos requeridos:',this.numTurnosRequeridos); //recortar 3 
 
     if (this.pzaTeoricasXprimerTurno && this.pzaTeoricasXsegundoTurno) {
-      this.pzaProdEnTurnos = (dato.turnoInicial*this.pzaTeoricasXprimerTurno)+(dato.turnoConsecutivo*this.pzaTeoricasXsegundoTurno);
+      this.pzaProdEnTurnos = Number(((dato.turnoInicial*this.pzaTeoricasXprimerTurno)+(dato.turnoConsecutivo*this.pzaTeoricasXsegundoTurno)).toFixed(3));
       console.log('piezas producidas en turnos:',this.pzaProdEnTurnos);
     } else {
       this.pzaProdEnTurnos = 0;
-      console.log('piezas producidas en turnos:',this.pzaProdEnTurnos);
+      console.log('piezas producidas en turnos:',this.pzaProdEnTurnos);  //checar
     }
     
     if (this.requerimientoDiario) {
@@ -129,9 +150,19 @@ export class TroqueladorasComponent {
     }
 
     if (this.numTurnosRequeridos) {
-      this.proyectadoOcupAnual = (this.numTurnosRequeridos / (dato.turnosAlDia * dato.diasAlaborarSemana))*100;
+      this.proyectadoOcupAnual = Number(((this.numTurnosRequeridos / (dato.turnosAlDia * dato.diasAlaborarSemana))*100).toFixed(2));
     } else {
       this.proyectadoOcupAnual = 0;
+    }
+  }
+
+  getBackgroundColor(): string {
+    if (this.proyectadoOcupAnual <= 85) {
+      return '#008000'; // Verde
+    } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
     }
   }
 

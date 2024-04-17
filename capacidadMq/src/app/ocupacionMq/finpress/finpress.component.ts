@@ -12,6 +12,7 @@ export class FinpressComponent {
   activarPestania:boolean=false;
   //variables para el formulario
   cortesXminuto:number=0;
+  pzaRequeridas:number=0;
   requeriAnualAutilizar:number=0;
   semanasAlaborar:number=0;
   diasAlaborarSemana:number=0;
@@ -34,7 +35,7 @@ export class FinpressComponent {
   tiempoEfecDiario:number=0;
   ensamReqXdia:number=0;
   ensamXdiaMasScrap:number=0;
-  ProyectadoOcupacionAnual:number=0;
+  proyectadoOcupAnual:number=0;
 
   //variable que mandara datos al componente padre
   @Output() nuevoCalculoEvent = new EventEmitter<boolean>();
@@ -49,6 +50,7 @@ export class FinpressComponent {
     this.activarPestania=estado;
     let bodyData = {
       "cortesXminuto" : this.cortesXminuto,
+      "pzaRequeridas" : this.pzaRequeridas,
       "requeriAnualAutilizar" : this.requeriAnualAutilizar,
       "semanasAlaborar" : this.semanasAlaborar,
       "diasAlaborarSemana" : this.diasAlaborarSemana,
@@ -70,13 +72,27 @@ export class FinpressComponent {
     this.horaSemanaTurno = dato.horasDelTurno * dato.diasAlaborarSemana * dato.turnosAlDia;
     console.log("horas por semana por turno:",this.horaSemanaTurno);
 
-    let ensamblesPorminuto = dato.cortesXminuto / 46; //aqui se va a cambiar los 46, pero eso viene del catalogo
-    this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); // o Number(ensamblesPorminuto.toFixed(3));
-    console.log("ensambles por minuto:",this.ensamblesXminuto);
+    let ensamblesPorminuto = dato.cortesXminuto / dato.pzaRequeridas; //aqui se va a cambiar los 46, pero eso viene del catalogo
+    /*this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); // o Number(ensamblesPorminuto.toFixed(3));
+    console.log("ensambles por minuto:",this.ensamblesXminuto);*/
+    if (ensamblesPorminuto) {
+      this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); // o Number(ensamblesPorminuto.toFixed(3));
+      console.log("ensambles por minuto:",this.ensamblesXminuto);
+    } else {
+      this.ensamblesXminuto = 0; // o Number(ensamblesPorminuto.toFixed(3));
+      console.log("ensambles por minuto:",this.ensamblesXminuto);
+    }
 
-    let ensamblesPorhora = ensamblesPorminuto * 60;
+    /*let ensamblesPorhora = ensamblesPorminuto * 60;
     this.ensamblesXhora = Number(ensamblesPorhora.toFixed(3));
-    console.log("ensambles por hora:",this.ensamblesXhora)
+    console.log("ensambles por hora:",this.ensamblesXhora)*/
+    if (ensamblesPorminuto) {
+      this.ensamblesXhora = Number((ensamblesPorminuto * 60).toFixed(3));
+      console.log("ensambles por hora:",this.ensamblesXhora);
+    } else {
+      this.ensamblesXhora = 0;
+      console.log("ensambles por hora:",this.ensamblesXhora);
+    }
 
     if (dato.requeriAnualAutilizar && dato.semanasAlaborar) {
       this.requerimientoSem = Number((dato.requeriAnualAutilizar / dato.semanasAlaborar).toFixed(3));
@@ -118,9 +134,9 @@ export class FinpressComponent {
     let primeroPorcentaje = horasRequerimientoDiario / this.tiempoEfecDiario;
     let segundoPorcentaje = primeroPorcentaje * 100;
     if (segundoPorcentaje) {
-      this.ProyectadoOcupacionAnual = Number(segundoPorcentaje.toFixed(2));
+      this.proyectadoOcupAnual = Number(segundoPorcentaje.toFixed(2));
     } else {
-      this.ProyectadoOcupacionAnual = 0;
+      this.proyectadoOcupAnual = 0;
     }
 
   }
@@ -129,9 +145,9 @@ export class FinpressComponent {
   }
 
   getBackgroundColor(): string {
-    if (this.ProyectadoOcupacionAnual <= 85) {
+    if (this.proyectadoOcupAnual <= 85) {
       return '#008000'; // Verde
-    } else if (this.ProyectadoOcupacionAnual > 85 && this.ProyectadoOcupacionAnual < 90) {
+    } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
       return '#FFA500'; // Anaranjado
     } else {
       return '#FF0000'; // Rojo

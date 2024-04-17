@@ -15,68 +15,72 @@
         <div class="card-body">
             <h4 class="card-title">Datos de ocupación de la máquina</h4>
             <section class="contenido d-flex">
-              <div class="p-2 w-50">
+              <div class="p-2">
                   <div class="finpress" style="padding: 0 5%;">
                       <form class="row g-3">
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                             <label for="validarTiempoCiclo" class="form-label">Tiempo ciclo por pieza</label>
                             <input type="number" [(ngModel)]="tiempoCicloXpza" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoCiclo" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
+                            <label for="validarPzaRequeridas" class="form-label">Piezas requeridas</label>
+                            <input type="number" [(ngModel)]="pzaRequeridas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPzaRequeridas" required>
+                          </div>
+                          <div class="col-md-3">
                             <label for="validarRequerimiento" class="form-label">Requerimiento anual</label>
                             <input type="number" [(ngModel)]="requeriAnualVentas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarRequerimiento"  required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarSemanas" class="form-label">Semanas a laborar</label>
                               <input type="number" [(ngModel)]="semanasAlaborar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarSemanas" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarDias" class="form-label">Días a laborar en la semana</label>
                               <input type="number" [(ngModel)]="diasAlaborarSemana" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDias" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarHoras" class="form-label">Horas del turno</label>
                               <input type="number" [(ngModel)]="horasDelTurno" [ngModelOptions]="{standalone: true}" class="form-control" id="validarHoras" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarTurnos" class="form-label">Turnos al día</label>
                               <input type="number" [(ngModel)]="turnosAlDia" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCambioH" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarCambioH" class="form-label">Cambio herramental</label>
                               <input type="number" [(ngModel)]="cambioHerramental" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoST" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarNumCambioH" class="form-label">Número de cambios herramental</label>
                               <input type="number" [(ngModel)]="numDeCambiosHerra" [ngModelOptions]="{standalone: true}" class="form-control" id="validarNumCambioH" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarParadas" class="form-label">Paradas programadas</label>
                               <input type="number" [(ngModel)]="paradasProgramadas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarParadas" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarDemoras" class="form-label">Demoras inevitables</label>
                               <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarCavidadesMolde" class="form-label">Cavidades por molde</label>
                               <input type="number" [(ngModel)]="cavidadesXmolde" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCavidadesMolde" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                               <label for="validarTurnoInicial" class="form-label">Turno inicial</label>
                               <input type="number" [(ngModel)]="turnoInicial" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnoInicial" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                             <label for="validarTurnoConsecutivo" class="form-label">Turno consecutivos</label>
                             <input type="number" [(ngModel)]="turnoConsecutivo" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnoConsecutivo" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-3">
                             <label for="validarScrapLiberado" class="form-label">Scrap liberado</label>
                             <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarScrapLiberado" required>
                           </div>
-                          <div class="col-md-4">
+                          <div class="col-md-6">
                             <label for="validarObservaciones" class="form-label">Observaciones</label>
-                            <input type="text" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" class="form-control" id="validarObservaciones" required>
+                            <textarea class="form-control" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" id="validarObservaciones" rows="1"></textarea>
                           </div>
                           <div class="col-12">
                             <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Submit form</button>
@@ -84,11 +88,11 @@
                         </form>
                   </div>
               </div>
-              <div class="p-2 w-50 ">
+              <div class="p-2">
                   <div class="d-flex justify-content-center">
                       <div class="card d-flex align-items-center" id="cardporcentaje">
                           <h4>Proyectado de ocupacion anual</h4>
-                          <div class="porcentaje d-flex align-items-center justify-content-center">
+                          <div class="porcentaje d-flex align-items-center justify-content-center" [ngStyle]="{'background-color': getBackgroundColor()}">
                               {{proyectadoOcupAnual}}%
                           </div>
                       </div>
@@ -117,7 +121,7 @@
           <p class="card-text"><strong>Requerimiento diario:</strong> {{requerimientoDiario}}</p>
           <p class="card-text"><strong>Tiempo disponible por turno:</strong> {{tiempDispoXturno}}</p>
           <p class="card-text"><strong>Piezas teoricas para primer turno:</strong> {{pzaTeoricasXprimerTurno}}</p>
-          <p class="card-text"><strong>Piezas teoricas para segundo turno:</strong> {{pzaTeoricasXsegundoTurno}} seg</p>
+          <p class="card-text"><strong>Piezas teoricas para segundo turno:</strong> {{pzaTeoricasXsegundoTurno}}</p>
           <p class="card-text"><strong>Numero de turnos requeridios:</strong> {{numTurnosRequeridos}}</p>
           <p class="card-text"><strong>Piezas producidas en turnos para requerimiento semanal:</strong> {{pzaProdEnTurnos}}</p>
           <p class="card-text"><strong>Requerimiento semanal:</strong> {{requerimientoSem}}</p>

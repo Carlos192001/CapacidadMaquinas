@@ -12,6 +12,7 @@ export class InyectorasComponent {
   activarPestania:boolean=false;
   //variables para los datos a ingresar que serviran para el calculo 
   tiempoCicloXpza:number=0;
+  pzaRequeridas:number=0;
   requeriAnualVentas:number=0;
   semanasAlaborar:number=0;
   diasAlaborarSemana:number=0;
@@ -48,6 +49,7 @@ export class InyectorasComponent {
     this.activarPestania=estado;
     let bodyData = {
       "tiempoCicloXpza" : this.tiempoCicloXpza,
+      "pzaRequeridas" : this.pzaRequeridas,
       "requeriAnualVentas" : this.requeriAnualVentas,
       "semanasAlaborar" : this.semanasAlaborar,
       "diasAlaborarSemana" : this.diasAlaborarSemana,
@@ -76,7 +78,7 @@ export class InyectorasComponent {
     console.log(this.tiempoSetUp);
 
       //el 5 cambiara porque es del catalogo de las maquinas
-    let calculorequerimiento = (5*dato.requeriAnualVentas)/(dato.semanasAlaborar*dato.diasAlaborarSemana)
+    let calculorequerimiento = (dato.pzaRequeridas * dato.requeriAnualVentas)/(dato.semanasAlaborar*dato.diasAlaborarSemana)
     if (dato.requeriAnualVentas && dato.semanasAlaborar && dato.diasAlaborarSemana) {
       this.requerimientoDiario = Number(calculorequerimiento.toFixed(3));
       console.log(this.requerimientoDiario);
@@ -93,22 +95,22 @@ export class InyectorasComponent {
     let calculoPzaTeoricas = (this.tiempDispoXturno/(dato.tiempoCicloXpza/60/60))*dato.cavidadesXmolde;
     if (calculoPzaTeoricas) {
       this.pzaTeoricasXprimerTurno = Math.ceil(calculoPzaTeoricas);
-      console.log(this.pzaTeoricasXprimerTurno);
+      console.log('piezas teoricas primer turno',this.pzaTeoricasXprimerTurno);
     } else {
       this.pzaTeoricasXprimerTurno = 0;
       console.log(this.pzaTeoricasXprimerTurno);
     }
 
-    let calcularpzaTeoricasSegundo = ((dato.horasDelTurno-((dato.paradasProgramadas+dato.demorasInevitables)/60))/(dato.tiempoCicloXpza/60/60))*8;
+    let calcularpzaTeoricasSegundo = ((dato.horasDelTurno-((dato.paradasProgramadas+dato.demorasInevitables)/60))/(dato.tiempoCicloXpza/60/60))*dato.cavidadesXmolde;
     if (calcularpzaTeoricasSegundo) {
       this.pzaTeoricasXsegundoTurno = Number(calcularpzaTeoricasSegundo.toFixed(3)); 
-      console.log(this.pzaTeoricasXsegundoTurno);
+      console.log('piezas teoricas segundo turno:',this.pzaTeoricasXsegundoTurno);
     } else {
       this.pzaTeoricasXprimerTurno = 0;
       console.log(this.pzaTeoricasXsegundoTurno);
     }
     
-    this.numTurnosRequeridos = this.turnoInicial + this.turnoConsecutivo;                   //Number((this.turnoInicial + this.turnoConsecutivo).toFixed(1));
+    this.numTurnosRequeridos = Number((this.turnoInicial + this.turnoConsecutivo).toFixed(3));                   //Number((this.turnoInicial + this.turnoConsecutivo).toFixed(1));
     console.log(this.numTurnosRequeridos);
 
     if (this.pzaTeoricasXprimerTurno) {
@@ -136,6 +138,15 @@ export class InyectorasComponent {
       this.proyectadoOcupAnual=0;
     }
 
+  }
+  getBackgroundColor(): string {
+    if (this.proyectadoOcupAnual <= 85) {
+      return '#008000'; // Verde
+    } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
   }
   
 
