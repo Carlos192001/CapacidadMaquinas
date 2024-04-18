@@ -14,7 +14,7 @@
     </section>
     <section class="contenido2 ">
         <div class="table-wrapper table-responsive">
-            <table class="table table-hover ">
+            <table class="table table-hover " style="text-align: center;">
                 <thead class="table-secondary">
                   <tr>
                     <th scope="col">Planta</th>
@@ -24,77 +24,13 @@
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr>
-                    <td>1</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Otto</td>
-                    <td>Larry the Bird</td>
-                    <td>mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Larry the Bird</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
+                  <tr *ngFor="let plantaItems of plantaArray">
+                    <td>{{plantaItems.planta}}</td>
+                    <td>{{plantaItems.base}}</td>
+                    <td>{{plantaItems.estatus}}</td>
+                    <td><!--<button class="btn btn-warning" (click)="dataUpdate(plantaItems)">actualizar</button>-->
+                      <svg xmlns="http://www.w3.org/2000/svg" (click)="dataUpdate(plantaItems)" style="cursor: pointer;" width="25" height="25" viewBox="0 0 1200 1200"><path fill="#eab308" d="M284.506 0L58.436 218.249V1200h850.418V817.511L803.861 922.504v173.167H163.428V292.179h197.59v-187.85h442.844v272.996L490.433 690.753L397.32 977.619l286.793-93.188l457.452-457.452L947.885 233.3l-39.031 39.031V0zm254.402 739.154l96.803 96.876l-143.434 46.557z"/></svg>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -114,31 +50,25 @@
                 </div>
                 <form class="row g-3">
                     <div class="col-md-6">
-                      <label for="validarTipo" class="form-label">Planta</label>
-                      <select class="form-select" id="validarTipo" required>
-                        <option selected disabled value="">Choose...</option>
-                        <option>Matriz</option>
-                        <option>Pluebla</option>
-                      </select>
+                      <label for="validarPlanta" class="form-label">Planta</label>
+                      <input type="text" [(ngModel)]="planta" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPlanta" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="validarTipo" class="form-label">Base</label>
-                        <select class="form-select" id="validarTipo" required>
-                          <option selected disabled value="">Choose...</option>
-                          <option>Matriz</option>
-                          <option>Pluebla</option>
-                        </select>
+                        <label for="validarBase" class="form-label">Base</label>
+                        <input type="text" [(ngModel)]="base" [ngModelOptions]="{standalone: true}" class="form-control" id="validarBase" required>
                       </div>
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-                        <label class="form-check-label" for="invalidCheck2">
-                          Inactivo
-                        </label>
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" [(ngModel)]="estatus" (change)="actualizarEstado()" id="invalidCheck2" name="estadoCheckbox">
+                          <label class="form-check-label" for="invalidCheck2">
+                            Activo
+                          </label>
+                        </div>
                       </div>
-                    </div>
+                      
                     <div class="col-12">
-                      <button class="btn btn-primary" type="submit">Agregar</button>
+                      <button class="btn btn-primary" type="submit" (click)="saveDatos()" *ngIf="agregar">Agregar</button>
+                      <button class="btn btn-warning" (click)="updateDatos()" *ngIf="editar">Actualizar</button>
                     </div>
                   </form>
             </div>
