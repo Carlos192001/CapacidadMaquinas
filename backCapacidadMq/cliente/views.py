@@ -29,7 +29,7 @@ def cliente_detalle(request, id):
     try:
         clienteID = Cliente.objects.get(id=id)
     except Cliente.DoesNotExist:
-        return HttpResponseNotFound("Depto no encontrado")
+        return HttpResponseNotFound("Cliente no encontrado")
 
     if request.method == 'GET':
         serializer = ClienteSerializer(clienteID)
@@ -43,4 +43,4 @@ def cliente_detalle(request, id):
         return JsonResponse(serializer.errors, status=400)
     elif request.method == 'DELETE':
         clienteID.delete()
-        return JsonResponse({"message": "Depto eliminado"}, status=204)
+        return JsonResponse({"message": "Cliente eliminado"}, status=204)

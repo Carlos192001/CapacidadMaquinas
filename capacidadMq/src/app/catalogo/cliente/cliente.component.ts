@@ -12,6 +12,7 @@ export class ClienteComponent {
   nombre: string = '';
   estatus: boolean = true;
   idCliente = '';
+  filtro: string='';
 
   verTarjeta:boolean=false;
 
@@ -85,6 +86,14 @@ export class ClienteComponent {
   verBotones(estado:boolean){
     this.agregar = estado;
     this.editar = !estado;
+  }
+
+  // Función para filtrar 
+  filtrar(): any[] {
+    return this.clienteArray.filter(clienteItems =>
+      clienteItems.nombre.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      clienteItems.estatus.toString().toLowerCase().includes(this.filtro.toLowerCase())
+    );
   }
 
 }

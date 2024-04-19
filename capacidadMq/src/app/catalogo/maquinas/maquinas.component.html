@@ -21,110 +21,29 @@
             <table class="table table-hover ">
                 <thead class="table-secondary">
                   <tr>
+                    <th scope="col">Departamento</th>
                     <th scope="col">Código Máquina</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Nombre de la Máquina</th>
                     <th scope="col">Código Proceso</th>
-                    <th scope="col">Tipo</th>
+                    <th scope="col">Planta</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
+                  <tr *ngFor="let maquinaItems of maquinaArray">
+                    <td>{{maquinaItems.numDepartamento}}</td>
+                    <td>{{maquinaItems.codInternoMq}}</td>
+                    <td>{{maquinaItems.nombre}}</td>
+                    <td>{{maquinaItems.codInternoProceso}}</td>
+                    <td>{{maquinaItems.planta}}</td>
+                    <td [ngClass]="{'negrita verde': maquinaItems.estatus, 'negrita rojo': !maquinaItems.estatus}">
+                      {{maquinaItems.estatus ? 'True' : 'False'}}
+                    </td>
+                    <td>
+                      <svg xmlns="http://www.w3.org/2000/svg" (click)="dataUpdate(maquinaItems)" style="cursor: pointer;" width="25" height="25" viewBox="0 0 1200 1200"><path fill="#eab308" d="M284.506 0L58.436 218.249V1200h850.418V817.511L803.861 922.504v173.167H163.428V292.179h197.59v-187.85h442.844v272.996L490.433 690.753L397.32 977.619l286.793-93.188l457.452-457.452L947.885 233.3l-39.031 39.031V0zm254.402 739.154l96.803 96.876l-143.434 46.557z"/></svg>
+
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -143,39 +62,51 @@
                     </div>
                 </div>
                 <form class="row g-3">
-                    <div class="col-md-6">
-                      <label for="validarCodMq" class="form-label">Código Interno Máquina</label>
-                      <input type="text" class="form-control" id="codMq" required>
+                    <div class="col-md-3">
+                      <label for="validarDepto" class="form-label">Departamento</label>
+                      <select class="form-select" [(ngModel)]="numDepartamento" [ngModelOptions]="{standalone: true}" id="validarDepto" required>
+                        <option *ngFor="let items of deptoArray">{{items.numero}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="validarCodMq" class="form-label">Código Máquina</label>
+                      <input type="text" [(ngModel)]="codInternoMq" [ngModelOptions]="{standalone: true}"  class="form-control" id="codMq" required>
                     </div>
                     <div class="col-md-6">
                       <label for="validarNombre" class="form-label">Nombre Máquina</label>
-                      <input type="text" class="form-control" id="nombre" required>
+                      <input type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" class="form-control" id="nombre" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="validarCodProceso" class="form-label">Código Proceso</label>
+                      <input type="text" [(ngModel)]="codInternoProceso" [ngModelOptions]="{standalone: true}" class="form-control" id="codProceso" required>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="validarFuncion" class="form-label">Función máquina</label>
+                      <select class="form-select" [(ngModel)]="funcionMaquina" [ngModelOptions]="{standalone: true}" id="validarTipo" required>
+                        <option value="ACABADO">FIN PRESS</option>
+                        <option value="TROQUELAR">TROQUELADORA</option>
+                        <option value="INYECTAR">INYECTORA</option>
+                        <option value="FLUXEAR">FLUXEADORA</option>
+                        <option value="HORNEAR">HORNO</option>
+                      </select>
                     </div>
                     <div class="col-md-6">
-                      <label for="validarCodProceso" class="form-label">Código Interno De Proceso</label>
-                      <input type="text" class="form-control" id="codProceso" required>
-                    </div>
-                    <div class="col-md-6">
-                      <label for="validarTipo" class="form-label">Tipo</label>
-                      <select class="form-select" id="validarTipo" required>
-                        <option selected disabled value="">Choose...</option>
-                        <option>FIN PRESS</option>
-                        <option>INYECTORAS</option>
-                        <option>TROQUELADORAS</option>
-                        <option>HORNOS</option>
-                        <option>FLUXEADORAS</option>
+                      <label for="validarPlanta" class="form-label">Planta</label>
+                      <select class="form-select" [(ngModel)]="planta" [ngModelOptions]="{standalone: true}" id="validarPlanta" required>
+                        <option *ngFor="let items of plantaArray">{{items.planta}}</option>
                       </select>
                     </div>
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="estatus" (change)="actualizarEstado()" id="invalidCheck2" name="estadoCheckbox">
                         <label class="form-check-label" for="invalidCheck2">
-                          Inactivo
+                          Activo
                         </label>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary" type="submit">Agregar</button>
+                      <button class="btn btn-primary" type="submit" (click)="saveDatos()" *ngIf="agregar">Agregar</button>
+                      <button class="btn btn-warning" (click)="updateDatos()" *ngIf="editar">Actualizar</button>
                     </div>
                   </form>
             </div>

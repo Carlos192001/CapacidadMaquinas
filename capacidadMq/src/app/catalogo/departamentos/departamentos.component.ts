@@ -17,6 +17,7 @@ export class DepartamentosComponent {
   idDepto = '';
 
   verTarjeta:boolean=false;
+  filtro: string = '';
 
   //variables para mostrar los botones de actualizar y agregar
   agregar:boolean=false;
@@ -65,7 +66,7 @@ export class DepartamentosComponent {
     this.numero = data.numero;
     this.nombre = data.nombre;
     this.encargado = data.encargado;
-    this.tipo = data.encargado;
+    this.tipo = data.tipo;
     this.estatus = data.estatus;
     this.idDepto = data.id;
     this.verTarjeta = true;
@@ -108,6 +109,17 @@ export class DepartamentosComponent {
   verBotones(estado:boolean){
     this.agregar = estado;
     this.editar = !estado;
+  }
+
+  // Función para filtrar 
+  filtrar(): any[] {
+    return this.deptoArray.filter(deptosItems =>
+      deptosItems.numero === parseInt(this.filtro, 10) ||
+      deptosItems.nombre.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      deptosItems.encargado.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      deptosItems.tipo.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      deptosItems.estatus.toString().toLowerCase().includes(this.filtro.toLowerCase())
+    );
   }
 
 

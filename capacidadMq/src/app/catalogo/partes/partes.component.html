@@ -5,7 +5,7 @@
         </div>
         <div class="d-flex" role="search">
             <div class="me-auto p-2">
-                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <input class="form-control me-2" [(ngModel)]="filtro" type="search" placeholder="Buscar..." aria-label="Search">
             </div>
             <div class="ms-auto p-2">
                 <button class="btn btn-outline-primary" type="submit" (click)="mostrarTarjeta()">Agregar Parte</button>
@@ -20,113 +20,23 @@
                     <th scope="col">Número</th>
                     <th scope="col">Descripción del número de parte</th>
                     <th scope="col">Tipo</th>
-                    <th scope="col">Pza requeridas</th>
-                    <th scope="col">Código máquina</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr>
-                    <td>1</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>Otto</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Otto</td>
-                    <td>Larry the Bird</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Larry the Bird</td>
-                    <td>Thornton</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Larry the Bird</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Larry the Bird</td>
-                    <td>mdo</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Larry the Bird</td>
-                    <td>twitter</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
-                    <td>Larry the Bird</td>
+                  <tr *ngFor="let parteItems of filtrar()">
+                    <td>{{parteItems.numParte}}</td>
+                    <td>{{parteItems.descripcion}}</td>
+                    <td>{{parteItems.tipo}}</td>
+                    <td>{{parteItems.cliente}}</td>
+                    <td [ngClass]="{'negrita verde': parteItems.estatus, 'negrita rojo': !parteItems.estatus}">
+                      {{parteItems.estatus ? 'True' : 'False'}}
+                    </td>
+                    <td>
+                      <svg xmlns="http://www.w3.org/2000/svg" (click)="dataUpdate(parteItems)" style="cursor: pointer;" width="25" height="25" viewBox="0 0 1200 1200"><path fill="#eab308" d="M284.506 0L58.436 218.249V1200h850.418V817.511L803.861 922.504v173.167H163.428V292.179h197.59v-187.85h442.844v272.996L490.433 690.753L397.32 977.619l286.793-93.188l457.452-457.452L947.885 233.3l-39.031 39.031V0zm254.402 739.154l96.803 96.876l-143.434 46.557z"/></svg>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -147,45 +57,48 @@
                 <form class="row g-3">
                     <div class="col-md-6">
                       <label for="validarNumParte" class="form-label">Número de parte</label>
-                      <input type="text" class="form-control" id="validarNumParte" required>
+                      <input type="text" [(ngModel)]="numParte" [ngModelOptions]="{standalone: true}" class="form-control" id="validarNumParte" required>
                     </div>
                     <div class="col-md-6">
                       <label for="validarDescripcion" class="form-label">Descripción</label>
-                      <textarea class="form-control" id="validarDescripcion" rows="1"></textarea>
+                      <textarea class="form-control" [(ngModel)]="descripcion" [ngModelOptions]="{standalone: true}" id="validarDescripcion" rows="1"></textarea>
                     </div>
                     <div class="col-md-6">
-                      <label for="validarTipo" class="form-label">Tipo</label>
-                      <select class="form-select" id="validarTipo" required>
-                        <option selected disabled value="">Choose...</option>
-                        <option>FIN PRESS</option>
-                        <option>INYECTORAS</option>
-                        <option>TROQUELADORAS</option>
-                        <option>HORNOS</option>
-                        <option>FLUXEADORAS</option>
+                      <label for="validarTipo" class="form-label">Tipo de parte</label>
+                      <select class="form-select" [(ngModel)]="tipo" [ngModelOptions]="{standalone: true}" id="validarTipo" required>
+                        <option>PREENSAMBLE</option>
+                        <option>PRODUCTO COMPRADO</option>
+                        <option>MATERIA PRIMA</option>
+                        <option>PRODUCTO TERMINADO</option>
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <label for="validarPzaRequerida" class="form-label">Piezas requeridas</label>
-                      <input type="text" class="form-control" id="validarPzaRequerida" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="validarCodigoMq" class="form-label">Código de máquina</label>
-                        <input type="text" class="form-control" id="validarCodigoMq" required>
+                      <label for="validarFuncionMq" class="form-label">Máquina que lo realiza o produce</label>
+                      <select class="form-select" [(ngModel)]="funcionMaquina" [ngModelOptions]="{standalone: true}" id="validarTipo" required>
+                        <option value="ACABADO">FIN PRESS</option>
+                        <option value="TROQUELAR">TROQUELADORA</option>
+                        <option value="INYECTAR">INYECTORA</option>
+                        <option value="FLUXEAR">FLUXEADORA</option>
+                        <option value="HORNEAR">HORNO</option>
+                      </select>
                     </div>
                     <div class="col-md-6">
                       <label for="validarCliente" class="form-label">Cliente</label>
-                      <input type="text" class="form-control" id="validarCliente" required>
+                      <select class="form-select" [(ngModel)]="cliente" [ngModelOptions]="{standalone: true}" id="validarTipo" required>
+                        <option *ngFor="let items of clienteArray">{{items.nombre}}</option>
+                      </select>
                     </div>
                     <div class="col-12">
                       <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                        <input class="form-check-input" type="checkbox" [(ngModel)]="estatus" (change)="actualizarEstado()" id="invalidCheck2" name="estadoCheckbox">
                         <label class="form-check-label" for="invalidCheck2">
-                          Inactivo
+                          Activo
                         </label>
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary" type="submit">Agregar</button>
+                      <button class="btn btn-primary" type="submit" (click)="saveDatos()" *ngIf="agregar">Agregar</button>
+                      <button class="btn btn-warning" (click)="updateDatos()" *ngIf="editar">Actualizar</button>
                     </div>
                   </form>
             </div>

@@ -1,0 +1,33 @@
+<body>
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #005ba2;" >
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="assets/img-logo/Airtemp_logo.png" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <section class="formulario">
+                <form>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"><strong>Usuario</strong></label>
+                    <input type="text"  [(ngModel)]="user" [ngModelOptions]="{standalone: true}" class="form-control" id="usuario" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label"><strong>Constraseña</strong></label>
+                    <input type="password"  [(ngModel)]="password" [ngModelOptions]="{standalone: true}" class="form-control" id="contrasenia" [type]="showPassword ? 'text' : 'password'">
+                  </div>
+                  <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" (change)="PasswordVisibility()">
+                    <label class="form-check-label" for="exampleCheck1">Ver</label>
+                  </div>
+                  <button type="submit" class="btn btn-primary" (click)="logueo()">Ingresar</button>
+                </form>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  

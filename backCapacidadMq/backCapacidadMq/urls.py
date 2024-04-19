@@ -20,6 +20,8 @@ from planta import views as planta_views
 from departamento import views as departamento_views
 from parte import views as parte_views
 from cliente import views as cliente_views
+from maquina import views as maquina_views
+from usuario import views as usuarios_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,4 +41,14 @@ urlpatterns = [
     #endpoints para los clientes
     path('clientes/', cliente_views.cliente_list),
     path('clientes/<int:id>/', cliente_views.cliente_detalle),
+
+    #endpoints para las maquinas
+    path('maquinas/', maquina_views.maquina_list),
+    path('maquinas/<int:id>/',maquina_views.maquina_detalle),
+
+    #endpoints para los usuarios
+    path('users/', usuarios_views.usuario_list),
+    path('users/<int:id>/', usuarios_views.usuario_detalle),
+    path('tocken/',usuarios_views.autenticar_user),
+    path('descifrar/<str:token>', usuarios_views.descifrar_token),
 ]

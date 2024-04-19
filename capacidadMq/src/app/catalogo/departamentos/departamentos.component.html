@@ -6,7 +6,7 @@
         </div>
         <div class="d-flex" role="search">
             <div class="me-auto p-2">
-                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <input class="form-control me-2"  [(ngModel)]="filtro" type="search" placeholder="Buscar..." aria-label="Search">
             </div>
             <div class="ms-auto p-2">
                 <button class="btn btn-outline-primary" type="submit" (click)="mostrarTarjeta()">Agregar Departamento</button>
@@ -27,12 +27,14 @@
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr *ngFor="let deptosItems of deptoArray">
+                  <tr *ngFor="let deptosItems of filtrar()">
                     <td>{{deptosItems.numero}}</td>
                     <td>{{deptosItems.nombre}}</td>
                     <td>{{deptosItems.encargado}}</td>
                     <td>{{deptosItems.tipo}}</td>
-                    <td>{{deptosItems.estatus}}</td>
+                    <td [ngClass]="{'negrita verde': deptosItems.estatus, 'negrita rojo': !deptosItems.estatus}">
+                      {{deptosItems.estatus ? 'True' : 'False'}}
+                    </td>
                     <td>
                       <svg xmlns="http://www.w3.org/2000/svg" (click)="dataUpdate(deptosItems)" style="cursor: pointer;" width="25" height="25" viewBox="0 0 1200 1200"><path fill="#eab308" d="M284.506 0L58.436 218.249V1200h850.418V817.511L803.861 922.504v173.167H163.428V292.179h197.59v-187.85h442.844v272.996L490.433 690.753L397.32 977.619l286.793-93.188l457.452-457.452L947.885 233.3l-39.031 39.031V0zm254.402 739.154l96.803 96.876l-143.434 46.557z"/></svg>
                     </td>

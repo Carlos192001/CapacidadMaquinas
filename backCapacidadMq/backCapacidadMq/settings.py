@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'departamento.apps.DepartamentoConfig',
     'parte.apps.ParteConfig',
     'cliente.apps.ClienteConfig',
+    'maquina.apps.MaquinaConfig',
+    'usuario.apps.UsuarioConfig',
 ]
 
 MIDDLEWARE = [

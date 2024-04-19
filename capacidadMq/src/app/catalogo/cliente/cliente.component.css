@@ -74,6 +74,16 @@ h1{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/*colores para el estatus*/
+.verde {
+    color: green;
+    font-weight: bold;
+}
+  
+.rojo {
+    color: red;
+    font-weight: bold;
+}
 
 /*Estilos para pantallas medianas*/
 @media screen and (max-width: 992px) {

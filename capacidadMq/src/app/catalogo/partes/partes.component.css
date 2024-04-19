@@ -63,7 +63,7 @@ h1{
 
 .tarjeta-flotante {
     position: fixed;
-    top: 30%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
@@ -73,8 +73,17 @@ h1{
     z-index: 9999; /* Z-index superior para asegurar que esté encima del fondo oscuro */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-
+/*colores para el estatus*/
+  
+.verde {
+    color: green;
+    font-weight: bold;
+}
+  
+.rojo {
+    color: red;
+    font-weight: bold;
+}
 /*Estilos para pantallas medianas*/
 @media screen and (max-width: 992px) {
     .contenido1{

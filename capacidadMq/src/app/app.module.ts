@@ -21,6 +21,7 @@ import { ClienteComponent } from './catalogo/cliente/cliente.component';
 import { DatogeneralComponent } from './catalogo/datogeneral/datogeneral.component';
 import { CapacidadMqComponent } from './panels/capacidad-mq/capacidad-mq.component';
 import { RealizarCalculosComponent } from './header/realizar-calculos/realizar-calculos.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { RealizarCalculosComponent } from './header/realizar-calculos/realizar-c
     ClienteComponent,
     DatogeneralComponent,
     CapacidadMqComponent,
-    RealizarCalculosComponent
+    RealizarCalculosComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

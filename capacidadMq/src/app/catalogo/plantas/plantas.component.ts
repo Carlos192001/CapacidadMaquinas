@@ -13,6 +13,7 @@ export class PlantasComponent {
   base : string = '';
   estatus : boolean = true;
   idPlanta = '';
+  filtro: string = '';
 
   verTarjeta:boolean=false;
 
@@ -96,5 +97,14 @@ export class PlantasComponent {
     this.agregar = estado;
     this.editar = !estado;
   }
+  // Función para filtrar 
+  filtrar(): any[] {
+    return this.plantaArray.filter(plantaItems =>
+      plantaItems.planta.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      plantaItems.base.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      plantaItems.estatus.toString().toLowerCase().includes(this.filtro.toLowerCase())
+    );
+  }
+  
 
 }
