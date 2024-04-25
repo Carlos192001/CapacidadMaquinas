@@ -31,12 +31,12 @@ export class PartesComponent {
   }
 
   getAllPartes(){
-    this.http.get("http://127.0.0.1:8000/partes/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/partes/").subscribe((resultData:any)=>{
       this.parteArray = resultData;
     });
   }
   getAllClientes(){
-    this.http.get("http://127.0.0.1:8000/clientes/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/clientes/").subscribe((resultData:any)=>{
       this.clienteArray = resultData;
     });
   }
@@ -60,7 +60,7 @@ export class PartesComponent {
       "funcionMaquina" : this.funcionMaquina,
       "estatus" : this.estatus,
     }
-    this.http.post("http://127.0.0.1:8000/partes/",bodyData).subscribe((resultData: any)=>{
+    this.http.post("http://10.1.0.186:8090/partes/",bodyData).subscribe((resultData: any)=>{
       alert("Parte registrado");
       this.getAllPartes();
       this.numParte = '';
@@ -92,7 +92,7 @@ export class PartesComponent {
       "funcionMaquina" : this.funcionMaquina,
       "estatus" : this.estatus,
     }
-    this.http.put("http://127.0.0.1:8000/partes/"+this.idParte+'/',bodyData).subscribe((resulData:any)=>{
+    this.http.put("http://10.1.0.186:8090/partes/"+this.idParte+'/',bodyData).subscribe((resulData:any)=>{
       alert("Parte actualizado");
       this.numParte = '';
       this.descripcion = '';

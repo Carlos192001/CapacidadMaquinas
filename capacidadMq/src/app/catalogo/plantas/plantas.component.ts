@@ -27,7 +27,7 @@ export class PlantasComponent {
 
   //obtener todo el listado de las plantas
   getAllPlantas(){
-    this.http.get("http://127.0.0.1:8000/plantas/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/plantas/").subscribe((resultData:any)=>{
       this.plantaArray = resultData;
     });
   }
@@ -48,7 +48,7 @@ export class PlantasComponent {
       "base" : this.base,
       "estatus" : this.estatus,
     }
-    this.http.post("http://127.0.0.1:8000/plantas/",bodyData).subscribe((resultData: any)=>{
+    this.http.post("http://10.1.0.186:8090/plantas/",bodyData).subscribe((resultData: any)=>{
       alert("Planta registrada");
       this.getAllPlantas();
       this.planta = '';
@@ -72,7 +72,7 @@ export class PlantasComponent {
       "base" : this.base,
       "estatus" : this.estatus,
     }
-    this.http.put("http://127.0.0.1:8000/plantas/"+this.idPlanta+'/',bodyData).subscribe((resulData:any)=>{
+    this.http.put("http://10.1.0.186:8090/plantas/"+this.idPlanta+'/',bodyData).subscribe((resulData:any)=>{
       alert("Planta actualizada");
       this.planta = '';
       this.base = '';

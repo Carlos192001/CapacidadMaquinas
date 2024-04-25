@@ -44,6 +44,28 @@ export class TroqueladorasComponent {
   pzaProdEnTurnos:number=0;
   requerimientoSem:number=0;
 
+  ocupacionTotal:number=86;
+
+  //Para mostrar 
+  showDescription1: boolean = false;
+  showDescription2: boolean = false;
+  showDescription3: boolean = false;
+  showDescription4: boolean = false;
+  showDescription5: boolean = false;
+  showDescription6: boolean = false;
+  showDescription7: boolean = false;
+  showDescription8: boolean = false;
+  showDescription9: boolean = false;
+  showDescription10: boolean = false;
+  showDescription11: boolean = false;
+  showDescription12: boolean = false;
+  showDescription13: boolean = false;
+  showDescription14: boolean = false;
+  showDescription15: boolean = false;
+  showDescription16: boolean = false;
+  showDescription17: boolean = false;
+
+
   //
   verPestania1(estado:boolean){
     this.pestania1=estado;
@@ -160,6 +182,15 @@ export class TroqueladorasComponent {
     if (this.proyectadoOcupAnual <= 85) {
       return '#008000'; // Verde
     } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
+  }
+  getBackgroundColorTotal(): string {
+    if (this.ocupacionTotal <= 85) {
+      return '#008000'; // Verde
+    } else if (this.ocupacionTotal > 85 && this.ocupacionTotal < 90) {
       return '#FFA500'; // Anaranjado
     } else {
       return '#FF0000'; // Rojo

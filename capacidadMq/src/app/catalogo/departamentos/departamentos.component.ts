@@ -37,7 +37,7 @@ export class DepartamentosComponent {
   }
 
   getAllDeptos(){
-    this.http.get("http://127.0.0.1:8000/deptos/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/deptos/").subscribe((resultData:any)=>{
       this.deptoArray = resultData;
     });
   }
@@ -51,7 +51,7 @@ export class DepartamentosComponent {
       "tipo" : this.tipo,
       "estatus" : this.estatus,
     }
-    this.http.post("http://127.0.0.1:8000/deptos/",bodyData).subscribe((resultData: any)=>{
+    this.http.post("http://10.1.0.186:8090/deptos/",bodyData).subscribe((resultData: any)=>{
       alert("Departamento registrado");
       this.getAllDeptos();
       this.numero = '';
@@ -80,7 +80,7 @@ export class DepartamentosComponent {
       "tipo" : this.tipo,
       "estatus" : this.estatus,
     }
-    this.http.put("http://127.0.0.1:8000/deptos/"+this.idDepto+'/',bodyData).subscribe((resulData:any)=>{
+    this.http.put("http://10.1.0.186:8090/deptos/"+this.idDepto+'/',bodyData).subscribe((resulData:any)=>{
       alert("Departamento actualizado");
       this.numero = '';
       this.nombre = '';

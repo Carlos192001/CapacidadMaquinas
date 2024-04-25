@@ -24,7 +24,7 @@ export class LoginComponent {
       "user": this.user,
       "password": this.password
     }
-    this.http.post("http://127.0.0.1:8000/tocken/", bodyData).subscribe({
+    this.http.post("http://10.1.0.186:8090/tocken/", bodyData).subscribe({
       next: (resultData: any) => {
         //console.log(resultData.token);
         // Verificar si la respuesta es un token válido

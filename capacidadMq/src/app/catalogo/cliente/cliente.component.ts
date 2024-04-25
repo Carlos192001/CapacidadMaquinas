@@ -25,7 +25,7 @@ export class ClienteComponent {
   }
 
   getAllClientes(){
-    this.http.get("http://127.0.0.1:8000/clientes/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/clientes/").subscribe((resultData:any)=>{
       this.clienteArray = resultData;
     });
   }
@@ -52,7 +52,7 @@ export class ClienteComponent {
       "nombre" : this.nombre,
       "estatus" : this.estatus,
     }
-    this.http.post("http://127.0.0.1:8000/clientes/",bodyData).subscribe((resultData: any)=>{
+    this.http.post("http://10.1.0.186:8090/clientes/",bodyData).subscribe((resultData: any)=>{
       alert("Cliente registrado");
       this.getAllClientes();
       this.nombre = '';
@@ -64,7 +64,7 @@ export class ClienteComponent {
       "nombre" : this.nombre,
       "estatus" : this.estatus,
     }
-    this.http.put("http://127.0.0.1:8000/clientes/"+this.idCliente+'/',bodyData).subscribe((resulData:any)=>{
+    this.http.put("http://10.1.0.186:8090/clientes/"+this.idCliente+'/',bodyData).subscribe((resulData:any)=>{
       alert("Cliente actualizado");
       this.nombre = '';
       this.estatus = true;

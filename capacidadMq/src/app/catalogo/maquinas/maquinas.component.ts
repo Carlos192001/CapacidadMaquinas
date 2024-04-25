@@ -34,18 +34,18 @@ export class MaquinasComponent {
   }
 
   getAllMaquinas(){
-    this.http.get("http://127.0.0.1:8000/maquinas/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/maquinas/").subscribe((resultData:any)=>{
       this.maquinaArray = resultData;
     });
   }
 
   getAllDeptos(){
-    this.http.get("http://127.0.0.1:8000/deptos/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/deptos/").subscribe((resultData:any)=>{
       this.deptoArray = resultData;
     });
   }
   getAllPlantas(){
-    this.http.get("http://127.0.0.1:8000/plantas/").subscribe((resultData:any)=>{
+    this.http.get("http://10.1.0.186:8090/plantas/").subscribe((resultData:any)=>{
       this.plantaArray = resultData;
     });
   }
@@ -71,7 +71,7 @@ export class MaquinasComponent {
       "estatus" : this.estatus,
     }
     console.log(bodyData);
-    this.http.post("http://127.0.0.1:8000/maquinas/",bodyData).subscribe((resultData: any)=>{
+    this.http.post("http://10.1.0.186:8090/maquinas/",bodyData).subscribe((resultData: any)=>{
       alert("Máquina registrada");
       this.getAllMaquinas();
       this.numDepartamento = '';
@@ -107,7 +107,7 @@ export class MaquinasComponent {
       "estatus" : this.estatus,
     }
     
-    this.http.put("http://127.0.0.1:8000/maquinas/"+this.idMaquina+'/',bodyData).subscribe((resulData:any)=>{
+    this.http.put("http://10.1.0.186:8090/maquinas/"+this.idMaquina+'/',bodyData).subscribe((resulData:any)=>{
       alert("Maquina actualizado");
       this.numDepartamento = '';
       this.codInternoMq = '';
