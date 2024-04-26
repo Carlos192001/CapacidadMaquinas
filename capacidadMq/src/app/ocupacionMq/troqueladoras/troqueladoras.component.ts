@@ -44,7 +44,7 @@ export class TroqueladorasComponent {
   pzaProdEnTurnos:number=0;
   requerimientoSem:number=0;
 
-  ocupacionTotal:number=86;
+  ocupacionTotal:number=0;
 
   //Para mostrar 
   showDescription1: boolean = false;
@@ -65,6 +65,8 @@ export class TroqueladorasComponent {
   showDescription16: boolean = false;
   showDescription17: boolean = false;
 
+  //arreglo que contendra las partes ingresadas en las máquinas
+  partes:any[] = [];
 
   //
   verPestania1(estado:boolean){
@@ -176,7 +178,25 @@ export class TroqueladorasComponent {
     } else {
       this.proyectadoOcupAnual = 0;
     }
+    this.partes.push(this.proyectadoOcupAnual);
+    
+    this.getSumaCapacidad();
   }
+
+  getSumaCapacidad(){
+    const suma = this.partes.reduce((total, current) => total + current, 0);
+    this.ocupacionTotal = Number(suma.toFixed(2));
+    console.log("Suma de capacidades:", suma);
+  
+    if (this.ocupacionTotal >= 85 && this.ocupacionTotal < 90) {
+      alert('La capacidad de la máquina está llegando a su límite');
+    } else if (this.ocupacionTotal >= 90 && this.ocupacionTotal <= 100) {
+      alert('La capacidad de la máquina llegó a su límite');
+    } else if (this.ocupacionTotal > 100) {
+      alert('¡La capacidad de la máquina ha sido excedida!');
+    }
+  }
+  
 
   getBackgroundColor(): string {
     if (this.proyectadoOcupAnual <= 85) {

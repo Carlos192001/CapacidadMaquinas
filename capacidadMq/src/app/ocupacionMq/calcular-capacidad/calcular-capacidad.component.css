@@ -1,19 +1,20 @@
 #contenedor{
     padding: 1% 5%;
 }
-/*#maquina{
-    background-color: rgb(191, 241, 241);
-}*/
-#uno{
-    background-color: brown;
-}
-#dos{
-    background-color: blueviolet;
-}
-#tres{
-    background-color: coral;
-}
+
 select{
     border-color: #000000;
     background-color: rgb(248, 249, 250);
+}
+
+.btn{
+    background-color: #34adfc;
+    font-weight: bold;
+    color: white;
+    border: #d3d1d1 solid 2px;
+}
+
+#calcular{
+    background-color: #0074cb;
+
 }

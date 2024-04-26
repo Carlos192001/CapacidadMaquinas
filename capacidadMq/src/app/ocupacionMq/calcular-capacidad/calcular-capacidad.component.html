@@ -3,39 +3,57 @@
     <div class="p-2" id="maquina" *ngIf="datosMaquina">
       <div class="card">
         <h5 class="card-header">OCUPACIÓN DE MÁQUINAS</h5>
-        <div class="card-body d-flex ">
-          <!--<h5 class="card-title">Special title treatment</h5>-->
-          <div class="p-2 flex-fill d-flex justify-content-center" >
-            <select class="form-select" [(ngModel)]="maquinaSelect" size="6" style="width: 80%;"  aria-label="Default select example">
-              <option disabled>Seleccione una máquina</option>
-              <option value="finpress">FIN PRESS ECKO</option>
-              <option value="inyectoras">INYECTORA BORCHE BS-1501203N029</option>
-              <option value="troqueladoras">PRENSA BLISS 300 TON</option>
-              <option value="hornos">HORNO CALTECH</option>
-              <option value="fluxeadoras">PAINT FLUX MACHINE</option>
-              <option value="3">TFShree</option>
-              <option value="1">TDOne</option>
-              <option value="2">TJwo</option>
-              <option value="3">ThrTDee</option>
-            </select>
-          </div>
-          <div class="p-2 flex-fill d-flex justify-content-center" >
-            <select class="form-select" [(ngModel)]="parteSelect" size="6" style="width: 80%;"  aria-label="Default select example">
-              <option disabled>Seleccione un número de parte</option>
-              <option value="finpress">ALETA RADIADOR VERSA</option>
-              <option value="INYECTORAS">FLAG BIG MAGNA</option>
-              <option value="troqueladoras">REINFORCEMENT CORE PLATE EA888 EVO3</option>
-              <option value="hornos">OIL COOLER R5 MOTOR 5 CIL 2.5L</option>
-              <option value="fluxeadoras">WATER PLATE EA888 EVO 3</option>
-              <option value="3">Three</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div class="p-5 ">
-            <!--<button class="btn btn-primary" (click)="calcularCapacidad()">Calcular</button>-->
-            <button class="btn btn-primary" (click)="elementosSelecionados()">Calcular</button>
+        <div class="card-body d-flex flex-column mb-3">
+          <div class="d-flex flex-row mb-1 justify-content-center" >
+            <div class="p-2">
+              <Button class="btn" id="finpress">FIN PRESS</Button>
+            </div>
+            <div class="p-2">
+              <button class="btn" id="inyectoras">INYECTORAS</button>
+            </div>
+            <div class="p-2">
+              <button class="btn" id="troqueladoras">TROQUELADORAS</button>
+            </div>
+            <div class="p-2">
+              <button class="btn" id="hornos">HORNOS</button>
+            </div>
+            <div class="p-2">
+              <button class="btn" id="fluxeadoras">FLUXEADORAS</button>
+            </div>
+          </div>          
+          <div class="d-flex flex-row mb-1">
+            <div class="p-2 flex-fill d-flex justify-content-center" >
+              <select class="form-select" [(ngModel)]="maquinaSelect" size="6" style="width: 80%;"  aria-label="Default select example">
+                <option disabled>Seleccione una máquina</option>
+                <option value="finpress">FIN PRESS ECKO</option>
+                <option value="inyectoras">INYECTORA BORCHE BS-1501203N029</option>
+                <option value="troqueladoras">PRENSA BLISS 300 TON</option>
+                <option value="hornos">HORNO CALTECH</option>
+                <option value="fluxeadoras">PAINT FLUX MACHINE</option>
+                <option value="3">TFShree</option>
+                <option value="1">TDOne</option>
+                <option value="2">TJwo</option>
+                <option value="3">ThrTDee</option>
+              </select>
+            </div>
+            <div class="p-2 flex-fill d-flex justify-content-center" >
+              <select class="form-select" [(ngModel)]="parteSelect" size="6" style="width: 80%;"  aria-label="Default select example">
+                <option disabled>Seleccione un número de parte</option>
+                <option value="finpress">ALETA RADIADOR VERSA</option>
+                <option value="INYECTORAS">FLAG BIG MAGNA</option>
+                <option value="troqueladoras">REINFORCEMENT CORE PLATE EA888 EVO3</option>
+                <option value="hornos">OIL COOLER R5 MOTOR 5 CIL 2.5L</option>
+                <option value="fluxeadoras">WATER PLATE EA888 EVO 3</option>
+                <option value="3">Three</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+            <div class="p-5 ">
+              <!--<button class="btn btn-primary" (click)="calcularCapacidad()">Calcular</button>-->
+              <button class="btn" id="calcular" (click)="elementosSelecionados()">Calcular</button>
+            </div>
           </div>
         </div>
       </div>
