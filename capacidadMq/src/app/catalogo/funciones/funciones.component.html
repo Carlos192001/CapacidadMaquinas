@@ -1,5 +1,5 @@
 <body>
-    <section class="contenido1">
+    <!--<section class="contenido1">
         <div class="titulo">
             <h1 style="text-decoration: underline;">Funciones</h1>
         </div>
@@ -87,7 +87,6 @@
               </table>
         </div>
     </section>
-    <!-- Tarjeta flotante con formulario y fondo oscuro -->
     <div class="fondo-oscuro" *ngIf="verTarjeta" >
         <div class="tarjeta-flotante">
             <div class="formulario-maquina">
@@ -114,6 +113,40 @@
                   </form>
             </div>
         </div>
-    </div>
-
+    </div>-->
+    <nav class="navbar navbar-expand-lg" style="background-color: #005ba2;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img src="assets/img-logo/Letras_Airtemp.png" alt="Logo" style="height: 50px;"/>
+        </a>
+        <div class="menunavegacion" id="navbarNav">
+          <ul class="navbar-nav">
+            <div class="menu-container">
+              <div class="dropdown">
+                <a class="nav-link" (click)="toggleMenu()">Menú
+                  <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#ffffff" d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6z"/></svg>
+                </a>
+                <ul class="dropdown-menu" id="dropdownMenu" [class.visible]="dropdownMenuVisible">
+                  <li><a href="#scrollspyHeading5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="#005ba2" d="m4 10l-.707.707L2.586 10l.707-.707zm17 8a1 1 0 1 1-2 0zM8.293 15.707l-5-5l1.414-1.414l5 5zm-5-6.414l5-5l1.414 1.414l-5 5zM4 9h10v2H4zm17 7v2h-2v-2zm-7-7a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5z"/></svg>                    
+                    Panel Principal</a>
+                  </li>
+                  <li><a href="#scrollspyHeading3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 2048 2048"><path fill="#005ba2" d="M1024 1280v-128h128v128zm0 256v-128h128v128zm384 256v-128h128v128zm0-256v-128h128v128zm-384 256v-128h128v128zM1536 0v128H256v1664H128V0zM768 1152v128H640v-128zm0 256v128H640v-128zm0 256v128H640v-128zM384 256h1408v1792H384zm1280 1664V384H512v1536zM1536 512v384H640V512zm-128 256V640H768v128zm0 512v-128h128v128z"/></svg>
+                    Información calculada
+                  </a></li>
+                  <li><hr></li>
+                  <li><a href="#scrollspyHeading3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 20"><g fill="#005ba2" fill-rule="evenodd" clip-rule="evenodd"><path d="M15.027 7.232a1 1 0 0 1 1.408.128l2.083 2.5a1 1 0 0 1-1.536 1.28l-2.083-2.5a1 1 0 0 1 .128-1.408"/><path d="M15.027 13.768a1 1 0 0 1-.129-1.408l2.084-2.5a1 1 0 1 1 1.536 1.28l-2.083 2.5a1 1 0 0 1-1.408.128"/><path d="M17.5 10.5a1 1 0 0 1-1 1H10a1 1 0 1 1 0-2h6.5a1 1 0 0 1 1 1M3 3.5a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1m0 14a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1"/><path d="M13 2.5a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1m0 10a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0v-4a1 1 0 0 1 1-1m-9-10a1 1 0 0 1 1 1v14a1 1 0 1 1-2 0v-14a1 1 0 0 1 1-1"/></g></svg>
+                    Cerrar sesión</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>        
+      </div>
+    </nav>
+    
+    
 </body>

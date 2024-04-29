@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-calcular-capacidad',
@@ -17,6 +17,7 @@ export class CalcularCapacidadComponent {
   /*variables para saber lo que se tiene seleccionado*/
   maquinaSelect: string = '';
   parteSelect: string = '';
+  radioSeleccionado: string = 'Todos'; // Valor por defecto
 
   calcularCapacidad(){
     this.datosMaquina=false;
@@ -34,9 +35,16 @@ export class CalcularCapacidadComponent {
     console.log(this.parteSelect);
     if (this.maquinaSelect && this.parteSelect) {
       this.saberCualMostrar(this.maquinaSelect, this.parteSelect);
+      
     } else {
       alert('Selecione una maquina y un número de parte');
     }
+  }
+  //para el filtro de las maquinas
+  handleChange(event: any) {
+    this.radioSeleccionado = event.target.value;
+    console.log('Radio seleccionado:', this.radioSeleccionado);
+    // Aquí puedes hacer lo que necesites con el radio seleccionado
   }
 
   saberCualMostrar(maquina: string, parte: string){
@@ -76,6 +84,7 @@ export class CalcularCapacidadComponent {
             break;
     }
   }
+  
 
   verFinPress(estado:boolean){
     this.datosMaquina = !estado;

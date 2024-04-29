@@ -8,13 +8,38 @@ select{
 }
 
 .btn{
-    background-color: #34adfc;
+    background-color: #0074cb;
     font-weight: bold;
     color: white;
-    border: #d3d1d1 solid 2px;
+    /*border: #d3d1d1 solid 2px;*/
+}
+.btn:hover{
+    background-color: #b9e0fe;
+    color: #747474;
 }
 
 #calcular{
     background-color: #0074cb;
 
+}
+#calcular:hover{
+    background-color: #7bc9fe;
+    color: black;
+}
+
+.loader{
+    border: 15px solid #f3f3f3;
+    border-top: 15px solid #005ba2;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

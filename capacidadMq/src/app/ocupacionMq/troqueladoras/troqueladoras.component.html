@@ -1,15 +1,20 @@
 <body>
     <div class="card" *ngIf="pestania1">
-        <h5 class="card-header">MÁQUINA TROQUELADORAS - DEPTO 128</h5>
+        <!--<h5 class="card-header">MÁQUINA TROQUELADORAS - DEPTO 128</h5>-->
+        <div class="card-header d-flex flex-row">
+          <h5>MÁQUINA TROQUELADORAS - DEPTO 128</h5>
+          <svg xmlns="http://www.w3.org/2000/svg" (click)="cambio()" style="margin-left: 60%; cursor:pointer" width="30" height="30" viewBox="0 0 24 24">
+            <path fill="#005ba2" d="M9.457 6.543a1 1 0 0 1 0 1.414L6.414 11h11.172l-3.043-3.043a1 1 0 0 1 1.414-1.414l4.75 4.75a1 1 0 0 1 0 1.414l-4.75 4.75a1 1 0 0 1-1.414-1.414L17.586 13H6.414l3.043 3.043a1 1 0 1 1-1.414 1.414l-4.75-4.75a1 1 0 0 1 0-1.414l4.75-4.75a1 1 0 0 1 1.414 0"/></svg>
+        </div>
         <div class="card-body d-flex flex-nowrap">
           <div class="card-body d-flex flex-nowrap">
-            <div class="p-1"><p><strong>MÁQUINA: </strong>FIN PRESS ECKO</p></div>
+            <div class="p-2"><p><strong>MÁQUINA: </strong>FIN PRESS ECKO</p></div>
             <!--<div class="p-1"><p><strong>CÓDIGO:</strong>AT102FP02</p></div>-->
-            <div class="p-1"><p><strong>NÚMERO DE PARTE: </strong>03102A234</p></div>
-            <div class="p-1"><p><strong>DESCRIPCIÓN: </strong>ALETAS RADIADOR VERSA</p></div>
+            <div class="p-2"><p><strong>NÚMERO DE PARTE: </strong>03102A234</p></div>
+            <div class="p-2"><p><strong>DESCRIPCIÓN: </strong>ALETAS RADIADOR VERSA</p></div>
           </div>
           <div class="card-body">
-            <div class="p-1" id="ocupacionTotal" [ngStyle]="{'background-color': getBackgroundColorTotal()}"><p><strong >Ocupación total: </strong>{{ocupacionTotal}}%</p></div>
+            <div class="p-2" id="ocupacionTotal" [ngStyle]="{'background-color': getBackgroundColorTotal()}"><p><strong >Ocupación total: </strong>{{ocupacionTotal}}%</p></div>
           </div>
         </div>
         <div class="card-header">
@@ -154,7 +159,11 @@
         </div>
     </div>
     <div class="card" *ngIf="pestania2">
-      <h5 class="card-header">MÁQUINA TROQUELADORAS - DEPTO 128</h5>
+      <div class="card-header d-flex flex-row">
+        <h5>MÁQUINA TROQUELADORAS - DEPTO 128</h5>
+        <svg xmlns="http://www.w3.org/2000/svg" (click)="cambio()" style="margin-left: 60%; cursor:pointer" width="30" height="30" viewBox="0 0 24 24">
+          <path fill="#005ba2" d="M9.457 6.543a1 1 0 0 1 0 1.414L6.414 11h11.172l-3.043-3.043a1 1 0 0 1 1.414-1.414l4.75 4.75a1 1 0 0 1 0 1.414l-4.75 4.75a1 1 0 0 1-1.414-1.414L17.586 13H6.414l3.043 3.043a1 1 0 1 1-1.414 1.414l-4.75-4.75a1 1 0 0 1 0-1.414l4.75-4.75a1 1 0 0 1 1.414 0"/></svg>
+      </div>
         <div class="card-body d-flex flex-nowrap">
           <div class="card-body d-flex flex-nowrap">
             <div class="p-1"><p><strong>MÁQUINA: </strong>FIN PRESS ECKO</p></div>
@@ -182,19 +191,26 @@
         </div>
         <div class="card-body" style="padding: 1% 5%;">
           <h4 class="card-title">Resultados de los cálculos</h4>
-          <p class="card-text"><strong>Horas por semana por turno:</strong> {{horaSemanaTurno}} horas</p>
-          <p class="card-text"><strong>Requerimiento diario:</strong> {{requerimientoDiario}} piezas</p>
-          <p class="card-text"><strong>Tiempo ciclo por golpe:</strong> {{timeCicloXgolpe}} minutos</p>
-          <p class="card-text"><strong>Horas efectivas por turno:</strong> {{hrsEfectivasXturno}} horas</p>
-          <p class="card-text"><strong>Piezas teoricas para primer turno:</strong> {{pzaTeoricasXprimerTurno}} piezas</p>
-          <p class="card-text"><strong>Piezas teoricas para segundo turno:</strong> {{pzaTeoricasXsegundoTurno}} piezas</p>
-          <p class="card-text"><strong>Numero de turnos requeridos:</strong> {{numTurnosRequeridos}} turnos</p>
-          <p class="card-text"><strong>Piezas producidas en turnos para requerimiento semanal:</strong> {{pzaProdEnTurnos}} piezas</p>
-          <p class="card-text"><strong>Requerimiento semanal:</strong> {{requerimientoSem}} piezas</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Horas por semana por turno:</strong> {{horaSemanaTurno}} horas</li>
+            <li class="list-group-item"><strong>Requerimiento diario:</strong> {{requerimientoDiario}} piezas</li>
+            <li class="list-group-item"><strong>Tiempo ciclo por golpe:</strong> {{timeCicloXgolpe}} minutos</li>
+            <li class="list-group-item"><strong>Horas efectivas por turno:</strong> {{hrsEfectivasXturno}} horas</li>
+            <li class="list-group-item"><strong>Piezas teóricas para primer turno:</strong> {{pzaTeoricasXprimerTurno}} piezas</li>
+            <li class="list-group-item"><strong>Piezas teóricas para segundo turno:</strong> {{pzaTeoricasXsegundoTurno}} piezas</li>
+            <li class="list-group-item"><strong>Número de turnos requeridos:</strong> {{numTurnosRequeridos}} turnos</li>
+            <li class="list-group-item"><strong>Piezas producidas en turnos para requerimiento semanal:</strong> {{pzaProdEnTurnos}} piezas</li>
+            <li class="list-group-item"><strong>Requerimiento semanal:</strong> {{requerimientoSem}} piezas</li>
+          </ul>
         </div>
+        
     </div>
     <div class="card" *ngIf="pestania3">
-      <h5 class="card-header">MÁQUINA TROQUELADORAS - DEPTO 128</h5>
+      <div class="card-header d-flex flex-row">
+        <h5>MÁQUINA TROQUELADORAS - DEPTO 128</h5>
+        <svg xmlns="http://www.w3.org/2000/svg" (click)="cambio()" style="margin-left: 60%; cursor:pointer" width="30" height="30" viewBox="0 0 24 24">
+          <path fill="#005ba2" d="M9.457 6.543a1 1 0 0 1 0 1.414L6.414 11h11.172l-3.043-3.043a1 1 0 0 1 1.414-1.414l4.75 4.75a1 1 0 0 1 0 1.414l-4.75 4.75a1 1 0 0 1-1.414-1.414L17.586 13H6.414l3.043 3.043a1 1 0 1 1-1.414 1.414l-4.75-4.75a1 1 0 0 1 0-1.414l4.75-4.75a1 1 0 0 1 1.414 0"/></svg>
+      </div>
       <div class="card-body d-flex flex-nowrap">
           <div class="card-body d-flex flex-nowrap">
             <div class="p-1"><p><strong>MÁQUINA: </strong>FIN PRESS ECKO</p></div>

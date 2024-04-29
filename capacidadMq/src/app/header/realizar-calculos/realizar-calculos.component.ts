@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-realizar-calculos',
@@ -14,9 +15,42 @@ export class RealizarCalculosComponent {
   departamentosForm:boolean=false;
   parteForm:boolean=false;
   funcionForm:boolean=false;
+  dropdownMenuVisible: boolean = false;
+
+  constructor(private router: Router){}
+
+  
+  @HostListener('document:click', ['$event'])
+  toggleDropdown(event: Event) {
+    const clickedElement = event.target as HTMLElement;
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownButton = document.getElementById('dropdownButton');
+
+    if (dropdownMenu && dropdownButton) {
+      if (clickedElement === dropdownButton || dropdownButton.contains(clickedElement)) {
+        this.dropdownMenuVisible = !this.dropdownMenuVisible;
+      } else if (!dropdownMenu.contains(clickedElement)) {
+        this.dropdownMenuVisible = false;
+      }
+    }
+  }
+  
+
+  toggleMenu() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    if (dropdownMenu) {
+      dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    }
+  }
+
+  cerrarSesion(){
+    localStorage.removeItem('token');
+    //console.log('token destruido')
+    this.router.navigate(['/capacidadMq/login']);
+  }
 
 
-  datosGenerales(estado:boolean){
+  /*datosGenerales(estado:boolean){
     this.datoGeneral   = estado;
     this.maquinasForm = !estado;
     this.plantasForm = !estado;
@@ -64,6 +98,6 @@ export class RealizarCalculosComponent {
     this.departamentosForm = !estado;
     this.parteForm = !estado;
     this.funcionForm = estado;
-  }
+  }*/
 
 }

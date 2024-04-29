@@ -4,23 +4,43 @@
       <div class="card">
         <h5 class="card-header">OCUPACIÓN DE MÁQUINAS</h5>
         <div class="card-body d-flex flex-column mb-3">
-          <div class="d-flex flex-row mb-1 justify-content-center" >
-            <div class="p-2">
-              <Button class="btn" id="finpress">FIN PRESS</Button>
-            </div>
-            <div class="p-2">
-              <button class="btn" id="inyectoras">INYECTORAS</button>
-            </div>
-            <div class="p-2">
-              <button class="btn" id="troqueladoras">TROQUELADORAS</button>
-            </div>
-            <div class="p-2">
-              <button class="btn" id="hornos">HORNOS</button>
-            </div>
-            <div class="p-2">
-              <button class="btn" id="fluxeadoras">FLUXEADORAS</button>
-            </div>
-          </div>          
+          
+          <ul class="list-group list-group-horizontal">
+            <h5>filtrar:</h5>
+            <!--<li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="Todos" id="todos" checked (change)="handleChange($event)">
+              <label class="form-check-label" for="todos">TODOS</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="Fin Press" id="finPress" (change)="handleChange($event)">
+              <label class="form-check-label" for="finPress">FIN PRESS</label>
+            </li>-->
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Todos'" id="todos" [checked]="radioSeleccionado === 'Todos'" (change)="handleChange($event)">
+              <label class="form-check-label" for="todos">TODOS</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Fin Press'" id="finPress" [checked]="radioSeleccionado === 'Fin Press'" (change)="handleChange($event)">
+              <label class="form-check-label" for="finPress">FIN PRESS</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Inyectoras'" id="inyectoras" [checked]="radioSeleccionado === 'Inyectoras'" (change)="handleChange($event)">
+              <label class="form-check-label" for="inyectoras">INYECTORAS</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Troqueladoras'" id="troqueladoras" [checked]="radioSeleccionado === 'Troqueladoras'" (change)="handleChange($event)">
+              <label class="form-check-label" for="troqueladoras">TROQUELADORAS</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="hornos">
+              <label class="form-check-label" for="hornos">HORNOS</label>
+            </li>
+            <li class="list-group-item">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fluxeadoras">
+              <label class="form-check-label" for="fluxeadoras">FLUXEADORAS</label>
+            </li>
+          </ul>
+                 
           <div class="d-flex flex-row mb-1">
             <div class="p-2 flex-fill d-flex justify-content-center" >
               <select class="form-select" [(ngModel)]="maquinaSelect" size="6" style="width: 80%;"  aria-label="Default select example">
@@ -55,6 +75,7 @@
               <button class="btn" id="calcular" (click)="elementosSelecionados()">Calcular</button>
             </div>
           </div>
+          <!--<div class="loader"></div>-->
         </div>
       </div>
     </div>
@@ -62,10 +83,11 @@
       <div class="card-body">
         <app-finpress *ngIf="formFinPress" (nuevoCalculoEvent)="manejarNuevoCalculo($event)"></app-finpress>
         <app-inyectoras *ngIf="formInyectoras"></app-inyectoras>
-        <app-troqueladoras *ngIf="formTroqueladoras"></app-troqueladoras>
+        <app-troqueladoras *ngIf="formTroqueladoras" (datoEnviado)="manejarNuevoCalculo($event)"></app-troqueladoras>
         <app-hornos *ngIf="formHornos"></app-hornos>
         <app-fluxeadoras *ngIf="formFluxeadoras"></app-fluxeadoras>
       </div>
     </div>
+    
   </div>
 </body>

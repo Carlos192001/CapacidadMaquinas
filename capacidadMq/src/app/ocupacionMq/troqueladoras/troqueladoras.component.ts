@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-troqueladoras',
@@ -46,6 +46,7 @@ export class TroqueladorasComponent {
 
   ocupacionTotal:number=0;
 
+  @Output() datoEnviado = new EventEmitter<boolean>();
   //Para mostrar 
   showDescription1: boolean = false;
   showDescription2: boolean = false;
@@ -67,6 +68,11 @@ export class TroqueladorasComponent {
 
   //arreglo que contendra las partes ingresadas en las máquinas
   partes:any[] = [];
+
+  //para cambiar la maquina o el numero de parte
+  cambio(){
+    this.datoEnviado.emit(true);
+  }
 
   //
   verPestania1(estado:boolean){
