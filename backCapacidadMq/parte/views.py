@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from parte.models import Parte
 from parte.serializers import ParteSerializer
-from django.http import JsonResponse
+from django.http import HttpResponseNotAllowed, JsonResponse
 from rest_framework.parsers import JSONParser
 from django.http import HttpResponseNotFound
 
@@ -44,3 +44,14 @@ def parte_detalle(request, id):
     elif request.method == 'DELETE':
         parteID.delete()
         return JsonResponse({"message": "Parte eliminado"}, status=204)
+    
+@csrf_exempt
+def filtrarFuncion(request, funcion):
+    if request.method == 'GET':
+        partes = Parte.objects.filter(funcionMaquina=funcion)
+        serializer = ParteSerializer(partes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+def method_not_allowed(request, *args, ** kwargs):
+    return HttpResponseNotAllowed(['GET', 'POST', 'PUT', 'DELETE'])

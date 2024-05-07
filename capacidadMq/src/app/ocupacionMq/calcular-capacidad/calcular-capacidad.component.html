@@ -7,74 +7,51 @@
           
           <ul class="list-group list-group-horizontal">
             <h5>filtrar:</h5>
-            <!--<li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="Todos" id="todos" checked (change)="handleChange($event)">
-              <label class="form-check-label" for="todos">TODOS</label>
-            </li>
-            <li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="Fin Press" id="finPress" (change)="handleChange($event)">
-              <label class="form-check-label" for="finPress">FIN PRESS</label>
-            </li>-->
             <li class="list-group-item">
               <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Todos'" id="todos" [checked]="radioSeleccionado === 'Todos'" (change)="handleChange($event)">
               <label class="form-check-label" for="todos">TODOS</label>
             </li>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Fin Press'" id="finPress" [checked]="radioSeleccionado === 'Fin Press'" (change)="handleChange($event)">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'ACABADO'" id="finPress" [checked]="radioSeleccionado === 'ACABADO'" (change)="handleChange($event)">
               <label class="form-check-label" for="finPress">FIN PRESS</label>
             </li>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Inyectoras'" id="inyectoras" [checked]="radioSeleccionado === 'Inyectoras'" (change)="handleChange($event)">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'INYECTAR'" id="inyectoras" [checked]="radioSeleccionado === 'INYECTAR'" (change)="handleChange($event)">
               <label class="form-check-label" for="inyectoras">INYECTORAS</label>
             </li>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Troqueladoras'" id="troqueladoras" [checked]="radioSeleccionado === 'Troqueladoras'" (change)="handleChange($event)">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'TROQUELAR'" id="troqueladoras" [checked]="radioSeleccionado === 'TROQUELAR'" (change)="handleChange($event)">
               <label class="form-check-label" for="troqueladoras">TROQUELADORAS</label>
             </li>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="hornos">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'HORNEAR'" id="hornos" [checked]="radioSeleccionado === 'HORNEAR'" (change)="handleChange($event)">
               <label class="form-check-label" for="hornos">HORNOS</label>
             </li>
             <li class="list-group-item">
-              <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="fluxeadoras">
+              <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'FLUXEAR'" id="fluxeadoras" [checked]="radioSeleccionado === 'FLUXEAR'" (change)="handleChange($event)">
               <label class="form-check-label" for="fluxeadoras">FLUXEADORAS</label>
             </li>
           </ul>
                  
           <div class="d-flex flex-row mb-1">
-            <div class="p-2 flex-fill d-flex justify-content-center" >
-              <select class="form-select" [(ngModel)]="maquinaSelect" size="6" style="width: 80%;"  aria-label="Default select example">
-                <option disabled>Seleccione una máquina</option>
-                <option value="finpress">FIN PRESS ECKO</option>
-                <option value="inyectoras">INYECTORA BORCHE BS-1501203N029</option>
-                <option value="troqueladoras">PRENSA BLISS 300 TON</option>
-                <option value="hornos">HORNO CALTECH</option>
-                <option value="fluxeadoras">PAINT FLUX MACHINE</option>
-                <option value="3">TFShree</option>
-                <option value="1">TDOne</option>
-                <option value="2">TJwo</option>
-                <option value="3">ThrTDee</option>
-              </select>
+            <div class="p-2 flex-fill d-flex justify-content-center">
+                <select class="form-select" [(ngModel)]="maquinaSelect" size="6" multiple aria-label="Size 3 select example">
+                    <option disabled>Seleccione una máquina</option>
+                    <option [value]="items.codInternoMq" *ngFor="let items of maquinaArray">{{items.nombre}}</option>
+                </select>
             </div>
-            <div class="p-2 flex-fill d-flex justify-content-center" >
-              <select class="form-select" [(ngModel)]="parteSelect" size="6" style="width: 80%;"  aria-label="Default select example">
-                <option disabled>Seleccione un número de parte</option>
-                <option value="finpress">ALETA RADIADOR VERSA</option>
-                <option value="INYECTORAS">FLAG BIG MAGNA</option>
-                <option value="troqueladoras">REINFORCEMENT CORE PLATE EA888 EVO3</option>
-                <option value="hornos">OIL COOLER R5 MOTOR 5 CIL 2.5L</option>
-                <option value="fluxeadoras">WATER PLATE EA888 EVO 3</option>
-                <option value="3">Three</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+            <div class="p-2 flex-fill d-flex justify-content-center">
+                <select class="form-select" [(ngModel)]="parteSelect" size="6" multiple aria-label="Size 3 select example">
+                    <option disabled>Seleccione un número de parte</option>
+                    <option [value]="items.numParte" *ngFor="let items of partesArray">{{items.descripcion}}</option>
+                </select>
             </div>
-            <div class="p-5 ">
-              <!--<button class="btn btn-primary" (click)="calcularCapacidad()">Calcular</button>-->
-              <button class="btn" id="calcular" (click)="elementosSelecionados()">Calcular</button>
+            <div class="p-5">
+                <!--<button class="btn btn-primary" (click)="calcularCapacidad()">Calcular</button>-->
+                <button class="btn" id="calcular" (click)="elementosSelecionados()">Calcular</button>
             </div>
-          </div>
+        </div>
+        
           <!--<div class="loader"></div>-->
         </div>
       </div>

@@ -5,7 +5,7 @@ from maquina.models import Maquina
 from maquina.serializers import MaquinaSerializer
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, HttpResponseNotAllowed
 
 # Create your views here.
 
@@ -44,3 +44,15 @@ def maquina_detalle(request, id):
     elif request.method == 'DELETE':
         maquinaID.delete()
         return JsonResponse({"message": "Maquina eliminada"}, status=204)
+    
+
+@csrf_exempt
+def filtrarFuncion(request, funcion):
+    if request.method == 'GET':
+        maquinas = Maquina.objects.filter(funcionMaquina=funcion)
+        serializer = MaquinaSerializer(maquinas, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+def method_not_allowed(request, *args, ** kwargs):
+    return HttpResponseNotAllowed(['GET', 'POST', 'PUT', 'DELETE'])

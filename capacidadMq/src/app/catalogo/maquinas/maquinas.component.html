@@ -24,7 +24,8 @@
                     <th scope="col">Departamento</th>
                     <th scope="col">Código Máquina</th>
                     <th scope="col">Nombre de la Máquina</th>
-                    <th scope="col">Código Proceso</th>
+                    <!--<th scope="col">Código Proceso</th>-->
+                    <th scope="col">Función</th>
                     <th scope="col">Planta</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
@@ -35,7 +36,8 @@
                     <td>{{maquinaItems.numDepartamento}}</td>
                     <td>{{maquinaItems.codInternoMq}}</td>
                     <td>{{maquinaItems.nombre}}</td>
-                    <td>{{maquinaItems.codInternoProceso}}</td>
+                    <!--<td>{{maquinaItems.codInternoProceso}}</td>-->
+                    <td>{{maquinaItems.funcionMaquina}}</td>
                     <td>{{maquinaItems.planta}}</td>
                     <td [ngClass]="{'negrita verde': maquinaItems.estatus, 'negrita rojo': !maquinaItems.estatus}">
                       {{maquinaItems.estatus ? 'True' : 'False'}}

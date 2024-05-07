@@ -37,6 +37,7 @@ urlpatterns = [
     #endpoints para las partes
     path('partes/', parte_views.parte_list),
     path('partes/<int:id>/', parte_views.parte_detalle),
+    path('partes-filtrar-funcion/<str:funcion>/', parte_views.filtrarFuncion, name='partes-filtrar-funcion'),
 
     #endpoints para los clientes
     path('clientes/', cliente_views.cliente_list),
@@ -45,6 +46,7 @@ urlpatterns = [
     #endpoints para las maquinas
     path('maquinas/', maquina_views.maquina_list),
     path('maquinas/<int:id>/',maquina_views.maquina_detalle),
+    path('maquinas-filtrar-funcion/<str:funcion>/',maquina_views.filtrarFuncion, name='maquinas-filtrar-funcion'),
 
     #endpoints para los usuarios
     path('users/', usuarios_views.usuario_list),

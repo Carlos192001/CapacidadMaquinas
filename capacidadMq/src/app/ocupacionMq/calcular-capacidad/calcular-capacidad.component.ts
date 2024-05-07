@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calcular-capacidad',
   templateUrl: './calcular-capacidad.component.html',
   styleUrl: './calcular-capacidad.component.css'
 })
-export class CalcularCapacidadComponent {
+export class CalcularCapacidadComponent implements OnInit{
 
   datosMaquina: boolean = true;
   formFinPress: boolean = false;
@@ -18,6 +19,15 @@ export class CalcularCapacidadComponent {
   maquinaSelect: string = '';
   parteSelect: string = '';
   radioSeleccionado: string = 'Todos'; // Valor por defecto
+  maquinaArray:any[]=[];
+  partesArray:any[]=[];
+
+  constructor(private http:HttpClient){
+    this.getTodasMaquinasPartes();
+  }
+  ngOnInit(): void {
+    
+  }
 
   calcularCapacidad(){
     this.datosMaquina=false;
@@ -31,11 +41,11 @@ export class CalcularCapacidadComponent {
   }
 
   elementosSelecionados(){
-    console.log(this.maquinaSelect);
-    console.log(this.parteSelect);
     if (this.maquinaSelect && this.parteSelect) {
-      this.saberCualMostrar(this.maquinaSelect, this.parteSelect);
-      
+      /*console.log(this.maquinaSelect);
+      console.log(this.parteSelect);
+      console.log(this.radioSeleccionado);*/
+      this.saberCualMostrar(this.radioSeleccionado);
     } else {
       alert('Selecione una maquina y un número de parte');
     }
@@ -44,47 +54,33 @@ export class CalcularCapacidadComponent {
   handleChange(event: any) {
     this.radioSeleccionado = event.target.value;
     console.log('Radio seleccionado:', this.radioSeleccionado);
-    // Aquí puedes hacer lo que necesites con el radio seleccionado
-  }
-
-  saberCualMostrar(maquina: string, parte: string){
-    switch(true) {
-        /*case maquina.toLowerCase() === parte.toLowerCase():
-            // Realiza una acción si maquina y parte son iguales (ignorando mayúsculas y minúsculas)
-            console.log("Maquina y parte son iguales.");
-            break;*/
-        case maquina.toLowerCase().includes("finpress") && parte.toLowerCase().includes("finpress"):
-            // Realiza una acción si maquina y parte contienen "palabra1"
-            this.verFinPress(true);
-            console.log("Maquina y parte contienen 'finpress'.");
-            break;
-        case maquina.toLowerCase().includes("inyectoras") && parte.toLowerCase().includes("inyectoras"):
-            // Realiza una acción si maquina y parte contienen "palabra2"
-            this.verInyectoras(true);
-            console.log("Maquina y parte contienen 'inyectoras'.");
-            break;
-        case maquina.toLowerCase().includes("troqueladoras") && parte.toLowerCase().includes("troqueladoras"):
-            // Realiza una acción si maquina y parte contienen "palabra2"
-            this.verTroqueladoras(true);
-            console.log("Maquina y parte contienen 'troqueladoras'.");
-            break;
-        case maquina.toLowerCase().includes("hornos") && parte.toLowerCase().includes("hornos"):
-            // Realiza una acción si maquina y parte contienen "palabra2"
-            this.verHornos(true);
-            console.log("Maquina y parte contienen 'hornos'.");
-            break;
-        case maquina.toLowerCase().includes("fluxeadoras") && parte.toLowerCase().includes("fluxeadoras"):
-            // Realiza una acción si maquina y parte contienen "palabra2"
-            this.verFluxeadoras(true);
-            console.log("Maquina y parte contienen 'fluxeadoras'.");
-            break;
-        default:
-            // Realiza una acción por defecto si no se cumple ningún caso anterior
-            console.log("Maquina y parte no coinciden con ningún caso específico.");
-            break;
+    if (this.radioSeleccionado === 'Todos') {
+      this.getTodasMaquinasPartes();
+    } else {
+      this.getFiltroMaquinasPartes(this.radioSeleccionado);
     }
   }
-  
+  getTodasMaquinasPartes(){
+    this.http.get('http://10.1.0.186:8090/maquinas/').subscribe((resultData:any)=>{
+      this.maquinaArray = resultData;
+      //console.log(this.maquinaArray);
+    });
+    this.http.get('http://10.1.0.186:8090/partes/').subscribe((resultData:any)=>{
+      this.partesArray = resultData;
+      //console.log(this.partesArray);
+    });
+  }
+  getFiltroMaquinasPartes(funcion:string){
+    this.http.get('http://10.1.0.186:8090/maquinas-filtrar-funcion/'+funcion+'/').subscribe((resultData:any)=>{
+      this.maquinaArray = resultData;
+      //console.log(this.maquinaArray);
+    });
+    this.http.get('http://10.1.0.186:8090/partes-filtrar-funcion/'+funcion+'/').subscribe((resultData:any)=>{
+      this.partesArray = resultData;
+      //console.log(this.partesArray);
+    });
+  }
+
 
   verFinPress(estado:boolean){
     this.datosMaquina = !estado;
@@ -126,6 +122,36 @@ export class CalcularCapacidadComponent {
     this.formHornos = !estado;
     this.formFluxeadoras = estado;
   }
+
+  saberCualMostrar(mostrar:string){
+    switch(true) {
+        case mostrar === 'ACABADO':
+            this.verFinPress(true);
+            console.log("Maquina y parte contienen 'finpress'.");
+            break;
+        case mostrar === 'INYECTAR':
+            this.verInyectoras(true);
+            console.log("Maquina y parte contienen 'inyectoras'.");
+            break;
+        case mostrar === 'TROQUELAR':
+            this.verTroqueladoras(true);
+            console.log("Maquina y parte contienen 'troqueladoras'.");
+            break;
+        case mostrar === 'HORNEAR':
+            this.verHornos(true);
+            console.log("Maquina y parte contienen 'hornos'.");
+            break;
+        case mostrar === 'FLUXEAR':
+            this.verFluxeadoras(true);
+            console.log("Maquina y parte contienen 'fluxeadoras'.");
+            break;
+        default:
+            // Realiza una acción por defecto si no se cumple ningún caso anterior
+            console.log("Maquina y parte no coinciden con ningún caso específico.");
+            break;
+    }
+  }
+  
 
 
 
