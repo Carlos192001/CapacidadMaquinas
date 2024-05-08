@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { delay } from 'rxjs/operators';
+import { Parte } from '../../interface/parte';
 
 @Component({
   selector: 'app-calcular-capacidad',
@@ -14,16 +16,18 @@ export class CalcularCapacidadComponent implements OnInit{
   formTroqueladoras: boolean = false;
   formHornos: boolean = false;
   formFluxeadoras: boolean = false;
+  loader: boolean = false;
 
   /*variables para saber lo que se tiene seleccionado*/
   maquinaSelect: string = '';
   parteSelect: string = '';
-  radioSeleccionado: string = 'Todos'; // Valor por defecto
+  radioSeleccionado: string = ''; // Valor por defecto
   maquinaArray:any[]=[];
-  partesArray:any[]=[];
+  partesArray:Parte[]=[];
+  idOcupMq!:number;
 
   constructor(private http:HttpClient){
-    this.getTodasMaquinasPartes();
+    //this.getTodasMaquinasPartes();
   }
   ngOnInit(): void {
     
@@ -42,23 +46,28 @@ export class CalcularCapacidadComponent implements OnInit{
 
   elementosSelecionados(){
     if (this.maquinaSelect && this.parteSelect) {
-      /*console.log(this.maquinaSelect);
-      console.log(this.parteSelect);
-      console.log(this.radioSeleccionado);*/
-      this.saberCualMostrar(this.radioSeleccionado);
+      let bodyData = {
+        "codInternoMq": this.maquinaSelect[0],
+        "numParte": this.parteSelect[0],
+        "estatus":true
+      }
+      console.log(bodyData);
+      this.http.post('http://127.0.0.1:8000/ocupacionMq/',bodyData).subscribe((resulData:any)=>{
+        console.log('Registro realizado, id del registro',resulData.id);
+        this.idOcupMq = resulData.id;
+        this.saberCualMostrar(this.radioSeleccionado);
+      })
     } else {
-      alert('Selecione una maquina y un número de parte');
+      alert('Selecione una máquina y un número de parte');
     }
   }
   //para el filtro de las maquinas
   handleChange(event: any) {
     this.radioSeleccionado = event.target.value;
     console.log('Radio seleccionado:', this.radioSeleccionado);
-    if (this.radioSeleccionado === 'Todos') {
-      this.getTodasMaquinasPartes();
-    } else {
+    if (this.radioSeleccionado) {
       this.getFiltroMaquinasPartes(this.radioSeleccionado);
-    }
+    } 
   }
   getTodasMaquinasPartes(){
     this.http.get('http://10.1.0.186:8090/maquinas/').subscribe((resultData:any)=>{
@@ -70,15 +79,34 @@ export class CalcularCapacidadComponent implements OnInit{
       //console.log(this.partesArray);
     });
   }
-  getFiltroMaquinasPartes(funcion:string){
-    this.http.get('http://10.1.0.186:8090/maquinas-filtrar-funcion/'+funcion+'/').subscribe((resultData:any)=>{
-      this.maquinaArray = resultData;
-      //console.log(this.maquinaArray);
-    });
-    this.http.get('http://10.1.0.186:8090/partes-filtrar-funcion/'+funcion+'/').subscribe((resultData:any)=>{
-      this.partesArray = resultData;
-      //console.log(this.partesArray);
-    });
+  getFiltroMaquinasPartes(funcion: string) {
+    this.maquinaSelect = '';
+    this.parteSelect = '';
+    this.loader = true; // Mostrar el loader antes de la solicitud HTTP
+  
+    // Realizar la solicitud HTTP para obtener las máquinas
+    this.http.get('http://10.1.0.186:8090/maquinas-filtrar-funcion/' + funcion + '/')
+      .subscribe((resultData: any) => {
+        this.maquinaArray = resultData;
+        // console.log(this.maquinaArray);
+      }, error => {
+        console.error('Error al obtener las máquinas:', error);
+      });
+  
+    // Realizar la solicitud HTTP para obtener las partes
+    this.http.get('http://10.1.0.186:8090/partes-filtrar-funcion/' + funcion + '/')
+      .pipe(
+        delay(1000) // Agregar un retraso de 1 segundos
+      )
+      .subscribe((resultData: any) => {
+        this.partesArray = resultData;
+        // console.log(this.partesArray);
+      }, error => {
+        console.error('Error al obtener las partes:', error);
+      }, () => {
+        // Esta función se ejecuta cuando la solicitud HTTP se completa con éxito
+        this.loader = false; // Ocultar el loader después de que la solicitud se complete
+      });
   }
 
 

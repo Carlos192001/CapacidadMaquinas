@@ -8,10 +8,10 @@
         </div>
         <div class="card-body d-flex flex-nowrap">
           <div class="card-body d-flex flex-nowrap">
-            <div class="p-2"><p><strong>MÁQUINA: </strong>FIN PRESS ECKO</p></div>
+            <div class="p-2"><p><strong>MÁQUINA: </strong>{{maquinaSelect}}</p></div>
             <!--<div class="p-1"><p><strong>CÓDIGO:</strong>AT102FP02</p></div>-->
-            <div class="p-2"><p><strong>NÚMERO DE PARTE: </strong>03102A234</p></div>
-            <div class="p-2"><p><strong>DESCRIPCIÓN: </strong>ALETAS RADIADOR VERSA</p></div>
+            <div class="p-2"><p><strong>NÚMERO DE PARTE: </strong>{{parteSelect}}</p></div>
+            <div class="p-2"><p><strong>DESCRIPCIÓN: </strong>{{descripcionNumParte}}</p></div>
           </div>
           <div class="card-body">
             <div class="p-2" id="ocupacionTotal" [ngStyle]="{'background-color': getBackgroundColorTotal()}"><p><strong >Ocupación total: </strong>{{ocupacionTotal}}%</p></div>

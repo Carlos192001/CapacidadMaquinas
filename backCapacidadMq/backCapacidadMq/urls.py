@@ -22,6 +22,7 @@ from parte import views as parte_views
 from cliente import views as cliente_views
 from maquina import views as maquina_views
 from usuario import views as usuarios_views
+from ocupacionMq import views as ocupacionMq_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,6 +39,7 @@ urlpatterns = [
     path('partes/', parte_views.parte_list),
     path('partes/<int:id>/', parte_views.parte_detalle),
     path('partes-filtrar-funcion/<str:funcion>/', parte_views.filtrarFuncion, name='partes-filtrar-funcion'),
+    path('partes/filtrar-numparte/<str:numparte>/', parte_views.filtrarnumParte, name='partes-filtrar-numparte'),
 
     #endpoints para los clientes
     path('clientes/', cliente_views.cliente_list),
@@ -53,4 +55,9 @@ urlpatterns = [
     path('users/<int:id>/', usuarios_views.usuario_detalle),
     path('tocken/',usuarios_views.autenticar_user),
     path('descifrar/<str:token>', usuarios_views.descifrar_token),
+
+    #endpoints para el encabezado OcupacionMq
+    path('ocupacionMq/',ocupacionMq_views.ocupMq_list),
+    path('ocupacionMq/<int:id>/',ocupacionMq_views.ocupMq_detalle),
+
 ]

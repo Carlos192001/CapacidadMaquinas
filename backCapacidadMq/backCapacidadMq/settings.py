@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'cliente.apps.ClienteConfig',
     'maquina.apps.MaquinaConfig',
     'usuario.apps.UsuarioConfig',
+    'ocupacionMq.apps.OcupacionmqConfig',
 ]
 
 MIDDLEWARE = [

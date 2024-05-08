@@ -28,11 +28,11 @@ select{
 }
 
 .loader{
-    border: 15px solid #f3f3f3;
-    border-top: 15px solid #005ba2;
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid #005ba2;
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     animation: spin 1s linear infinite;
 }
 @keyframes spin {
@@ -42,4 +42,15 @@ select{
     100% {
         transform: rotate(360deg);
     }
+}
+
+.card-body{
+    display: flex;
+    justify-content: center;
+}
+.container{
+    margin: 2% 0;
+}
+.col-12{
+    margin: 2% 0;
 }

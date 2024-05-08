@@ -1,11 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Parte } from '../../interface/parte';
 
 @Component({
   selector: 'app-troqueladoras',
   templateUrl: './troqueladoras.component.html',
   styleUrl: './troqueladoras.component.css'
 })
-export class TroqueladorasComponent {
+export class TroqueladorasComponent implements OnInit{
+  @Input() maquinaSelect: string = '';
+  @Input() parteSelect: string = '';
+  @Input() idOcupMq!: number;
+  @Output() datoEnviado = new EventEmitter<boolean>();
   //variables para activar las pestañas
   pestania1:boolean=true;
   pestania2:boolean=false;
@@ -31,6 +37,8 @@ export class TroqueladorasComponent {
   scrapLiberado:number=0;
   estatus:boolean=true;
   observaciones:string='';
+  prueba:number=0;
+  prueba2:number=0;
 
   //variables que contendran los calculos 
   proyectadoOcupAnual:number=0;
@@ -46,7 +54,6 @@ export class TroqueladorasComponent {
 
   ocupacionTotal:number=0;
 
-  @Output() datoEnviado = new EventEmitter<boolean>();
   //Para mostrar 
   showDescription1: boolean = false;
   showDescription2: boolean = false;
@@ -68,6 +75,23 @@ export class TroqueladorasComponent {
 
   //arreglo que contendra las partes ingresadas en las máquinas
   partes:any[] = [];
+  descripcionNumParte:string='';
+
+  constructor( private http:HttpClient){}
+
+  ngOnInit(): void {
+    this.http.get<Parte[]>('http://10.1.0.186:8090/partes/filtrar-numparte/' + this.parteSelect + '/')
+    .subscribe((res: Parte[]) => {
+      if (res.length > 0) {
+        this.descripcionNumParte = res[0].descripcion;
+      } else {
+        alert('No se encontró ninguna descripción para el número de parte:'+this.parteSelect);
+      }
+    }, error => {
+      console.error('Error al obtener la descripción:', error);
+    });
+    console.log('con ese id trabajare:',this.idOcupMq);
+  }
 
   //para cambiar la maquina o el numero de parte
   cambio(){
@@ -112,8 +136,11 @@ export class TroqueladorasComponent {
       "scrapLiberado" : this.scrapLiberado,
       "estatus":true,
       "observaciones" : this.observaciones,
+      "prueba":this.prueba,
+      "prueba2":this.prueba2,
     }
-    //console.log(bodyData);
+    console.log(bodyData);
+    console.log('----------------------------------------------------------------');
     this.calcularUso(bodyData);
   }
 

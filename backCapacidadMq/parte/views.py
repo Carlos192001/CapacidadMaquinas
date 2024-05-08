@@ -48,7 +48,18 @@ def parte_detalle(request, id):
 @csrf_exempt
 def filtrarFuncion(request, funcion):
     if request.method == 'GET':
-        partes = Parte.objects.filter(funcionMaquina=funcion)
+        partes = Parte.objects.filter(funcionMaquina=funcion, estatus=True)
+        serializer = ParteSerializer(partes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+def method_not_allowed(request, *args, ** kwargs):
+    return HttpResponseNotAllowed(['GET', 'POST', 'PUT', 'DELETE'])
+
+@csrf_exempt
+def filtrarnumParte(request, numparte):
+    if request.method == 'GET':
+        partes = Parte.objects.filter(numParte=numparte, estatus=True)
         serializer = ParteSerializer(partes, many=True)
         return JsonResponse(serializer.data, safe=False)
     else:
