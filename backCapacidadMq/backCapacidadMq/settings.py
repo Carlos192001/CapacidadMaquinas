@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'maquina.apps.MaquinaConfig',
     'usuario.apps.UsuarioConfig',
     'ocupacionMq.apps.OcupacionmqConfig',
+    'datosAcalcular.apps.DatosacalcularConfig'
 ]
 
 MIDDLEWARE = [

@@ -31,14 +31,22 @@ export class TroqueladorasComponent implements OnInit{
   numDeCambiosHerra:number=0;
   paradasProgramadas:number=0;
   demorasInevitables:number=0;
-  cavidadesXgolpe:number=0;
+  cavidades:number=0;
   turnoInicial:number=0;
   turnoConsecutivo:number=0;
   scrapLiberado:number=0;
   estatus:boolean=true;
   observaciones:string='';
-  prueba:number=0;
-  prueba2:number=0;
+  //pertenecen a otra maquina
+  cortesXminuto:number=0;
+  tiempoCicloXpza:number=0;
+  longTrabajoBanda:number=0;
+  longTotalBanda:number=0;
+  longEfectivoBanda:number=0;
+  velocidadBanda:number=0;
+  longDePza:number=0;
+  espacioEntrePza:number=0;
+
 
   //variables que contendran los calculos 
   proyectadoOcupAnual:number=0;
@@ -51,6 +59,15 @@ export class TroqueladorasComponent implements OnInit{
   numTurnosRequeridos:number=0;
   pzaProdEnTurnos:number=0;
   requerimientoSem:number=0;
+  numLadosAfluxear:number=0;
+  cantidadDummys:number=0;
+  longitudDummy:number=0;
+  longitudEntreDummys:number=0;
+  longitudJig:number=0;
+  longitudEntreJigs:number=0;
+  filasDummysSimultaneas:number=0;
+  filasJigsSimultaneas:number=0;
+  numCambiosReceta:number=0;
 
   ocupacionTotal:number=0;
 
@@ -76,6 +93,7 @@ export class TroqueladorasComponent implements OnInit{
   //arreglo que contendra las partes ingresadas en las máquinas
   partes:any[] = [];
   descripcionNumParte:string='';
+  
 
   constructor( private http:HttpClient){}
 
@@ -118,6 +136,7 @@ export class TroqueladorasComponent implements OnInit{
   registrarDatos(estado:boolean){
     this.activarPestania=estado;
     let bodyData = {
+      "idOcupacionMq" : this.idOcupMq,
       "requeriAnualAutilizar" : this.requeriAnualAutilizar,
       "golpesXminutos" : this.golpesXminutos,
       "pzaRequeridas" : this.pzaRequeridas,
@@ -130,18 +149,37 @@ export class TroqueladorasComponent implements OnInit{
       "numDeCambiosHerra" : this.numDeCambiosHerra,
       "paradasProgramadas" : this.paradasProgramadas,
       "demorasInevitables" : this.demorasInevitables,
-      "cavidadesXgolpe" : this.cavidadesXgolpe,
+      "cavidades" : this.cavidades,
       "turnoInicial" : this.turnoInicial,
       "turnoConsecutivo" : this.turnoConsecutivo,
       "scrapLiberado" : this.scrapLiberado,
-      "estatus":true,
+      "estatus":'ACTIVO',
       "observaciones" : this.observaciones,
-      "prueba":this.prueba,
-      "prueba2":this.prueba2,
+
+
+      "cortesXminuto":this.cortesXminuto,
+      "tiempoCicloXpza":this.tiempoCicloXpza,
+      "longTrabajoBanda": this.longTrabajoBanda,
+      "longTotalBanda" : this.longTotalBanda,
+      "longEfectivoBanda" : this.longEfectivoBanda,
+      "velocidadBanda" : this.velocidadBanda,
+      "longDePza" : this.longDePza,
+      "espacioEntrePza" : this.espacioEntrePza,
+      "numLadosAfluxear" : this.numLadosAfluxear,
+      "cantidadDummys" : this.cantidadDummys,
+      "longitudDummy" : this.longitudDummy,
+      "longitudEntreDummys" : this.longitudEntreDummys,
+      "longitudJig" : this.longitudJig,
+      "longitudEntreJigs" : this.longitudEntreJigs,
+      "filasDummysSimultaneas" : this.filasDummysSimultaneas,
+      "filasJigsSimultaneas" : this.filasJigsSimultaneas,
+      "numCambiosReceta" : this.numCambiosReceta
     }
-    console.log(bodyData);
-    console.log('----------------------------------------------------------------');
-    this.calcularUso(bodyData);
+    this.http.post('http://127.0.0.1:8000/datosAcalcular/',bodyData).subscribe((resultData:any)=>{
+      console.log('se realizo el REGISTROO, con este ID:',resultData.id);
+      this.calcularUso(bodyData);
+    })
+    
   }
 
   calcularUso(dato:any){
@@ -171,15 +209,15 @@ export class TroqueladorasComponent implements OnInit{
     console.log('horas efectivas por turno:',this.hrsEfectivasXturno);
 
     if (this.timeCicloXgolpe) {
-      this.pzaTeoricasXprimerTurno = (this.hrsEfectivasXturno/(this.timeCicloXgolpe/60/60))*dato.cavidadesXgolpe;
+      this.pzaTeoricasXprimerTurno = (this.hrsEfectivasXturno/(this.timeCicloXgolpe/60/60))*dato.cavidades;
       console.log('piezas teoricas por primer turno:',this.pzaTeoricasXprimerTurno);
     } else {
       this.pzaTeoricasXprimerTurno = 0;
       console.log('piezas teoricas por primer turno:',this.pzaTeoricasXprimerTurno);
     }
 
-    if (this.timeCicloXgolpe && this.cavidadesXgolpe) {
-      this.pzaTeoricasXsegundoTurno = Number((((dato.horasDelTurno-((dato.paradasProgramadas+dato.demorasInevitables)/60))/(this.timeCicloXgolpe/60/60))*this.cavidadesXgolpe).toFixed(3));
+    if (this.timeCicloXgolpe && this.cavidades) {
+      this.pzaTeoricasXsegundoTurno = Number((((dato.horasDelTurno-((dato.paradasProgramadas+dato.demorasInevitables)/60))/(this.timeCicloXgolpe/60/60))*this.cavidades).toFixed(3));
       console.log('piezas teoricas por segundo turno',this.pzaTeoricasXsegundoTurno); //chececar
     } else {
       this.pzaTeoricasXsegundoTurno =0;

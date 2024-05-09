@@ -6,6 +6,7 @@ class OcupacionMq(models.Model):
     codInternoMq = models.CharField('codInternoMq', max_length=255)
     numParte = models.CharField('numParte', max_length=255)
     estatus = models.BooleanField('estatus')
+    funcion = models.CharField('funcion', max_length=255)
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)    
 

@@ -45,11 +45,13 @@ export class CalcularCapacidadComponent implements OnInit{
   }
 
   elementosSelecionados(){
+    console.log('este es el tipo:',this.radioSeleccionado);
     if (this.maquinaSelect && this.parteSelect) {
       let bodyData = {
         "codInternoMq": this.maquinaSelect[0],
         "numParte": this.parteSelect[0],
-        "estatus":true
+        "estatus": true,
+        "funcion": this.radioSeleccionado,
       }
       console.log(bodyData);
       this.http.post('http://127.0.0.1:8000/ocupacionMq/',bodyData).subscribe((resulData:any)=>{
