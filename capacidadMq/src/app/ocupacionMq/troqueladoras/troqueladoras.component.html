@@ -26,7 +26,7 @@
                 <a class="nav-link" (click)="verPestania2(true)" *ngIf="activarPestania">Datos calculados</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" (click)="verPestania3(true)" *ngIf="activarPestania">Registros</a>
+                <a class="nav-link" (click)="verPestania3(true)">Registros</a>
               </li>
               <!-- Agrega más pestañas si es necesario -->  
             </ul>
@@ -243,69 +243,22 @@
               <th scope="col">#</th>
               <th scope="col">Código Máquina</th>
               <th scope="col">Nombre Máquina</th>
-              <th scope="col">Númbero de parte</th>
+              <th scope="col">Número de parte</th>
               <th scope="col">Descripción</th>
-              <th scope="col">Turnos requeridos</th>
+              <!--<th scope="col">Turnos requeridos</th>
               <th scope="col">Turnos al día</th>
-              <th scope="col">Días a laborar</th>
+              <th scope="col">Días a laborar</th>-->
               <th scope="col">Proyectado Ocupación</th>
             </tr>
           </thead>
           <tbody class="table-group-divider" >
-            <tr>
-              <th scope="row">1</th>
-              <td>AT128PR05</td>
-              <td>PRENSA SEYI SNS2 440 TON</td>
-              <td>03128CA21</td>
-              <td>TROQUEL DE HEADER CAC CHATANUGA</td>
-              <td>0.10</td>
-              <td>1</td>
-              <td>5</td>
-              <td>1.94%</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>AT128PR05</td>
-              <td>PRENSA SEYI SNS2 440 TON</td>
-              <td>03128FA32</td>
-              <td>TROQUEL DE FALSO CAC CHATANUGA</td>
-              <td>1</td>
-              <td>2</td>
-              <td>6</td>
-              <td>1.94%</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>AT128PR05</td>
-              <td>PRENSA SEYI SNS2 440 TON</td>
-              <td>03128CA18</td>
-              <td>HEADER RADIATOR ATLAS</td>
-              <td>1</td>
-              <td>1</td>
-              <td>5</td>
-              <td>8.16%</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>AT128PR05</td>
-              <td>PRENSA SEYI SNS2 440 TON</td>
-              <td>03128FA32</td>
-              <td>TROQUEL DE FALSO CAC CHATANUGA</td>
-              <td>1</td>
-              <td>2</td>
-              <td>5</td>
-              <td>1.94%</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>AT128PR05</td>
-              <td>PRENSA SEYI SNS2 440 TON</td>
-              <td>03128CA18</td>
-              <td>HEADER RADIATOR ATLAS</td>
-              <td>1</td>
-              <td>1</td>
-              <td>5</td>
-              <td>8.16%</td>
+            <tr *ngFor="let items of ocupacionAll">
+              <th scope="row">{{items.id}}</th>
+              <td>{{items.codInternoMq}}</td>
+              <td>{{items.nombre}}</td>
+              <td>{{items.numParte}}</td>
+              <td>{{items.descripcion}}</td>
+              <td>{{items.proyectadoOcupAnual}} %</td>
             </tr>
           </tbody>
         </table>

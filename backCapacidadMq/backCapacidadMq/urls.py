@@ -24,6 +24,7 @@ from maquina import views as maquina_views
 from usuario import views as usuarios_views
 from ocupacionMq import views as ocupacionMq_views
 from datosAcalcular import views as datosAcalcular_views
+from resultadoCalculo import views as reultadoCalculo_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -60,9 +61,16 @@ urlpatterns = [
     #endpoints para el encabezado OcupacionMq
     path('ocupacionMq/',ocupacionMq_views.ocupMq_list),
     path('ocupacionMq/<int:id>/',ocupacionMq_views.ocupMq_detalle),
+    path('ocupacionMq/encabezado/<str:funcion>',ocupacionMq_views.datosEncabezado),
+    path('ocupacionMq/troqueladoras/',ocupacionMq_views.datosTroqueladoras),
 
     #endpoints para los datos que se usaran para los calculos 
     path('datosAcalcular/', datosAcalcular_views.datos_list),
     path('datosAcalcular/<int:id>/', datosAcalcular_views.datos_detalle),
+    path('tu_nueva_vista/', datosAcalcular_views.tu_nueva_vista),
+
+    #endpoints para los datos que contendran los resultados de los calculos
+    path('resultadoCalculo/',reultadoCalculo_views.resultado_list),
+    path('resultadoCalculo/<int:id>/',reultadoCalculo_views.resultado_detalle)
 
 ]

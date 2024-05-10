@@ -35,7 +35,6 @@ export class TroqueladorasComponent implements OnInit{
   turnoInicial:number=0;
   turnoConsecutivo:number=0;
   scrapLiberado:number=0;
-  estatus:boolean=true;
   observaciones:string='';
   //pertenecen a otra maquina
   cortesXminuto:number=0;
@@ -46,6 +45,15 @@ export class TroqueladorasComponent implements OnInit{
   velocidadBanda:number=0;
   longDePza:number=0;
   espacioEntrePza:number=0;
+  numLadosAfluxear:number=0;
+  cantidadDummys:number=0;
+  longitudDummy:number=0;
+  longitudEntreDummys:number=0;
+  longitudJig:number=0;
+  longitudEntreJigs:number=0;
+  filasDummysSimultaneas:number=0;
+  filasJigsSimultaneas:number=0;
+  numCambiosReceta:number=0;
 
 
   //variables que contendran los calculos 
@@ -59,17 +67,36 @@ export class TroqueladorasComponent implements OnInit{
   numTurnosRequeridos:number=0;
   pzaProdEnTurnos:number=0;
   requerimientoSem:number=0;
-  numLadosAfluxear:number=0;
-  cantidadDummys:number=0;
-  longitudDummy:number=0;
-  longitudEntreDummys:number=0;
-  longitudJig:number=0;
-  longitudEntreJigs:number=0;
-  filasDummysSimultaneas:number=0;
-  filasJigsSimultaneas:number=0;
-  numCambiosReceta:number=0;
-
   ocupacionTotal:number=0;
+  idDatosAcalcular!:number;
+  //variables de los calculos de otras maquinas
+  ensamblesXminuto:number=0;
+  ensamblesXhora:number=0;
+  tiempDispoXturno:number=0;
+  hrsNcesRequeDiario:number=0;
+  tiempoEfecDiario:number=0;
+  ensamReqXdia:number=0;
+  ensamXdiaMasScrap:number=0;
+  timeMuertoPrimeraColum:number=0;
+  tiempoCiclo:number=0;
+  pzaXhora:number=0;
+  hrsXdiaRequeriSemanal:number=0;
+  pzaXturno:number=0;
+  longTotalJigDummy:number=0;
+  longTotalJigProducto:number=0;
+  numColDummys:number=0;
+  numColJigProducto:number=0;
+  tiempDisponibleHornoAlDia:number=0;
+  horneadoXpzaPrimerDummy:number=0;
+  horneadoXpzaRestoDummys:number=0;
+  horneadoXpzaProducto:number=0;
+  tiempRecorriPrimerDummy:number=0;
+  tiempRecorriRestoDummys:number=0;
+  tiempRecorridoProducto:number=0;
+  ocupacionPrimerDummy:number=0;
+  ocupacionRestoDummys:number=0;
+  ocupacionProducto:number=0;
+
 
   //Para mostrar 
   showDescription1: boolean = false;
@@ -93,9 +120,12 @@ export class TroqueladorasComponent implements OnInit{
   //arreglo que contendra las partes ingresadas en las máquinas
   partes:any[] = [];
   descripcionNumParte:string='';
+  ocupacionAll:any[]=[];
   
 
-  constructor( private http:HttpClient){}
+  constructor( private http:HttpClient){
+    this.getOcupacionMq();
+  }
 
   ngOnInit(): void {
     this.http.get<Parte[]>('http://10.1.0.186:8090/partes/filtrar-numparte/' + this.parteSelect + '/')
@@ -177,6 +207,7 @@ export class TroqueladorasComponent implements OnInit{
     }
     this.http.post('http://127.0.0.1:8000/datosAcalcular/',bodyData).subscribe((resultData:any)=>{
       console.log('se realizo el REGISTROO, con este ID:',resultData.id);
+      this.idDatosAcalcular = resultData.id;
       this.calcularUso(bodyData);
     })
     
@@ -252,6 +283,56 @@ export class TroqueladorasComponent implements OnInit{
     this.partes.push(this.proyectadoOcupAnual);
     
     this.getSumaCapacidad();
+    let bodyData = {
+      "idDatosAcalcular": this.idDatosAcalcular,
+      "horaSemanaTurno":this.horaSemanaTurno,
+      "requerimientoDiario": this.requerimientoDiario,
+      "timeCicloXgolpe": this.timeCicloXgolpe,
+      "hrsEfectivasXturno": this.hrsEfectivasXturno,
+      "pzaTeoricasXprimerTurno": this.pzaTeoricasXprimerTurno,
+      "pzaTeoricasXsegundoTurno": this.pzaTeoricasXsegundoTurno,
+      "numTurnosRequeridos": this.numTurnosRequeridos,
+      "pzaProdEnTurnos": this.pzaProdEnTurnos,
+      "requerimientoSem": this.requerimientoSem,
+      "proyectadoOcupAnual": this.proyectadoOcupAnual,
+
+      "ensamblesXminuto": this.ensamblesXminuto,
+      "ensamblesXhora":this.ensamblesXhora,
+      "tiempDispoXturno":this.tiempDispoXturno,
+      "hrsNcesRequeDiario": this.hrsNcesRequeDiario,
+      "tiempoEfecDiario": this.tiempoEfecDiario,
+      "ensamReqXdia": this.ensamReqXdia,
+      "ensamXdiaMasScrap": this.ensamXdiaMasScrap,
+      "timeMuertoPrimeraColum": this.timeMuertoPrimeraColum,
+      "tiempoCiclo": this.tiempoCiclo,
+      "pzaXhora": this.pzaXhora,
+      "hrsXdiaRequeriSemanal": this.hrsXdiaRequeriSemanal,
+      "pzaXturno": this.pzaXturno,
+      "longTotalJigDummy": this.longTotalJigDummy,
+      "longTotalJigProducto": this.longTotalJigProducto,
+      "numColDummys": this.numColDummys,
+      "numColJigProducto": this.numColJigProducto,
+      "tiempDisponibleHornoAlDia": this.tiempDisponibleHornoAlDia,
+      "horneadoXpzaPrimerDummy": this.horneadoXpzaPrimerDummy,
+      "horneadoXpzaRestoDummys": this.horneadoXpzaRestoDummys,
+      "horneadoXpzaProducto": this.horneadoXpzaProducto,
+      "tiempRecorriPrimerDummy": this.tiempRecorriPrimerDummy,
+      "tiempRecorriRestoDummys": this.tiempRecorriRestoDummys,
+      "tiempRecorridoProducto": this.tiempRecorridoProducto,
+      "ocupacionPrimerDummy": this.ocupacionPrimerDummy,
+      "ocupacionRestoDummys": this.ocupacionRestoDummys,
+      "ocupacionProducto": this.ocupacionProducto,
+      "estatus":'ACTIVO'
+    }
+    this.http.post('http://127.0.0.1:8000/resultadoCalculo/',bodyData).subscribe((resultData:any)=>{
+      console.log('resgitro de los datos correcto');
+      this.getOcupacionMq();
+    })
+  }
+  getOcupacionMq(){
+    this.http.get('http://127.0.0.1:8000/ocupacionMq/Join/TROQUELAR').subscribe((resultData:any)=>{
+      this.ocupacionAll = resultData;
+    })
   }
 
   getSumaCapacidad(){
