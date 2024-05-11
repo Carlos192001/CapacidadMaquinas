@@ -46,6 +46,7 @@ export class CalcularCapacidadComponent implements OnInit{
 
   elementosSelecionados(){
     console.log('este es el tipo:',this.radioSeleccionado);
+    this.saberCualMostrar(this.radioSeleccionado);
     if (this.maquinaSelect && this.parteSelect) {
       let bodyData = {
         "codInternoMq": this.maquinaSelect[0],
@@ -57,7 +58,7 @@ export class CalcularCapacidadComponent implements OnInit{
       this.http.post('http://127.0.0.1:8000/ocupacionMq/',bodyData).subscribe((resulData:any)=>{
         console.log('Registro realizado, id del registro',resulData.id);
         this.idOcupMq = resulData.id;
-        this.saberCualMostrar(this.radioSeleccionado);
+        //this.saberCualMostrar(this.radioSeleccionado);
       })
     } else {
       alert('Selecione una máquina y un número de parte');
