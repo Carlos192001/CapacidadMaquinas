@@ -1,3 +1,66 @@
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item" (click)="clicActiveForm(true)">
+        <a class="nav-link" [class.active]="isActiveForm" [attr.aria-current]="isActiveDatos ? 'page' : null">Formulario</a>
+      </li>
+      <li class="nav-item" (click)="clicActiveDatos(true)">
+        <a class="nav-link" [class.active]="isActiveDatos" [attr.aria-current]="isActiveDatos ? 'page' : null">Datos calculados</a>
+      </li>
+      <li class="nav-item" (click)="clicActiveRegis(true)">
+        <a class="nav-link" [class.active]="isActiveRegis" [attr.aria-current]="isActiveDatos ? 'page' : null">Registros</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body" >
+    <div class="formulario" *ngIf="isActiveForm">
+      aqui estara el Formulario
+    </div>
+    <div class="registros" *ngIf="isActiveRegis">
+      <table class="table table-hover" style="text-align: center;">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Código Máquina</th>
+            <th scope="col">Nombre Máquina</th>
+            <th scope="col">Número de parte</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Proyectado Ocupación</th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider" >
+          <tr *ngFor="let items of ocupacionAll">
+            <th scope="row">{{items.id}}</th>
+            <td>{{items.codInternoMq}}</td>
+            <td>{{items.nombre}}</td>
+            <td>{{items.numParte}}</td>
+            <td>{{items.descripcion}}</td>
+            <td>{{items.proyectadoOcupAnual}} %</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="calculos" *ngIf="isActiveDatos">
+      aqui estaran los calculos
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!--<body>
     <div class="card" *ngIf="pestania1">
         <div class="card-header d-flex flex-row">

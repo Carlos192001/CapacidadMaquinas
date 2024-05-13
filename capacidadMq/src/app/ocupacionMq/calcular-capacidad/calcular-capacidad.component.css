@@ -1,11 +1,12 @@
 #contenedor{
     padding: 1% 5%;
+    /*background-color: brown;*/
 }
 
-select{
+/*select{
     border-color: #000000;
     background-color: rgb(248, 249, 250);
-}
+}*/
 
 .btn{
     background-color: #0074cb;

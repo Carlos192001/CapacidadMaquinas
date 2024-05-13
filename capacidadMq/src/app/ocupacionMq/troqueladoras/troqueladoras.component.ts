@@ -121,7 +121,9 @@ export class TroqueladorasComponent implements OnInit{
   partes:any[] = [];
   descripcionNumParte:string='';
   ocupacionAll:any[]=[];
-  
+  isActiveForm: boolean = true;
+  isActiveRegis: boolean = false;
+  isActiveDatos: boolean = false;
 
   constructor( private http:HttpClient){
     this.getOcupacionMq();
@@ -147,7 +149,22 @@ export class TroqueladorasComponent implements OnInit{
   }
 
   //
-  verPestania1(estado:boolean){
+  clicActiveForm(estado:boolean){
+    this.isActiveForm= estado;
+    this.isActiveRegis = !estado;
+    this.isActiveDatos = !estado
+  }
+  clicActiveRegis(estado:boolean){
+    this.isActiveForm= !estado;
+    this.isActiveRegis = estado;
+    this.isActiveDatos = !estado
+  }
+  clicActiveDatos(estado:boolean){
+    this.isActiveForm= !estado;
+    this.isActiveRegis = !estado;
+    this.isActiveDatos = estado
+  }
+  /*verPestania1(estado:boolean){
     this.pestania1=estado;
     this.pestania2=!estado;
     this.pestania3=!estado;
@@ -161,7 +178,7 @@ export class TroqueladorasComponent implements OnInit{
     this.pestania1=!estado;
     this.pestania2=!estado;
     this.pestania3=estado;
-  }
+  }*/
 
   registrarDatos(estado:boolean){
     this.activarPestania=estado;
@@ -330,7 +347,7 @@ export class TroqueladorasComponent implements OnInit{
     })
   }
   getOcupacionMq(){
-    this.http.get('http://127.0.0.1:8000/ocupacionMq/Join/TROQUELAR').subscribe((resultData:any)=>{
+    this.http.get('http://127.0.0.1:8000/ocupacionMq/encabezado/TROQUELAR').subscribe((resultData:any)=>{
       this.ocupacionAll = resultData;
     })
   }

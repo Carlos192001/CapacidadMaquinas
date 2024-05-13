@@ -1,6 +1,6 @@
-<body>
+
   <div class="d-flex flex-column mb-3 " id="contenedor">
-    <div class="p-2" id="maquina" *ngIf="datosMaquina">
+    <div class="p-2 maquina" *ngIf="datosMaquina">
       <div class="card">
         <h5 class="card-header">OCUPACIÓN DE MÁQUINAS</h5>
         <div class="card-body d-flex flex-column mb-3">
@@ -39,7 +39,7 @@
                   <h5 class="card-header">MÁQUINAS</h5>
                   <div class="card-body">
                     <div class="loader" *ngIf="loader"></div>
-                    <select class="form-select" [(ngModel)]="maquinaSelect" size="6" multiple aria-label="Size 3 select example" *ngIf="!loader">
+                    <select class="form-select" [(ngModel)]="maquinaSelect" size="6" aria-label="Size 3 select example" *ngIf="!loader">
                       <option [value]="items.codInternoMq" *ngFor="let items of maquinaArray">{{items.nombre}}</option>
                     </select>
                   </div>
@@ -50,7 +50,7 @@
                   <h5 class="card-header">PARTES</h5>
                   <div class="card-body">
                     <div class="loader" *ngIf="loader"></div>
-                    <select class="form-select" [(ngModel)]="parteSelect" size="6" multiple aria-label="Size 3 select example" *ngIf="!loader">
+                    <select class="form-select" [(ngModel)]="parteSelect" size="6" aria-label="Size 3 select example" *ngIf="!loader">
                       <option [value]="items.numParte" *ngFor="let items of partesArray">{{items.descripcion}}</option>
                   </select>
                   </div>
@@ -66,15 +66,14 @@
         </div>
       </div>
     </div>
-    <div class="p-2" id="interactivo" *ngIf="!datosMaquina">
-      <div class="card-body">
+    <div class="interactivo" *ngIf="!datosMaquina" style="background-color: aquamarine;">
+      <!--<div class="card-body">-->
         <app-finpress *ngIf="formFinPress" (nuevoCalculoEvent)="manejarNuevoCalculo($event)"></app-finpress>
         <app-inyectoras *ngIf="formInyectoras"></app-inyectoras>
         <app-troqueladoras *ngIf="formTroqueladoras" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-troqueladoras>
         <app-hornos *ngIf="formHornos"></app-hornos>
         <app-fluxeadoras *ngIf="formFluxeadoras"></app-fluxeadoras>
-      </div>
+      <!--</div>-->
     </div>
     
   </div>
-</body>
