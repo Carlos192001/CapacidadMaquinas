@@ -21,6 +21,7 @@ export class MaquinasComponent {
   planta: string = '';
   estatus: boolean = true;
   idMaquina = '';
+  filtro: string = '';
 
   //variables para mostrar los botones de actualizar y agregar
   agregar:boolean=false;
@@ -140,6 +141,18 @@ export class MaquinasComponent {
   verBotones(estado:boolean){
     this.agregar = estado;
     this.editar = !estado;
+  }
+
+  // Función para filtrar 
+  filtrar(): any[] {
+    return this.maquinaArray.filter(maquinaItems =>
+      maquinaItems.numDepartamento === parseInt(this.filtro, 10) ||
+      maquinaItems.codInternoMq.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      maquinaItems.nombre.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      maquinaItems.funcionMaquina.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      maquinaItems.planta.toLowerCase().includes(this.filtro.toLowerCase()) ||
+      maquinaItems.estatus.toString().toLowerCase().includes(this.filtro.toLowerCase())
+    );
   }
 
 }

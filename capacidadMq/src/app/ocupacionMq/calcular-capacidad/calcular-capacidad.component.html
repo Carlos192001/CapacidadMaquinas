@@ -39,8 +39,8 @@
                   <h5 class="card-header">MÁQUINAS</h5>
                   <div class="card-body">
                     <div class="loader" *ngIf="loader"></div>
-                    <select class="form-select" [(ngModel)]="maquinaSelect" size="6" aria-label="Size 3 select example" *ngIf="!loader">
-                      <option [value]="items.codInternoMq" *ngFor="let items of maquinaArray">{{items.nombre}}</option>
+                    <select class="form-select" [(ngModel)]="maquinaSelect" (change)="onSelectChange()" size="6" aria-label="Size 3 select example" *ngIf="!loader">
+                      <option [value]="items.codInternoMq" *ngFor="let items of maquinaArray">{{items.codInternoMq}} - {{items.nombre}}</option>
                     </select>
                   </div>
                 </div>
@@ -49,9 +49,9 @@
                 <div class="card">
                   <h5 class="card-header">PARTES</h5>
                   <div class="card-body">
-                    <div class="loader" *ngIf="loader"></div>
-                    <select class="form-select" [(ngModel)]="parteSelect" size="6" aria-label="Size 3 select example" *ngIf="!loader">
-                      <option [value]="items.numParte" *ngFor="let items of partesArray">{{items.descripcion}}</option>
+                    <div class="loader" *ngIf="loaderParte"></div>
+                    <select class="form-select" [(ngModel)]="parteSelect" size="6" aria-label="Size 3 select example" *ngIf="!loaderParte">
+                      <option [value]="items.numParte" *ngFor="let items of parteArrayCodMq">{{items.numParte}} - {{items.descripcion}}</option>
                   </select>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="interactivo" *ngIf="!datosMaquina" style="background-color: aquamarine;">
+    <div class="interactivo" *ngIf="!datosMaquina">
       <!--<div class="card-body">-->
         <app-finpress *ngIf="formFinPress" (nuevoCalculoEvent)="manejarNuevoCalculo($event)"></app-finpress>
         <app-inyectoras *ngIf="formInyectoras"></app-inyectoras>

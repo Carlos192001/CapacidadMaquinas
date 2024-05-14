@@ -66,3 +66,14 @@ def filtrarnumParte(request, numparte):
         return HttpResponseNotAllowed(['GET'])
 def method_not_allowed(request, *args, ** kwargs):
     return HttpResponseNotAllowed(['GET', 'POST', 'PUT', 'DELETE'])
+
+@csrf_exempt
+def filtrarCodMaquina(request, codMaquina):
+    if request.method == 'GET':
+        partes = Parte.objects.filter(codMaqRealiza=codMaquina, estatus=True)
+        serializer = ParteSerializer(partes, many=True)
+        return JsonResponse(serializer.data, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+def method_not_allowed(request, *args, ** kwargs):
+    return HttpResponseNotAllowed(['GET', 'POST', 'PUT', 'DELETE'])

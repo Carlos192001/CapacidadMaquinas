@@ -9,6 +9,7 @@ class Parte(models.Model):
     tipo = models.CharField('tipo', max_length=255)
     cliente = models.CharField('cliente', max_length=255)
     funcionMaquina = models.CharField('funcionMaquina', max_length=255)
+    codMaqRealiza = models.CharField('codMaqRealiza', max_length=255, null=True, blank=True)
     estatus = models.BooleanField('estatus')
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True)   

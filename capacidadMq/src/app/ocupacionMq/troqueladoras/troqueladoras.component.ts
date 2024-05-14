@@ -12,11 +12,6 @@ export class TroqueladorasComponent implements OnInit{
   @Input() parteSelect: string = '';
   @Input() idOcupMq!: number;
   @Output() datoEnviado = new EventEmitter<boolean>();
-  //variables para activar las pestañas
-  pestania1:boolean=true;
-  pestania2:boolean=false;
-  pestania3:boolean=false;
-  activarPestania:boolean=false;
 
   //variables para los datos a ingresar
   requeriAnualAutilizar:number=0;
@@ -125,9 +120,7 @@ export class TroqueladorasComponent implements OnInit{
   isActiveRegis: boolean = false;
   isActiveDatos: boolean = false;
 
-  constructor( private http:HttpClient){
-    this.getOcupacionMq();
-  }
+  constructor( private http:HttpClient){}
 
   ngOnInit(): void {
     this.http.get<Parte[]>('http://10.1.0.186:8090/partes/filtrar-numparte/' + this.parteSelect + '/')
@@ -140,7 +133,7 @@ export class TroqueladorasComponent implements OnInit{
     }, error => {
       console.error('Error al obtener la descripción:', error);
     });
-    console.log('con ese id trabajare:',this.idOcupMq);
+    this.getOcupacionMq();
   }
 
   //para cambiar la maquina o el numero de parte
@@ -164,24 +157,9 @@ export class TroqueladorasComponent implements OnInit{
     this.isActiveRegis = !estado;
     this.isActiveDatos = estado
   }
-  /*verPestania1(estado:boolean){
-    this.pestania1=estado;
-    this.pestania2=!estado;
-    this.pestania3=!estado;
-  }
-  verPestania2(estado:boolean){
-    this.pestania1=!estado;
-    this.pestania2=estado;
-    this.pestania3=!estado;
-  }
-  verPestania3(estado:boolean){
-    this.pestania1=!estado;
-    this.pestania2=!estado;
-    this.pestania3=estado;
-  }*/
 
   registrarDatos(estado:boolean){
-    this.activarPestania=estado;
+    //this.activarPestania=estado;
     let bodyData = {
       "idOcupacionMq" : this.idOcupMq,
       "requeriAnualAutilizar" : this.requeriAnualAutilizar,
@@ -224,6 +202,7 @@ export class TroqueladorasComponent implements OnInit{
     }
     this.http.post('http://127.0.0.1:8000/datosAcalcular/',bodyData).subscribe((resultData:any)=>{
       console.log('se realizo el REGISTROO, con este ID:',resultData.id);
+      alert('Calculo realizado con exito')
       this.idDatosAcalcular = resultData.id;
       this.calcularUso(bodyData);
     })
@@ -257,7 +236,7 @@ export class TroqueladorasComponent implements OnInit{
     console.log('horas efectivas por turno:',this.hrsEfectivasXturno);
 
     if (this.timeCicloXgolpe) {
-      this.pzaTeoricasXprimerTurno = (this.hrsEfectivasXturno/(this.timeCicloXgolpe/60/60))*dato.cavidades;
+      this.pzaTeoricasXprimerTurno = Number(((this.hrsEfectivasXturno/(this.timeCicloXgolpe/60/60))*dato.cavidades).toFixed(3));
       console.log('piezas teoricas por primer turno:',this.pzaTeoricasXprimerTurno);
     } else {
       this.pzaTeoricasXprimerTurno = 0;
@@ -297,9 +276,9 @@ export class TroqueladorasComponent implements OnInit{
     } else {
       this.proyectadoOcupAnual = 0;
     }
-    this.partes.push(this.proyectadoOcupAnual);
-    
-    this.getSumaCapacidad();
+
+    this.calcularSumaProyectadoOcupAnual();
+
     let bodyData = {
       "idDatosAcalcular": this.idDatosAcalcular,
       "horaSemanaTurno":this.horaSemanaTurno,
@@ -347,12 +326,18 @@ export class TroqueladorasComponent implements OnInit{
     })
   }
   getOcupacionMq(){
-    this.http.get('http://127.0.0.1:8000/ocupacionMq/encabezado/TROQUELAR').subscribe((resultData:any)=>{
+    this.http.get('http://127.0.0.1:8000/ocupacionMq/encabezado/TROQUELAR/'+this.maquinaSelect+'/').subscribe((resultData:any)=>{
       this.ocupacionAll = resultData;
-    })
+      this.calcularSumaProyectadoOcupAnual();
+    });
+  }
+  calcularSumaProyectadoOcupAnual(): void {
+    this.ocupacionTotal = this.ocupacionAll.reduce((sum, item) => {
+      return sum + parseFloat(item.proyectadoOcupAnual);
+    }, 0);
   }
 
-  getSumaCapacidad(){
+  /*getSumaCapacidad(){
     const suma = this.partes.reduce((total, current) => total + current, 0);
     this.ocupacionTotal = Number(suma.toFixed(2));
     console.log("Suma de capacidades:", suma);
@@ -364,7 +349,7 @@ export class TroqueladorasComponent implements OnInit{
     } else if (this.ocupacionTotal > 100) {
       alert('¡La capacidad de la máquina ha sido excedida!');
     }
-  }
+  }*/
   
 
   getBackgroundColor(): string {

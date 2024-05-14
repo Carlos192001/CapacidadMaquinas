@@ -1,53 +1,216 @@
-<div class="card text-center">
+
+<div class="card">
+  <div class="card-body d-flex">
+    <div class="p-2 flex-fill">
+      <p><strong>MÁQUINA: </strong>{{maquinaSelect}}</p>
+    </div>
+    <div class="p-2 flex-fill">
+      <p><strong>NÚMERO DE PARTE: </strong>{{parteSelect}}</p>
+    </div>
+    <div class="p-2 flex-fill">
+      <p><strong>DESCRIPCIÓN: </strong>{{descripcionNumParte}}</p>
+    </div>
+    <div class="p-2 flex-fill">
+      <button class="btn btn-outline-primary" (click)="cambio()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
+        </svg> Cambiar máquina o parte
+      </button>
+    </div>
+  </div>
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" (click)="clicActiveForm(true)">
         <a class="nav-link" [class.active]="isActiveForm" [attr.aria-current]="isActiveDatos ? 'page' : null">Formulario</a>
       </li>
-      <li class="nav-item" (click)="clicActiveDatos(true)">
+      <!--<li class="nav-item" (click)="clicActiveDatos(true)">
         <a class="nav-link" [class.active]="isActiveDatos" [attr.aria-current]="isActiveDatos ? 'page' : null">Datos calculados</a>
-      </li>
+      </li>-->
       <li class="nav-item" (click)="clicActiveRegis(true)">
         <a class="nav-link" [class.active]="isActiveRegis" [attr.aria-current]="isActiveDatos ? 'page' : null">Registros</a>
       </li>
     </ul>
   </div>
   <div class="card-body" >
-    <div class="formulario" *ngIf="isActiveForm">
-      aqui estara el Formulario
+    <div class="formulario" *ngIf="isActiveForm"> <!--contenedor padre-->
+
+      <div class="d-flex "> <!--contenedor del titulo y el porcentaje del uso-->
+        <div class="p-2 flex-fill"><h3>MÁQUINA TROQUELADORAS - DEPTO 128</h3></div>
+        <div class="p-2 flex-fill" >
+          <div class="ocupacion text-center" [ngStyle]="{'background-color': getBackgroundColor()}">
+            <p>Ocupación Pieza: {{proyectadoOcupAnual}}%</p>
+          </div>
+        </div>
+        <div class="p-2 flex-fill text-center">
+          <div class="ocupacion" [ngStyle]="{'background-color': getBackgroundColorTotal()}">
+            <p>Ocupación Total Máquina: {{ocupacionTotal}}%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex p-2"> <!--contenedor de formulario-->
+        <div class="p-2 w-100" style="border: 2px solid #ededed; border-radius: 5px;">
+          <form class="row g-3">
+            <div class="col-md-3">
+              <label for="validarRequerimiento" class="form-label">Requerimiento anual</label>
+              <input type="number" [(ngModel)]="requeriAnualAutilizar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarRequerimiento" required
+              (focus)="showDescription1 = true" (blur)="showDescription1 = false">
+              <small class="form-text text-muted" *ngIf="showDescription1">Ingrese el valor en piezas</small>
+            </div>                        
+            <div class="col-md-3">
+              <label for="validarGolpes" class="form-label">Golpes por minuto</label>
+              <input type="number" [(ngModel)]="golpesXminutos" [ngModelOptions]="{standalone: true}" class="form-control" id="validarGolpes"  required
+              (focus)="showDescription2 = true" (blur)="showDescription2 = false">
+              <small class="form-text text-muted" *ngIf="showDescription2">Ingrese el número de golpes</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarPzaRequeridas" class="form-label">Piezas requeridas</label>
+              <input type="number" [(ngModel)]="pzaRequeridas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPzaRequeridas" required
+              (focus)="showDescription3 = true" (blur)="showDescription3 = false">
+              <small class="form-text text-muted" *ngIf="showDescription3">Ingrese el valor en piezas</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarSemanas" class="form-label">Semanas a laborar</label>
+                <input type="number" [(ngModel)]="semanasAlaborar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarSemanas" required
+                (focus)="showDescription4 = true" (blur)="showDescription4 = false">
+                <small class="form-text text-muted" *ngIf="showDescription4">Ingrese el número de semanas</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarDias" class="form-label">Días a laborar en la semana</label>
+                <input type="number" [(ngModel)]="diasAlaborarSemana" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDias" required
+                (focus)="showDescription5 = true" (blur)="showDescription5 = false">
+                <small class="form-text text-muted" *ngIf="showDescription5">Ingrese el número de días</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarHoras" class="form-label">Horas del turno</label>
+                <input type="number" [(ngModel)]="horasDelTurno" [ngModelOptions]="{standalone: true}" class="form-control" id="validarHoras" required
+                (focus)="showDescription6 = true" (blur)="showDescription6 = false">
+                <small class="form-text text-muted" *ngIf="showDescription6">Ingrese el número de horas</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarTurnos" class="form-label">Turnos al día</label>
+                <input type="number" [(ngModel)]="turnosAlDia" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCambioH" required
+                (focus)="showDescription7 = true" (blur)="showDescription7 = false">
+                <small class="form-text text-muted" *ngIf="showDescription7">Ingrese el número de turnos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarSetUp" class="form-label">Tiempo Set-Up</label>
+                <input type="number" [(ngModel)]="tiempoSetUp" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTvalidarSetUpiempoST" required
+                (focus)="showDescription8 = true" (blur)="showDescription8 = false">
+                <small class="form-text text-muted" *ngIf="showDescription8">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarCambioHerramentalRevision" class="form-label">Cambios herramental por Revisión antes de uso</label>
+              <input type="number" [(ngModel)]="cambioHerramental" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCambioHerramentalRevision" required
+              (focus)="showDescription9 = true" (blur)="showDescription9 = false">
+              <small class="form-text text-muted" *ngIf="showDescription9">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarNumCambioH" class="form-label">Número de cambios herramental</label>
+                <input type="number" [(ngModel)]="numDeCambiosHerra" [ngModelOptions]="{standalone: true}" class="form-control" id="validarNumCambioH" required
+                (focus)="showDescription10 = true" (blur)="showDescription10 = false">
+                <small class="form-text text-muted" *ngIf="showDescription10">Ingrese el número de cambios</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarParadas" class="form-label">Paradas programadas</label>
+                <input type="number" [(ngModel)]="paradasProgramadas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarParadas" required
+                (focus)="showDescription11 = true" (blur)="showDescription11 = false">
+                <small class="form-text text-muted" *ngIf="showDescription11">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarDemoras" class="form-label">Demoras inevitables</label>
+                <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required
+                (focus)="showDescription12 = true" (blur)="showDescription12 = false">
+                <small class="form-text text-muted" *ngIf="showDescription12">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarCavidadesGolpe" class="form-label">Cavidades por golpe</label>
+                <input type="number" [(ngModel)]="cavidades" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCavidadesGolpe" required
+                (focus)="showDescription13 = true" (blur)="showDescription13 = false">
+                <small class="form-text text-muted" *ngIf="showDescription13">Ingrese las piezas por golpe</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarTurnoInicial" class="form-label">Turno inicial</label>
+                <input type="number" [(ngModel)]="turnoInicial" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnoInicial" required
+                (focus)="showDescription14 = true" (blur)="showDescription14 = false">
+                <small class="form-text text-muted" *ngIf="showDescription14">Ingrese el número del turno</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarTurnoConsecutivo" class="form-label">Turno consecutivos</label>
+              <input type="number" [(ngModel)]="turnoConsecutivo" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnoConsecutivo" required
+              (focus)="showDescription15 = true" (blur)="showDescription15 = false">
+              <small class="form-text text-muted" *ngIf="showDescription15">Ingrese el número del turno</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarScrapLiberado" class="form-label">Scrap liberado</label>
+              <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarScrapLiberado" required
+              (focus)="showDescription16 = true" (blur)="showDescription16 = false">
+              <small class="form-text text-muted" *ngIf="showDescription16">Ingrese el porcentaje</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarObservaciones" class="form-label">Observaciones</label>
+              <textarea class="form-control" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" id="validarObservaciones" rows="1"
+                (focus)="showDescription17 = true" (blur)="showDescription16 = false"></textarea>
+                <small class="form-text text-muted" *ngIf="showDescription17">Si no tiene observaciones ingresar "Ninguna"</small>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Calcular</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <div class="registros" *ngIf="isActiveRegis">
-      <table class="table table-hover" style="text-align: center;">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Código Máquina</th>
-            <th scope="col">Nombre Máquina</th>
-            <th scope="col">Número de parte</th>
-            <th scope="col">Descripción</th>
-            <th scope="col">Proyectado Ocupación</th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider" >
-          <tr *ngFor="let items of ocupacionAll">
-            <th scope="row">{{items.id}}</th>
-            <td>{{items.codInternoMq}}</td>
-            <td>{{items.nombre}}</td>
-            <td>{{items.numParte}}</td>
-            <td>{{items.descripcion}}</td>
-            <td>{{items.proyectadoOcupAnual}} %</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="container-tablas">
+        <div class="containerDatos">
+          <table class="table table-hover" style="text-align: center;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Código Máquina</th>
+                <th scope="col">Nombre Máquina</th>
+                <th scope="col">Número de parte</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Proyectado Ocupación</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" >
+              <tr *ngFor="let items of ocupacionAll">
+                <th scope="row">{{items.id}}</th>
+                <td>{{items.codInternoMq}}</td>
+                <td>{{items.nombre}}</td>
+                <td>{{items.numParte}}</td>
+                <td>{{items.descripcion}}</td>
+                <td>{{items.proyectadoOcupAnual}}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <table class="table table-hover" >
+          <tfoot>
+            <tr class="text-center">
+              <td colspan="5" ><strong>Ocupacion Total de la Máquina</strong></td>
+              <td id="totalTabla" [ngStyle]="{'background-color': getBackgroundColorTotal()}"><strong>{{ocupacionTotal}} %</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
-    <div class="calculos" *ngIf="isActiveDatos">
-      aqui estaran los calculos
-    </div>
+    <!--<div class="calculos" *ngIf="isActiveDatos">
+      <ul class="list-group">
+        <li class="list-group-item d-flex  align-items-center"><strong>Horas por semana por turno:</strong> {{horaSemanaTurno}} horas</li>
+        <li class="list-group-item"><strong>Requerimiento diario:</strong> {{requerimientoDiario}} piezas</li>
+        <li class="list-group-item"><strong>Tiempo ciclo por golpe:</strong> {{timeCicloXgolpe}} minutos</li>
+        <li class="list-group-item"><strong>Horas efectivas por turno:</strong> {{hrsEfectivasXturno}} horas</li>
+        <li class="list-group-item"><strong>Piezas teóricas para primer turno:</strong> {{pzaTeoricasXprimerTurno}} piezas</li>
+        <li class="list-group-item"><strong>Piezas teóricas para segundo turno:</strong> {{pzaTeoricasXsegundoTurno}} piezas</li>
+        <li class="list-group-item"><strong>Número de turnos requeridos:</strong> {{numTurnosRequeridos}} turnos</li>
+        <li class="list-group-item"><strong>Piezas producidas en turnos para requerimiento semanal:</strong> {{pzaProdEnTurnos}} piezas</li>
+        <li class="list-group-item"><strong>Requerimiento semanal:</strong> {{requerimientoSem}} piezas</li>
+      </ul>
+    </div>-->
   </div>
 </div>
-
-
-
 
 
 

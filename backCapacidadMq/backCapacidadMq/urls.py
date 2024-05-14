@@ -42,6 +42,7 @@ urlpatterns = [
     path('partes/<int:id>/', parte_views.parte_detalle),
     path('partes-filtrar-funcion/<str:funcion>/', parte_views.filtrarFuncion, name='partes-filtrar-funcion'),
     path('partes/filtrar-numparte/<str:numparte>/', parte_views.filtrarnumParte, name='partes-filtrar-numparte'),
+    path('partes/filtrar-codMaquina/<str:codMaquina>/', parte_views.filtrarCodMaquina, name='filtrar-cdMaquina'),
 
     #endpoints para los clientes
     path('clientes/', cliente_views.cliente_list),
@@ -61,7 +62,7 @@ urlpatterns = [
     #endpoints para el encabezado OcupacionMq
     path('ocupacionMq/',ocupacionMq_views.ocupMq_list),
     path('ocupacionMq/<int:id>/',ocupacionMq_views.ocupMq_detalle),
-    path('ocupacionMq/encabezado/<str:funcion>',ocupacionMq_views.datosEncabezado),
+    path('ocupacionMq/encabezado/<str:funcion>/<str:codMaquina>/',ocupacionMq_views.datosEncabezado),
     path('ocupacionMq/troqueladoras/',ocupacionMq_views.datosTroqueladoras),
 
     #endpoints para los datos que se usaran para los calculos 

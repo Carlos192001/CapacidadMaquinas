@@ -57,7 +57,7 @@ def method_not_allowed(request, *args, ** kwargs):
     return HttpResponseNotAllowed(['GET', 'POST', 'PUT', 'DELETE'])
 
 @csrf_exempt
-def datosEncabezado(request,funcion):
+def datosEncabezado(request,funcion,codMaquina):
     if request.method == 'GET':
         db_connection = 'default'
         # Realizar la consulta en la base de datos especificada
@@ -69,8 +69,8 @@ def datosEncabezado(request,funcion):
             INNER JOIN parte_parte ON ocupacionMq_ocupacionmq.numParte = parte_parte.numParte
             INNER JOIN datosAcalcular_datosacalcular ON ocupacionMq_ocupacionmq.id = datosAcalcular_datosacalcular.idOcupacionMq
             INNER JOIN resultadoCalculo_resultadocalculo ON datosAcalcular_datosacalcular.id = resultadoCalculo_resultadocalculo.idDatosAcalcular
-            WHERE ocupacionMq_ocupacionmq.funcion = %s AND ocupacionMq_ocupacionmq.estatus = 1;
-        """, [funcion])    
+            WHERE ocupacionMq_ocupacionmq.funcion = %s AND ocupacionMq_ocupacionmq.estatus = 1 AND ocupacionMq_ocupacionmq.codInternoMq = %s;
+        """, [funcion, codMaquina])    
 
         # Obtener los resultados como un diccionario
         resultados_db = dictfetchall(db_cursor)

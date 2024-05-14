@@ -9,7 +9,7 @@
         </div>
         <div class="d-flex" role="search">
             <div class="me-auto p-2">
-                <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Search">
+                <input class="form-control me-2" [(ngModel)]="filtro" type="search" placeholder="Buscar..." aria-label="Search">
             </div>
             <div class="ms-auto p-2">
                 <button class="btn btn-outline-primary" type="submit" (click)="mostrarTarjeta()">Agregar Máquina</button>
@@ -32,7 +32,7 @@
                   </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                  <tr *ngFor="let maquinaItems of maquinaArray">
+                  <tr *ngFor="let maquinaItems of filtrar()">
                     <td>{{maquinaItems.numDepartamento}}</td>
                     <td>{{maquinaItems.codInternoMq}}</td>
                     <td>{{maquinaItems.nombre}}</td>
