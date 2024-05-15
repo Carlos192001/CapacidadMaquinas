@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Parte } from '../../interface/parte';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-troqueladoras',
@@ -120,6 +121,9 @@ export class TroqueladorasComponent implements OnInit{
   isActiveRegis: boolean = false;
   isActiveDatos: boolean = false;
 
+  //ver el boton de calcular
+  verBtnCalcular: boolean = true;
+
   constructor( private http:HttpClient){}
 
   ngOnInit(): void {
@@ -152,11 +156,11 @@ export class TroqueladorasComponent implements OnInit{
     this.isActiveRegis = estado;
     this.isActiveDatos = !estado
   }
-  clicActiveDatos(estado:boolean){
+  /*clicActiveDatos(estado:boolean){
     this.isActiveForm= !estado;
     this.isActiveRegis = !estado;
     this.isActiveDatos = estado
-  }
+  }*/
 
   registrarDatos(estado:boolean){
     //this.activarPestania=estado;
@@ -200,12 +204,40 @@ export class TroqueladorasComponent implements OnInit{
       "filasJigsSimultaneas" : this.filasJigsSimultaneas,
       "numCambiosReceta" : this.numCambiosReceta
     }
-    this.http.post('http://127.0.0.1:8000/datosAcalcular/',bodyData).subscribe((resultData:any)=>{
-      console.log('se realizo el REGISTROO, con este ID:',resultData.id);
-      alert('Calculo realizado con exito')
-      this.idDatosAcalcular = resultData.id;
-      this.calcularUso(bodyData);
-    })
+    this.http.post('http://127.0.0.1:8000/datosAcalcular/', bodyData)
+      .pipe(
+        catchError(error => {
+          console.error('Error durante el registro:', error);
+          alert('Hubo un error al realizar el cálculo. Por favor, inténtelo de nuevo.');
+          return throwError(error);
+        })
+      )
+      .subscribe((resultData: any) => {
+        console.log('Se realizó el REGISTRO, con este ID:', resultData.id);
+        alert('Cálculo realizado con éxito');
+        this.idDatosAcalcular = resultData.id;
+        this.calcularUso(bodyData);
+        this.isActiveForm = false; //para desaparecer la pestaña del formulario
+        this.isActiveRegis = true;
+        this.verBtnCalcular = false; //para que el btn de calcular no deje calcular de nuevo el valor
+        this.requeriAnualAutilizar = 0;
+        this.golpesXminutos = 0;
+        this.pzaRequeridas = 0;
+        this.semanasAlaborar = 0;
+        this.diasAlaborarSemana = 0;
+        this.horasDelTurno = 0;
+        this.turnosAlDia = 0;
+        this.tiempoSetUp = 0;
+        this.cambioHerramental = 0;
+        this.numDeCambiosHerra = 0;
+        this.paradasProgramadas = 0;
+        this.demorasInevitables = 0;
+        this.cavidades = 0;
+        this.turnoInicial = 0;
+        this.turnoConsecutivo = 0;
+        this.scrapLiberado = 0;
+        this.observaciones = '';
+      });
     
   }
 
@@ -332,25 +364,11 @@ export class TroqueladorasComponent implements OnInit{
     });
   }
   calcularSumaProyectadoOcupAnual(): void {
-    this.ocupacionTotal = this.ocupacionAll.reduce((sum, item) => {
+    const suma = this.ocupacionAll.reduce((sum, item) => {
       return sum + parseFloat(item.proyectadoOcupAnual);
     }, 0);
-  }
-
-  /*getSumaCapacidad(){
-    const suma = this.partes.reduce((total, current) => total + current, 0);
     this.ocupacionTotal = Number(suma.toFixed(2));
-    console.log("Suma de capacidades:", suma);
-  
-    if (this.ocupacionTotal >= 85 && this.ocupacionTotal < 90) {
-      alert('La capacidad de la máquina está llegando a su límite');
-    } else if (this.ocupacionTotal >= 90 && this.ocupacionTotal <= 100) {
-      alert('La capacidad de la máquina llegó a su límite');
-    } else if (this.ocupacionTotal > 100) {
-      alert('¡La capacidad de la máquina ha sido excedida!');
-    }
-  }*/
-  
+  }
 
   getBackgroundColor(): string {
     if (this.proyectadoOcupAnual <= 85) {

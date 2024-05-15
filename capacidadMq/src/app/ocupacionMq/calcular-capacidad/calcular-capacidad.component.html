@@ -6,7 +6,7 @@
         <div class="card-body d-flex flex-column mb-3">
           
           <ul class="list-group list-group-horizontal" >
-            <h5>filtrar:</h5>
+            <h5>Seleccionar:</h5>
             <!--<li class="list-group-item">
               <input class="form-check-input me-1" type="radio" name="listGroupRadio" [value]="'Todos'" id="todos" [checked]="radioSeleccionado === 'Todos'" (change)="handleChange($event)">
               <label class="form-check-label" for="todos">TODOS</label>
@@ -68,7 +68,7 @@
     </div>
     <div class="interactivo" *ngIf="!datosMaquina">
       <!--<div class="card-body">-->
-        <app-finpress *ngIf="formFinPress" (nuevoCalculoEvent)="manejarNuevoCalculo($event)"></app-finpress>
+        <app-finpress *ngIf="formFinPress" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-finpress>
         <app-inyectoras *ngIf="formInyectoras"></app-inyectoras>
         <app-troqueladoras *ngIf="formTroqueladoras" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-troqueladoras>
         <app-hornos *ngIf="formHornos"></app-hornos>

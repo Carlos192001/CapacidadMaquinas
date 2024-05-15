@@ -14,9 +14,11 @@ export class PartesComponent {
   tipo:string = '';
   cliente = '';
   funcionMaquina = '';
+  codMaqRealiza = '';
   estatus:boolean = true;
   parteArray: any[] = [];
   clienteArray: any[] = [];
+  maquinasArray: any[] = [];
   idParte = '';
   filtro: string = '';
 
@@ -28,6 +30,7 @@ export class PartesComponent {
   constructor(private http: HttpClient){
     this.getAllPartes();
     this.getAllClientes();
+    this.getAllMaquinas();
   }
 
   getAllPartes(){
@@ -38,6 +41,12 @@ export class PartesComponent {
   getAllClientes(){
     this.http.get("http://10.1.0.186:8090/clientes/").subscribe((resultData:any)=>{
       this.clienteArray = resultData;
+    });
+  }
+
+  getAllMaquinas(){
+    this.http.get('http://10.1.0.186:8090/maquinas/').subscribe((resulData:any)=>{
+      this.maquinasArray = resulData;
     });
   }
 
@@ -58,6 +67,7 @@ export class PartesComponent {
       "tipo" : this.tipo,
       "cliente" : this.cliente,
       "funcionMaquina" : this.funcionMaquina,
+      "codMaqRealiza" : this.codMaqRealiza,
       "estatus" : this.estatus,
     }
     this.http.post("http://10.1.0.186:8090/partes/",bodyData).subscribe((resultData: any)=>{
@@ -78,6 +88,7 @@ export class PartesComponent {
     this.tipo = data.tipo;
     this.cliente = data.cliente;
     this.funcionMaquina = data.funcionMaquina;
+    this.codMaqRealiza = data.codMaqRealiza;
     this.estatus = data.estatus;
     this.verTarjeta = true;
     this.idParte = data.id;
@@ -90,6 +101,7 @@ export class PartesComponent {
       "tipo" : this.tipo,
       "cliente" : this.cliente,
       "funcionMaquina" : this.funcionMaquina,
+      "codMaqRealiza" : this.codMaqRealiza,
       "estatus" : this.estatus,
     }
     this.http.put("http://10.1.0.186:8090/partes/"+this.idParte+'/',bodyData).subscribe((resulData:any)=>{
@@ -112,6 +124,7 @@ export class PartesComponent {
     this.tipo = '';
     this.cliente = '';
     this.funcionMaquina = '';
+    this.codMaqRealiza = '',
     this.estatus = true;
     this.verTarjeta=!this.verTarjeta;
     this.verBotones(true);

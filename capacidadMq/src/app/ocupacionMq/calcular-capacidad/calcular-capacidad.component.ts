@@ -24,24 +24,27 @@ export class CalcularCapacidadComponent implements OnInit{
   parteSelect: string = '';
   radioSeleccionado: string = ''; // Valor por defecto
   maquinaArray:any[]=[];
-  partesArray:Parte[]=[];
+  //partesArray:Parte[]=[];
   parteArrayCodMq: Parte[] = [];
   idOcupMq!:number;
 
-  constructor(private http:HttpClient){
-    //this.getTodasMaquinasPartes();
-  }
+  constructor(private http:HttpClient){}
+
   ngOnInit(): void {
     
   }
 
-  calcularCapacidad(){
+  /*calcularCapacidad(){ //este nose porque esta aqui, tal vez sirva para algo
     this.datosMaquina=false;
     this.formFinPress=true;
-  }
+  }*/
   manejarNuevoCalculo(evento: boolean): void {
-    this.formFinPress = !evento; // Actualiza el estado en el componente padre
     this.datosMaquina = evento;
+    this.formFinPress = !evento; // Actualiza el estado en el componente padre
+    this.formInyectoras = !evento;
+    this.formTroqueladoras = !evento;
+    this.formHornos = !evento;
+    this.formFluxeadoras = !evento;
 
     console.log('ESTE ESTADO RECIBI DE MI HIJO:', evento);
   }
@@ -56,13 +59,13 @@ export class CalcularCapacidadComponent implements OnInit{
         "funcion": this.radioSeleccionado,
       }
       console.log(bodyData);
-      this.saberCualMostrar(this.radioSeleccionado);
-      /*this.http.post('http://127.0.0.1:8000/ocupacionMq/',bodyData).subscribe((resulData:any)=>{
+      //this.saberCualMostrar(this.radioSeleccionado);
+      this.http.post('http://127.0.0.1:8000/ocupacionMq/',bodyData).subscribe((resulData:any)=>{
         console.log('Registro realizado, id del registro',resulData.id);
         this.idOcupMq = resulData.id;
         console.log('idOcupMq se igualo a:', this.idOcupMq);
         this.saberCualMostrar(this.radioSeleccionado);
-      })*/
+      })
     } else {
       alert('Selecione una máquina y un número de parte');
     }
@@ -72,7 +75,7 @@ export class CalcularCapacidadComponent implements OnInit{
     this.radioSeleccionado = event.target.value;
     //console.log('Radio seleccionado:', this.radioSeleccionado);
     if (this.radioSeleccionado) {
-      this.getFiltroMaquinasPartes(this.radioSeleccionado);
+      this.getFiltroMaquinas(this.radioSeleccionado);
     } 
   }
   //para saber cual maquina fue seleccionada
@@ -80,7 +83,7 @@ export class CalcularCapacidadComponent implements OnInit{
     console.log(this.maquinaSelect);
     this.loaderParte=true;
     // Realizar la solicitud HTTP para obtener las partes
-    this.http.get('http://127.0.0.1:8000/partes/filtrar-codMaquina/' + this.maquinaSelect + '/')
+    this.http.get('http://10.1.0.186:8090/partes/filtrar-codMaquina/' + this.maquinaSelect + '/')
       .pipe(
         delay(1000) // Agregar un retraso de 1 segundos
       )
@@ -94,7 +97,7 @@ export class CalcularCapacidadComponent implements OnInit{
         this.loaderParte = false; // Ocultar el loader después de que la solicitud se complete
       });
   }
-  getTodasMaquinasPartes(){
+  /*getTodasMaquinasPartes(){
     this.http.get('http://10.1.0.186:8090/maquinas/').subscribe((resultData:any)=>{
       this.maquinaArray = resultData;
       //console.log(this.maquinaArray);
@@ -103,23 +106,28 @@ export class CalcularCapacidadComponent implements OnInit{
       this.partesArray = resultData;
       //console.log(this.partesArray);
     });
-  }
-  getFiltroMaquinasPartes(funcion: string) {
+  }*/
+  getFiltroMaquinas(funcion: string) {
     this.maquinaSelect = '';
     this.parteSelect = '';
     this.loader = true; // Mostrar el loader antes de la solicitud HTTP
     this.parteArrayCodMq = [];
     // Realizar la solicitud HTTP para obtener las máquinas
     this.http.get('http://10.1.0.186:8090/maquinas-filtrar-funcion/' + funcion + '/')
+      .pipe(
+        delay(1000) // Agregar un retraso de 1 segundos
+      )
       .subscribe((resultData: any) => {
         this.maquinaArray = resultData;
         // console.log(this.maquinaArray);
       }, error => {
         console.error('Error al obtener las máquinas:', error);
+      }, () => {
+        this.loader = false; // Ocultar el loader después de que la solicitud se complete
       });
   
     // Realizar la solicitud HTTP para obtener las partes
-    this.http.get('http://10.1.0.186:8090/partes-filtrar-funcion/' + funcion + '/')
+    /*this.http.get('http://10.1.0.186:8090/partes-filtrar-funcion/' + funcion + '/')
       .pipe(
         delay(1000) // Agregar un retraso de 1 segundos
       )
@@ -131,7 +139,7 @@ export class CalcularCapacidadComponent implements OnInit{
       }, () => {
         // Esta función se ejecuta cuando la solicitud HTTP se completa con éxito
         this.loader = false; // Ocultar el loader después de que la solicitud se complete
-      });
+      });*/
   }
 
 

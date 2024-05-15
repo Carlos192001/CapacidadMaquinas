@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-finpress',
   templateUrl: './finpress.component.html',
   styleUrl: './finpress.component.css'
 })
-export class FinpressComponent {
+export class FinpressComponent implements OnInit{
 
   pestania1:boolean=true;
   pestania2:boolean=false;
-  activarPestania:boolean=false;
+  //activarPestania:boolean=false;
   //variables para el formulario
   cortesXminuto:number=0;
   pzaRequeridas:number=0;
@@ -24,7 +26,6 @@ export class FinpressComponent {
   cavidades:number=0;
   scrapLiberado:number=0;
   observaciones:string='';
-  estatus:boolean=true;
 
   //variables para el calculo de la ocupacion de la máquina
   horaSemanaTurno:number=0;
@@ -38,17 +39,58 @@ export class FinpressComponent {
   proyectadoOcupAnual:number=0;
 
   //variable que mandara datos al componente padre
-  @Output() nuevoCalculoEvent = new EventEmitter<boolean>();
+  @Input() maquinaSelect: string = '';
+  @Input() parteSelect: string = '';
+  @Input() idOcupMq!: number;
+  @Output() datoEnviado = new EventEmitter<boolean>();
 
+  descripcionNumParte:string='';
+  ocupacionTotal: number =0;
+
+  isActiveForm: boolean = true;
+  isActiveRegis: boolean = false;
+  isActiveDatos: boolean = false;
+
+  //ver el boton de calcular
+  verBtnCalcular: boolean = true;
+
+  //Para mostrar ayuda de los inputs
+  showDescription1: boolean = false;
+  showDescription2: boolean = false;
+  showDescription3: boolean = false;
+  showDescription4: boolean = false;
+  showDescription5: boolean = false;
+  showDescription6: boolean = false;
+  showDescription7: boolean = false;
+  showDescription8: boolean = false;
+  showDescription9: boolean = false;
+  showDescription10: boolean = false;
+  showDescription11: boolean = false;
+  showDescription12: boolean = false;
+  showDescription13: boolean = false;
+
+  idDatosAcalcular!:number;
+
+  constructor(private http:HttpClient){}
+
+  ngOnInit(): void {
+    //throw new Error('Method not implemented.');
+  }
+
+  //para cambiar la maquina o el numero de parte
+  cambio(){
+    this.datoEnviado.emit(true);
+  }
 
   verPestania(estado:boolean){
     this.pestania1=estado;
     this.pestania2=!estado;
   }
   //registrar nuevos datos de la ocupacion de la maquina
-  registrarDatos(estado:boolean){
-    this.activarPestania=estado;
+  registrarDatos(){
+    //this.activarPestania=estado;
     let bodyData = {
+      "idOcupacionMq" : this.idOcupMq,
       "cortesXminuto" : this.cortesXminuto,
       "pzaRequeridas" : this.pzaRequeridas,
       "requeriAnualAutilizar" : this.requeriAnualAutilizar,
@@ -61,11 +103,41 @@ export class FinpressComponent {
       "demorasInevitables" : this.demorasInevitables,
       "cavidades" : this.cavidades,
       "scrapLiberado" : this.scrapLiberado,
-      "vendedorEncargado" : this.observaciones,
-      "estatus" : this.estatus
+      "estatus":'ACTIVO',
+      "observaciones" : this.observaciones,
     }
     this.calcularUso(bodyData);
     //console.log(bodyData);
+    this.http.post('http://127.0.0.1:8000/datosAcalcular/', bodyData)
+      .pipe(
+        catchError(error => {
+          console.error('Error durante el registro:', error);
+          alert('Hubo un error al realizar el cálculo. Por favor, inténtelo de nuevo.');
+          return throwError(error);
+        })
+      )
+      .subscribe((resultData: any) => {
+        console.log('Se realizó el REGISTRO, con este ID:', resultData.id);
+        alert('Cálculo realizado con éxito');
+        this.idDatosAcalcular = resultData.id;
+        this.calcularUso(bodyData);
+        this.isActiveForm = false; //para desaparecer la pestaña del formulario
+        this.isActiveRegis = true;
+        this.verBtnCalcular = false; //para que el btn de calcular no deje calcular de nuevo el valor
+        this.cortesXminuto = 0;
+        this.pzaRequeridas = 0;
+        this.requeriAnualAutilizar = 0;
+        this.semanasAlaborar = 0;
+        this.diasAlaborarSemana = 0;
+        this.horasDelTurno = 0;
+        this.turnosAlDia = 0;
+        this.tiempoSetUp = 0;
+        this.tiempoMuertoPlan = 0;
+        this.demorasInevitables = 0;
+        this.cavidades = 0;
+        this.scrapLiberado = 0;
+        this.observaciones = '';
+      });
   }
 
   calcularUso(dato:any){
@@ -141,13 +213,30 @@ export class FinpressComponent {
 
   }
   enviarEstado(): void {
-    this.nuevoCalculoEvent.emit(true); // Envía true al componente padre
+    this.datoEnviado.emit(true); // Envía true al componente padre
+  }
+  clicActiveForm(estado:boolean){
+    this.isActiveForm= estado;
+    this.isActiveRegis = !estado;
+  }
+  clicActiveRegis(estado:boolean){
+    this.isActiveForm= !estado;
+    this.isActiveRegis = estado;
   }
 
   getBackgroundColor(): string {
     if (this.proyectadoOcupAnual <= 85) {
       return '#008000'; // Verde
     } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
+  }
+  getBackgroundColorTotal(): string {
+    if (this.ocupacionTotal <= 85) {
+      return '#008000'; // Verde
+    } else if (this.ocupacionTotal > 85 && this.ocupacionTotal < 90) {
       return '#FFA500'; // Anaranjado
     } else {
       return '#FF0000'; // Rojo

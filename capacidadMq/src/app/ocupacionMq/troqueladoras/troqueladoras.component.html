@@ -150,11 +150,11 @@
             <div class="col-md-3">
               <label for="validarObservaciones" class="form-label">Observaciones</label>
               <textarea class="form-control" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" id="validarObservaciones" rows="1"
-                (focus)="showDescription17 = true" (blur)="showDescription16 = false"></textarea>
+                (focus)="showDescription17 = true" (blur)="showDescription17 = false"></textarea>
                 <small class="form-text text-muted" *ngIf="showDescription17">Si no tiene observaciones ingresar "Ninguna"</small>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)">Calcular</button>
+              <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)" *ngIf="verBtnCalcular">Calcular</button>
             </div>
           </form>
         </div>

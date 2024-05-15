@@ -20,6 +20,7 @@
                     <th scope="col">Número</th>
                     <th scope="col">Descripción del número de parte</th>
                     <th scope="col">Tipo</th>
+                    <th scope="col">Máquina realiza</th>
                     <th scope="col">Cliente</th>
                     <th scope="col">Estatus</th>
                     <th scope="col">Acciones</th>
@@ -30,6 +31,7 @@
                     <td>{{parteItems.numParte}}</td>
                     <td>{{parteItems.descripcion}}</td>
                     <td>{{parteItems.tipo}}</td>
+                    <td>{{parteItems.codMaqRealiza}}</td>
                     <td>{{parteItems.cliente}}</td>
                     <td [ngClass]="{'negrita verde': parteItems.estatus, 'negrita rojo': !parteItems.estatus}">
                       {{parteItems.estatus ? 'True' : 'False'}}
@@ -73,7 +75,7 @@
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <label for="validarFuncionMq" class="form-label">Máquina que lo realiza o produce</label>
+                      <label for="validarFuncionMq" class="form-label">Función de la máquina que lo realiza o produce</label>
                       <select class="form-select" [(ngModel)]="funcionMaquina" [ngModelOptions]="{standalone: true}" id="validarTipo" required>
                         <option value="ACABADO">FIN PRESS</option>
                         <option value="TROQUELAR">TROQUELADORA</option>
@@ -83,8 +85,14 @@
                       </select>
                     </div>
                     <div class="col-md-6">
+                      <label for="validarcodMaqRealiza" class="form-label">Máquina que lo realiza o produce</label>
+                      <select class="form-select" [(ngModel)]="codMaqRealiza" [ngModelOptions]="{standalone: true}" id="validarCodMq" required>
+                        <option [value]="items.codInternoMq" *ngFor="let items of maquinasArray">{{items.codInternoMq}} - {{items.nombre}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
                       <label for="validarCliente" class="form-label">Cliente</label>
-                      <select class="form-select" [(ngModel)]="cliente" [ngModelOptions]="{standalone: true}" id="validarTipo" required>
+                      <select class="form-select" [(ngModel)]="cliente" [ngModelOptions]="{standalone: true}" id="validarCliente" required>
                         <option *ngFor="let items of clienteArray">{{items.nombre}}</option>
                       </select>
                     </div>

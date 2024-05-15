@@ -1,4 +1,181 @@
-<body>
+
+<div class="card">
+  <div class="card-body d-flex">
+    <div class="p-2 flex-fill">
+      <p><strong>MÁQUINA: </strong>{{maquinaSelect}}</p>
+    </div>
+    <div class="p-2 flex-fill">
+      <p><strong>NÚMERO DE PARTE: </strong>{{parteSelect}}</p>
+    </div>
+    <div class="p-2 flex-fill">
+      <p><strong>DESCRIPCIÓN: </strong>{{descripcionNumParte}}</p>
+    </div>
+    <div class="p-2 flex-fill">
+      <button class="btn btn-outline-primary" (click)="cambio()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-left-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 11.5a.5.5 0 0 0 .5.5h11.793l-3.147 3.146a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 11H1.5a.5.5 0 0 0-.5.5m14-7a.5.5 0 0 1-.5.5H2.707l3.147 3.146a.5.5 0 1 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 4H14.5a.5.5 0 0 1 .5.5"/>
+        </svg> Cambiar máquina o parte
+      </button>
+    </div>
+  </div>
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item" (click)="clicActiveForm(true)">
+        <a class="nav-link" [class.active]="isActiveForm" [attr.aria-current]="isActiveDatos ? 'page' : null">Formulario</a>
+      </li>
+      <li class="nav-item" (click)="clicActiveRegis(true)">
+        <a class="nav-link" [class.active]="isActiveRegis" [attr.aria-current]="isActiveDatos ? 'page' : null">Registros</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body" >
+    <div class="formulario" *ngIf="isActiveForm"> <!--contenedor padre-->
+
+      <div class="d-flex "> <!--contenedor del titulo y el porcentaje del uso-->
+        <div class="p-2 flex-fill"><h3>MÁQUINA FIN PRESS - DEPTO 102 - ALETAS</h3></div>
+        <div class="p-2 flex-fill" >
+          <div class="ocupacion text-center" [ngStyle]="{'background-color': getBackgroundColor()}">
+            <p>Ocupación Pieza: {{proyectadoOcupAnual}}%</p>
+          </div>
+        </div>
+        <div class="p-2 flex-fill text-center">
+          <div class="ocupacion" [ngStyle]="{'background-color': getBackgroundColorTotal()}">
+            <p>Ocupación Total Máquina: {{ocupacionTotal}}%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex p-2"> <!--contenedor de formulario-->
+        <div class="p-2 w-100" style="border: 2px solid #ededed; border-radius: 5px;">
+          <form class="row g-3">
+            <div class="col-md-3">
+              <label for="validarCortes" class="form-label">Cortes por minutos</label>
+              <input type="number" [(ngModel)]="cortesXminuto" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCortes" required
+              (focus)="showDescription1 = true" (blur)="showDescription1 = false">
+              <small class="form-text text-muted" *ngIf="showDescription1">Ingrese el número de cortes</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarPzaRequeridas" class="form-label">Piezas requeridas</label>
+              <input type="number" [(ngModel)]="pzaRequeridas" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPzaRequeridas" required
+              (focus)="showDescription2 = true" (blur)="showDescription2 = false">
+              <small class="form-text text-muted" *ngIf="showDescription2">Ingrese el valor en piezas</small>
+            </div>
+            <div class="col-md-3">
+              <label for="validarRequerimiento" class="form-label">Requerimiento anual</label>
+              <input type="number" [(ngModel)]="requeriAnualAutilizar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarRequerimiento"  required
+              (focus)="showDescription3 = true" (blur)="showDescription3 = false">
+              <small class="form-text text-muted" *ngIf="showDescription3">Ingrese el valor en piezas</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarSemanas" class="form-label">Semanas a laborar</label>
+                <input type="number" [(ngModel)]="semanasAlaborar" [ngModelOptions]="{standalone: true}" class="form-control" id="validarSemanas" required
+                (focus)="showDescription4 = true" (blur)="showDescription4 = false">
+                <small class="form-text text-muted" *ngIf="showDescription4">Ingrese el número de semanas</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarDias" class="form-label">Días a laborar en la semana</label>
+                <input type="number" [(ngModel)]="diasAlaborarSemana" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDias" required
+                (focus)="showDescription5 = true" (blur)="showDescription5 = false">
+                <small class="form-text text-muted" *ngIf="showDescription5">Ingrese el número de días</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarHoras" class="form-label">Horas del turno</label>
+                <input type="number" [(ngModel)]="horasDelTurno" [ngModelOptions]="{standalone: true}" class="form-control" id="validarHoras" required
+                (focus)="showDescription6 = true" (blur)="showDescription6 = false">
+                <small class="form-text text-muted" *ngIf="showDescription6">Ingrese el número de horas</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarTurnos" class="form-label">Turnos al día</label>
+                <input type="number" [(ngModel)]="turnosAlDia" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTurnos" required
+                (focus)="showDescription7 = true" (blur)="showDescription7 = false">
+                <small class="form-text text-muted" *ngIf="showDescription7">Ingrese el número de turnos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarTiempoST" class="form-label">Tiempo Set-Up</label>
+                <input type="number" [(ngModel)]="tiempoSetUp" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoST" required
+                (focus)="showDescription8 = true" (blur)="showDescription8 = false">
+                <small class="form-text text-muted" *ngIf="showDescription8">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarTiempoMP" class="form-label">Paradas Programadas</label>
+                <input type="number" [(ngModel)]="tiempoMuertoPlan" [ngModelOptions]="{standalone: true}" class="form-control" id="validarTiempoMP" required
+                (focus)="showDescription9 = true" (blur)="showDescription9 = false">
+                <small class="form-text text-muted" *ngIf="showDescription9">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarDemoras" class="form-label">Demoras inevitables</label>
+                <input type="number" [(ngModel)]="demorasInevitables" [ngModelOptions]="{standalone: true}" class="form-control" id="validarDemoras" required
+                (focus)="showDescription10 = true" (blur)="showDescription10 = false">
+                <small class="form-text text-muted" *ngIf="showDescription10">Ingrese el valor en minutos</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarCavidades" class="form-label">Cavidades (piezas por corte)</label>
+                <input type="number" [(ngModel)]="cavidades" [ngModelOptions]="{standalone: true}" class="form-control" id="validarCavidades" required
+                (focus)="showDescription11 = true" (blur)="showDescription11 = false">
+                <small class="form-text text-muted" *ngIf="showDescription11">Ingrese las piezas por corte</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarPorcentajeScrap" class="form-label">Porcentaje Scrap liberado</label>
+                <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarPorcentajeScrap" required
+                (focus)="showDescription12 = true" (blur)="showDescription12 = false">
+              <small class="form-text text-muted" *ngIf="showDescription12">Ingrese el porcentaje</small>
+            </div>
+            <div class="col-md-3">
+                <label for="validarObservaciones" class="form-label">Observaciones</label>
+                <textarea class="form-control" [(ngModel)]="observaciones" [ngModelOptions]="{standalone: true}" id="validarObservaciones" rows="1"
+                (focus)="showDescription13 = true" (blur)="showDescription13 = false"></textarea>
+                <small class="form-text text-muted" *ngIf="showDescription13">Si no tiene observaciones ingresar "Ninguna"</small>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit" (click)="registrarDatos()" *ngIf="verBtnCalcular">Calcular</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="registros" *ngIf="isActiveRegis">
+      <div class="container-tablas">
+        <div class="containerDatos">
+          <table class="table table-hover" style="text-align: center;">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Código Máquina</th>
+                <th scope="col">Nombre Máquina</th>
+                <th scope="col">Número de parte</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Proyectado Ocupación</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" >
+              <!--<tr *ngFor="let items of ocupacionAll">
+                <th scope="row">{{items.id}}</th>
+                <td>{{items.codInternoMq}}</td>
+                <td>{{items.nombre}}</td>
+                <td>{{items.numParte}}</td>
+                <td>{{items.descripcion}}</td>
+                <td>{{items.proyectadoOcupAnual}}%</td>
+              </tr>-->
+            </tbody>
+          </table>
+        </div>
+        <table class="table table-hover" >
+          <tfoot>
+            <tr class="text-center">
+              <td colspan="5" ><strong>Ocupacion Total de la Máquina</strong></td>
+              <td id="totalTabla" [ngStyle]="{'background-color': getBackgroundColorTotal()}"><strong>{{ocupacionTotal}} %</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!--<body>
     <div class="card" *ngIf="pestania1">
       <h5 class="card-header" style=" font-weight: bold;">MÁQUINA FIN PRESS - DEPTO 102 - ALETAS</h5>
         <div class="card-body d-flex flex-nowrap">
@@ -15,7 +192,6 @@
             <li class="nav-item">
               <a class="nav-link" (click)="verPestania(false)" *ngIf="activarPestania">Datos calculados</a>
             </li>
-            <!-- Agrega más pestañas si es necesario -->
           </ul>
         </div>
         <div class="card-body">
@@ -111,7 +287,6 @@
             <li class="nav-item">
               <a class="nav-link active">Datos calculados</a>
             </li>
-            <!-- Agrega más pestañas si es necesario -->
           </ul>
         </div>
         <div class="card-body">
@@ -128,7 +303,5 @@
             <button class="btn btn-primary" (click)="enviarEstado()">Nuevo cálculo</button>
           </div>
         </div>
-    </div>
-      
-      
-</body>
+    </div>   
+</body>-->
