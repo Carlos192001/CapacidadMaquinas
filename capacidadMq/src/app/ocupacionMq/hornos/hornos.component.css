@@ -1,12 +1,10 @@
+
 .nav-link{
     cursor: pointer;
 }
 
-#cardporcentaje{
-    padding: 3%;
-}
 .porcentaje{
-    background-color: #005ba2;
+    background-color: #008000;
     color: #f5f9fb;
     width: 200px;
     height: 100px;
@@ -14,3 +12,27 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+.ocupacion{
+    background-color: #008000;
+    width: 75%;
+    height: 90%;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #f5f9fb;
+    font-size: 20px;
+}
+
+.container-tablas{
+    padding: 1% 4%;
+    border: 2px solid #ededed;
+    border-radius: 5px;
+}
+.containerDatos{
+    max-height: 500px;
+    overflow-y: auto;
+}
+ #totalTabla{
+    background-color: #008000;
+    font-size: 20px;
+ }

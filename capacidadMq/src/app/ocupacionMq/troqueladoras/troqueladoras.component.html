@@ -21,13 +21,23 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item" (click)="clicActiveForm(true)">
-        <a class="nav-link" [class.active]="isActiveForm" [attr.aria-current]="isActiveDatos ? 'page' : null">Formulario</a>
+        <a class="nav-link" [class.active]="isActiveForm" [attr.aria-current]="isActiveDatos ? 'page' : null">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+            <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
+          </svg>
+          Formulario
+        </a>
       </li>
       <!--<li class="nav-item" (click)="clicActiveDatos(true)">
         <a class="nav-link" [class.active]="isActiveDatos" [attr.aria-current]="isActiveDatos ? 'page' : null">Datos calculados</a>
       </li>-->
       <li class="nav-item" (click)="clicActiveRegis(true)">
-        <a class="nav-link" [class.active]="isActiveRegis" [attr.aria-current]="isActiveDatos ? 'page' : null">Registros</a>
+        <a class="nav-link" [class.active]="isActiveRegis" [attr.aria-current]="isActiveDatos ? 'page' : null">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+            <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2"/>
+          </svg>
+          Registros
+        </a>
       </li>
     </ul>
   </div>
@@ -145,7 +155,7 @@
               <label for="validarScrapLiberado" class="form-label">Scrap liberado</label>
               <input type="number" [(ngModel)]="scrapLiberado" [ngModelOptions]="{standalone: true}" class="form-control" id="validarScrapLiberado" required
               (focus)="showDescription16 = true" (blur)="showDescription16 = false">
-              <small class="form-text text-muted" *ngIf="showDescription16">Ingrese el porcentaje</small>
+              <small class="form-text text-muted" *ngIf="showDescription16">Ingrese solo el numero del porcentaje</small>
             </div>
             <div class="col-md-3">
               <label for="validarObservaciones" class="form-label">Observaciones</label>
@@ -154,7 +164,12 @@
                 <small class="form-text text-muted" *ngIf="showDescription17">Si no tiene observaciones ingresar "Ninguna"</small>
             </div>
             <div class="col-12">
-              <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)" *ngIf="verBtnCalcular">Calcular</button>
+              <button class="btn btn-primary" type="submit" (click)="registrarDatos(true)" *ngIf="verBtnCalcular">
+                Calcular
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calculator-fill" viewBox="0 0 16 16">
+                  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm2 .5v2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5h-7a.5.5 0 0 0-.5.5m0 4v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M4.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM4 12.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5M7.5 6a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM7 9.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m.5 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zM10 6.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5m.5 2.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-.5-.5z"/>
+                </svg>
+              </button>
             </div>
           </form>
         </div>

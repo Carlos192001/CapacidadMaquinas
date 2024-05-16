@@ -69,10 +69,10 @@
     <div class="interactivo" *ngIf="!datosMaquina">
       <!--<div class="card-body">-->
         <app-finpress *ngIf="formFinPress" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-finpress>
-        <app-inyectoras *ngIf="formInyectoras"></app-inyectoras>
+        <app-inyectoras *ngIf="formInyectoras" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-inyectoras>
         <app-troqueladoras *ngIf="formTroqueladoras" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-troqueladoras>
-        <app-hornos *ngIf="formHornos"></app-hornos>
-        <app-fluxeadoras *ngIf="formFluxeadoras"></app-fluxeadoras>
+        <app-hornos *ngIf="formHornos" [idOcupMq]="idOcupMq" [maquinaSelect]="maquinaSelect" [parteSelect]="parteSelect" (datoEnviado)="manejarNuevoCalculo($event)"></app-hornos>
+        <app-fluxeadoras *ngIf="formFluxeadoras" ></app-fluxeadoras>
       <!--</div>-->
     </div>
     

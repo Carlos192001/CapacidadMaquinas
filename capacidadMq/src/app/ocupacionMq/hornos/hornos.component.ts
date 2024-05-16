@@ -1,16 +1,56 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Parte } from '../../interface/parte';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-hornos',
   templateUrl: './hornos.component.html',
   styleUrl: './hornos.component.css'
 })
-export class HornosComponent {
+export class HornosComponent implements OnInit{
+
+  //variables que se reciben y se envian
+  @Input() maquinaSelect: string = '';
+  @Input() parteSelect: string = '';
+  @Input() idOcupMq!: number;
+  @Output() datoEnviado = new EventEmitter<boolean>();
+
+  descripcionNumParte:string='';
+  ocupacionTotal: number =0;
+  isActiveForm: boolean = true;
+  isActiveRegis: boolean = false;
+  isActiveDatos: boolean = false;
+  //Para mostrar ayuda de los inputs
+  showDescription1: boolean = false;
+  showDescription2: boolean = false;
+  showDescription3: boolean = false;
+  showDescription4: boolean = false;
+  showDescription5: boolean = false;
+  showDescription6: boolean = false;
+  showDescription7: boolean = false;
+  showDescription8: boolean = false;
+  showDescription9: boolean = false;
+  showDescription10: boolean = false;
+  showDescription11: boolean = false;
+  showDescription12: boolean = false;
+  showDescription13: boolean = false;
+  showDescription14: boolean = false;
+  showDescription15: boolean = false;
+  showDescription16: boolean = false;
+  showDescription17: boolean = false;
+  showDescription18: boolean = false;
+  showDescription19: boolean = false;
+
+  verContenedorForm: boolean = true;
+
+  idDatosAcalcular!:number;
+  ocupacionAll:any[]=[];
 
   //variables para activar las pestañas
-  pestania1:boolean=true;
-  pestania2:boolean=false;
-  activarPestania:boolean=false;
+  //pestania1:boolean=true;
+  //pestania2:boolean=false;
+  //activarPestania:boolean=false;
 
   //variebles que contendran los datos ingresados
   requeriAnualAutilizar:number=0;
@@ -55,13 +95,42 @@ export class HornosComponent {
   ocupacionProducto:number=0;
   observaciones:string='';
 
-  verPestania(estado:boolean){
+  /*verPestania(estado:boolean){
     this.pestania1=estado;
     this.pestania2=!estado;
+  }*/
+  constructor(private http: HttpClient){}
+
+  ngOnInit(): void {
+    this.http.get<Parte[]>('http://10.1.0.186:8090/partes/filtrar-numparte/' + this.parteSelect + '/')
+    .subscribe((res: Parte[]) => {
+      if (res.length > 0) {
+        this.descripcionNumParte = res[0].descripcion;
+      } else {
+        alert('No se encontró ninguna descripción para el número de parte:'+this.parteSelect);
+      }
+    }, error => {
+      console.error('Error al obtener la descripción:', error);
+    });
+    this.getOcupacionMq();
+  }
+  //consulta todos las registros que pertenecen al tipo maquina por su codigo
+  getOcupacionMq(){
+    this.http.get('http://127.0.0.1:8000/ocupacionMq/encabezado/HORNEAR/'+this.maquinaSelect+'/').subscribe((resultData:any)=>{
+      this.ocupacionAll = resultData;
+      this.calcularSumaProyectadoOcupAnual();
+    });
+  }
+  calcularSumaProyectadoOcupAnual(): void {
+    const suma = this.ocupacionAll.reduce((sum, item) => {
+      return sum + parseFloat(item.proyectadoOcupAnual);
+    }, 0);
+    this.ocupacionTotal = Number(suma.toFixed(2));
   }
 
-  registrarDatos(estado: boolean){
+  registrarDatos(){
     let bodyData = {
+      "idOcupacionMq" : this.idOcupMq,
       "requeriAnualAutilizar":this.requeriAnualAutilizar,
       "longTotalBanda":this.longTotalBanda,
       "longEfectivoBanda":this.longEfectivoBanda,
@@ -81,26 +150,50 @@ export class HornosComponent {
       "filasJigsSimultaneas":this.filasJigsSimultaneas,
       "cavidadesEnBanda":this.cavidadesEnBanda,
       "numCambiosReceta":this.numCambiosReceta,
-      "estatus":true,
+      "estatus":'ACTIVO',
       "observaciones":this.observaciones,
     }
-    this.activarPestania=estado;
-    this.calcularUso(bodyData);
+    console.log(bodyData);
+    //this.activarPestania=estado;
+    //this.calcularUso(bodyData);
+    if (bodyData) {
+      // Procesa los datos del formulario
+      console.log('Formulario válido, datos:', bodyData);
+      this.http.post('http://127.0.0.1:8000/datosAcalcular/', bodyData)
+      .pipe(
+        catchError(error => {
+          console.error('Error durante el registro:', error);
+          alert('Hubo un error al realizar el cálculo. Por favor, inténtelo de nuevo.');
+          return throwError(error);
+        })
+      )
+      .subscribe((resultData: any) => {
+        console.log('Se realizó el REGISTRO, con este ID:', resultData.id);
+        //alert('Cálculo realizado con éxito');
+        this.idDatosAcalcular = resultData.id;
+        this.calcularUso(bodyData);
+        this.verContenedorForm = false;
+        this.isActiveForm = false; //para desaparecer la pestaña del formulario
+        this.isActiveRegis = true;
+      });
+    } else {
+      console.log('Datos del Formulario inválido');
+    }
   }
   calcularUso(dato:any){
     //console.log(dato);
 
-    this.horaSemanaTurno = dato.horasDelTurno * dato.diasAlaborarSemana * dato.turnosAlDia;
+    this.horaSemanaTurno = Number((dato.horasDelTurno * dato.diasAlaborarSemana * dato.turnosAlDia).toFixed(3));
     console.log('Horas semanas turno:',this.horaSemanaTurno);
 
-    this.longTotalJigDummy = dato.longitudDummy + dato.longitudEntreDummys;
+    this.longTotalJigDummy = Number((dato.longitudDummy + dato.longitudEntreDummys).toFixed(3));
     console.log('Longitud total jig dummy:',this.longTotalJigDummy);
 
-    this.longTotalJigProducto = dato.longitudEntreJigs + dato.longitudJig;
+    this.longTotalJigProducto = Number((dato.longitudEntreJigs + dato.longitudJig).toFixed(3));
     console.log('Longitud total Jig producto:',this.longTotalJigProducto);
 
     if (dato.semanasAlaborar != 0) {
-      this.requerimientoSem = dato.requeriAnualAutilizar / dato.semanasAlaborar;
+      this.requerimientoSem = Number((dato.requeriAnualAutilizar / dato.semanasAlaborar).toFixed(3));
       console.log('Requerimiento semanal:',this.requerimientoSem);
     } else {
       this.requerimientoSem = 0;
@@ -108,7 +201,7 @@ export class HornosComponent {
     }
 
     if (this.requerimientoSem) {
-      this.requerimientoDiario = this.requerimientoSem / dato.diasAlaborarSemana;
+      this.requerimientoDiario = Number((this.requerimientoSem / dato.diasAlaborarSemana).toFixed(3));
       console.log('Requerimiento Diario:',this.requerimientoDiario);
     } else {
       this.requerimientoDiario = 0;
@@ -119,12 +212,12 @@ export class HornosComponent {
       this.numColDummys = 0;
       console.log('Numero columnas Dummys:',this.numColDummys);
     } else {
-      this.numColDummys = (dato.cantidadDummys / dato.filasDummysSimultaneas) - 1;
+      this.numColDummys = Number(((dato.cantidadDummys / dato.filasDummysSimultaneas) - 1).toFixed(3));
       console.log('Numero columnas Dummys:',this.numColDummys);
     }
 
     if (this.requerimientoDiario) {
-      this.numColJigProducto = this.requerimientoDiario/ dato.filasJigsSimultaneas;
+      this.numColJigProducto = Number((this.requerimientoDiario/ dato.filasJigsSimultaneas).toFixed(3));
       console.log('Numero columnas Jig producto:',this.numColJigProducto);
     } else {
       this.numColJigProducto = 0;
@@ -207,7 +300,79 @@ export class HornosComponent {
     }
 
     this.proyectadoOcupAnual = Number((this.ocupacionProducto + this.OcupacionRestoDummys + this.ocupacionPrimerDummy).toFixed(2));
+    console.log('proyectado anual:',this.proyectadoOcupAnual);
 
+    let bodyData ={
+      "idDatosAcalcular": this.idDatosAcalcular,
+      "horaSemanaTurno": this.horaSemanaTurno,
+      "longTotalJigDummy": this.longTotalJigDummy,
+      "longTotalJigProducto": this.longTotalJigProducto,
+      "requerimientoSem": this.requerimientoSem,
+      "requerimientoDiario": this. requerimientoDiario,
+      "numColDummys": this.numColDummys,
+      "numColJigProducto": this.numColJigProducto,
+      "timeDisponibleHornoAlDia": this.timeDisponibleHornoAlDia,
+      "horneadoXpzaPrimerDummy": this.horneadoXpzaPrimerDummy,
+      "horneadoXpzaRestoDummys": this.horneadoXpzaRestoDummys,
+      "horneadoXpzaProducto": this.horneadoXpzaProducto,
+      "timeRecorriPrimerDummy": this.timeRecorriPrimerDummy,
+      "timeRecorriRestoDummys": this.timeRecorriRestoDummys,
+      "timeRecorridoProducto": this.timeRecorridoProducto,
+      "ocupacionPrimerDummy": this.ocupacionPrimerDummy,
+      "OcupacionRestoDummys": this.OcupacionRestoDummys,
+      "ocupacionProducto": this.ocupacionProducto,
+      "proyectadoOcupAnual":this.proyectadoOcupAnual,
+      "estatus": "ACTIVO"
+    }
+    this.http.post('http://127.0.0.1:8000/resultadoCalculo/', bodyData)
+      .pipe(
+        catchError(error => {
+          console.error('Error durante el registro:', error);
+          alert('Hubo un error al realizar el cálculo. Por favor, inténtelo de nuevo.');
+          return throwError(error);
+        })
+      )
+      .subscribe(
+        (resultData: any) => {
+          alert('Cálculo realizado con éxito');
+          this.getOcupacionMq();
+        }
+      );
+
+  }
+
+  //para cambiar la maquina o el numero de parte
+  cambio(){
+    this.datoEnviado.emit(true);
+  }
+  enviarEstado(): void {
+    this.datoEnviado.emit(true); // Envía true al componente padre
+  }
+  clicActiveForm(estado:boolean){
+    this.isActiveForm= estado;
+    this.isActiveRegis = !estado;
+  }
+  clicActiveRegis(estado:boolean){
+    this.isActiveForm= !estado;
+    this.isActiveRegis = estado;
+  }
+  getBackgroundColor(): string {
+    if (this.proyectadoOcupAnual <= 85) {
+      return '#008000'; // Verde
+    } else if (this.proyectadoOcupAnual > 85 && this.proyectadoOcupAnual < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
+  }
+  getBackgroundColorTotal(): string {
+    if (this.ocupacionTotal <= 85) {
+      return '#008000'; // Verde
+    } else if (this.ocupacionTotal > 85 && this.ocupacionTotal < 90) {
+      return '#FFA500'; // Anaranjado
+    } else {
+      return '#FF0000'; // Rojo
+    }
   }
 
 }

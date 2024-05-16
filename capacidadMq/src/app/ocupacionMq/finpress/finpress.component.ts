@@ -156,20 +156,16 @@ export class FinpressComponent implements OnInit{
     this.horaSemanaTurno = dato.horasDelTurno * dato.diasAlaborarSemana * dato.turnosAlDia;
     console.log("horas por semana por turno:",this.horaSemanaTurno);
 
-    let ensamblesPorminuto = dato.cortesXminuto / dato.pzaRequeridas; //aqui se va a cambiar los 46, pero eso viene del catalogo
-    /*this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); // o Number(ensamblesPorminuto.toFixed(3));
-    console.log("ensambles por minuto:",this.ensamblesXminuto);*/
+    let ensamblesPorminuto = dato.cortesXminuto / dato.pzaRequeridas; 
+
     if (ensamblesPorminuto) {
-      this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); // o Number(ensamblesPorminuto.toFixed(3));
+      this.ensamblesXminuto = Number(ensamblesPorminuto.toFixed(3)); 
       console.log("ensambles por minuto:",this.ensamblesXminuto);
     } else {
-      this.ensamblesXminuto = 0; // o Number(ensamblesPorminuto.toFixed(3));
+      this.ensamblesXminuto = 0; 
       console.log("ensambles por minuto:",this.ensamblesXminuto);
     }
 
-    /*let ensamblesPorhora = ensamblesPorminuto * 60;
-    this.ensamblesXhora = Number(ensamblesPorhora.toFixed(3));
-    console.log("ensambles por hora:",this.ensamblesXhora)*/
     if (ensamblesPorminuto) {
       this.ensamblesXhora = Number((ensamblesPorminuto * 60).toFixed(3));
       console.log("ensambles por hora:",this.ensamblesXhora);
@@ -207,12 +203,7 @@ export class FinpressComponent implements OnInit{
       this.hrsNcesRequeDiario = 0;
       console.log("Horas necesarias requerimiento diario:", this.hrsNcesRequeDiario);
     }
-    
-    /*let primero = dato.demorasInevitables + dato.tiempoMuertoPlan + dato.tiempoSetUp;
-    let segundo = dato.horasDelTurno - primero / 60;
-    let resultado = segundo *dato.turnosAlDia;
-    this.tiempoEfecDiario = Number(resultado.toFixed(3));*/
-    //(dato.horasDelTurno((dato.demorasInevitables+dato.tiempoMuertoPlan+dato.tiempoSetUp)/60))*dato.turnosAlDia;
+
     this.tiempoEfecDiario = Number(((this.horasDelTurno-((this.demorasInevitables+this.tiempoMuertoPlan+this.tiempoSetUp)/60))*this.turnosAlDia).toFixed(3))
     console.log("tiempo efectivo diario:",this.tiempoEfecDiario);
 
