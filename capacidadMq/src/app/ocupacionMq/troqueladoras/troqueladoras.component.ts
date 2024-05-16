@@ -355,7 +355,7 @@ export class TroqueladorasComponent implements OnInit{
     this.http.post('http://127.0.0.1:8000/resultadoCalculo/',bodyData).subscribe((resultData:any)=>{
       console.log('resgitro de los datos correcto');
       this.getOcupacionMq();
-    })
+    });
   }
   getOcupacionMq(){
     this.http.get('http://127.0.0.1:8000/ocupacionMq/encabezado/TROQUELAR/'+this.maquinaSelect+'/').subscribe((resultData:any)=>{

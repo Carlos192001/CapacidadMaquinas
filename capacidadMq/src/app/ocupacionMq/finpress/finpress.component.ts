@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
+import { Parte } from '../../interface/parte';
 
 @Component({
   selector: 'app-finpress',
@@ -70,11 +71,22 @@ export class FinpressComponent implements OnInit{
   showDescription13: boolean = false;
 
   idDatosAcalcular!:number;
+  ocupacionAll:any[]=[];
 
   constructor(private http:HttpClient){}
 
   ngOnInit(): void {
-    //throw new Error('Method not implemented.');
+    this.http.get<Parte[]>('http://10.1.0.186:8090/partes/filtrar-numparte/' + this.parteSelect + '/')
+    .subscribe((res: Parte[]) => {
+      if (res.length > 0) {
+        this.descripcionNumParte = res[0].descripcion;
+      } else {
+        alert('No se encontró ninguna descripción para el número de parte:'+this.parteSelect);
+      }
+    }, error => {
+      console.error('Error al obtener la descripción:', error);
+    });
+    this.getOcupacionMq();
   }
 
   //para cambiar la maquina o el numero de parte
@@ -106,8 +118,8 @@ export class FinpressComponent implements OnInit{
       "estatus":'ACTIVO',
       "observaciones" : this.observaciones,
     }
-    this.calcularUso(bodyData);
     //console.log(bodyData);
+   
     this.http.post('http://127.0.0.1:8000/datosAcalcular/', bodyData)
       .pipe(
         catchError(error => {
@@ -196,22 +208,61 @@ export class FinpressComponent implements OnInit{
       console.log("Horas necesarias requerimiento diario:", this.hrsNcesRequeDiario);
     }
     
-    let primero = dato.demorasInevitables + dato.tiempoMuertoPlan + dato.tiempoSetUp;
+    /*let primero = dato.demorasInevitables + dato.tiempoMuertoPlan + dato.tiempoSetUp;
     let segundo = dato.horasDelTurno - primero / 60;
     let resultado = segundo *dato.turnosAlDia;
-    this.tiempoEfecDiario = Number(resultado.toFixed(3));
+    this.tiempoEfecDiario = Number(resultado.toFixed(3));*/
     //(dato.horasDelTurno((dato.demorasInevitables+dato.tiempoMuertoPlan+dato.tiempoSetUp)/60))*dato.turnosAlDia;
+    this.tiempoEfecDiario = Number(((this.horasDelTurno-((this.demorasInevitables+this.tiempoMuertoPlan+this.tiempoSetUp)/60))*this.turnosAlDia).toFixed(3))
     console.log("tiempo efectivo diario:",this.tiempoEfecDiario);
 
     let primeroPorcentaje = horasRequerimientoDiario / this.tiempoEfecDiario;
     let segundoPorcentaje = primeroPorcentaje * 100;
     if (segundoPorcentaje) {
       this.proyectadoOcupAnual = Number(segundoPorcentaje.toFixed(2));
+      console.log('proyectado de ocupacion anual:', this.proyectadoOcupAnual);
     } else {
       this.proyectadoOcupAnual = 0;
+      console.log('proyectado de ocupacion anual:', this.proyectadoOcupAnual);
     }
 
+    this.calcularSumaProyectadoOcupAnual();
+
+    let bodyData = {
+      "idDatosAcalcular": this.idDatosAcalcular,
+      "horaSemanaTurno": this.horaSemanaTurno,
+      "ensamblesXminuto": this.ensamblesXminuto,
+      "ensamblesXhora": this.ensamblesXhora,
+      "requerimientoSem": this.requerimientoSem,
+      "hrsNcesRequeDiario": this.hrsNcesRequeDiario,
+      "tiempoEfecDiario": this.tiempoEfecDiario,
+      "ensamReqXdia": this.ensamReqXdia,
+      "ensamXdiaMasScrap": this.ensamXdiaMasScrap,
+      "proyectadoOcupAnual":this.proyectadoOcupAnual,
+      "estatus": "ACTIVO"
+    }
+    //console.log(bodyData);
+    this.http.post('http://127.0.0.1:8000/resultadoCalculo/',bodyData).subscribe((resultData:any)=>{
+      console.log('registro de los datos correcto');
+      this.getOcupacionMq();
+    });
+
   }
+  //consulta todos las registros que pertenecen al tipo maquina por su codigo
+  getOcupacionMq(){
+    this.http.get('http://127.0.0.1:8000/ocupacionMq/encabezado/ACABADO/'+this.maquinaSelect+'/').subscribe((resultData:any)=>{
+      this.ocupacionAll = resultData;
+      this.calcularSumaProyectadoOcupAnual();
+    });
+  }
+
+  calcularSumaProyectadoOcupAnual(): void {
+    const suma = this.ocupacionAll.reduce((sum, item) => {
+      return sum + parseFloat(item.proyectadoOcupAnual);
+    }, 0);
+    this.ocupacionTotal = Number(suma.toFixed(2));
+  }
+
   enviarEstado(): void {
     this.datoEnviado.emit(true); // Envía true al componente padre
   }
