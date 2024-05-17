@@ -52,8 +52,8 @@ export class FinpressComponent implements OnInit{
   isActiveRegis: boolean = false;
   isActiveDatos: boolean = false;
 
-  //ver el boton de calcular
-  verBtnCalcular: boolean = true;
+  //para no mostrar la pestaña del formulario
+  verContenedorForm: boolean = true;
 
   //Para mostrar ayuda de los inputs
   showDescription1: boolean = false;
@@ -133,9 +133,9 @@ export class FinpressComponent implements OnInit{
         alert('Cálculo realizado con éxito');
         this.idDatosAcalcular = resultData.id;
         this.calcularUso(bodyData);
+        this.verContenedorForm = false;
         this.isActiveForm = false; //para desaparecer la pestaña del formulario
         this.isActiveRegis = true;
-        this.verBtnCalcular = false; //para que el btn de calcular no deje calcular de nuevo el valor
         this.cortesXminuto = 0;
         this.pzaRequeridas = 0;
         this.requeriAnualAutilizar = 0;

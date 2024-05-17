@@ -69,7 +69,8 @@ def datosEncabezado(request,funcion,codMaquina):
             INNER JOIN parte_parte ON ocupacionMq_ocupacionmq.numParte = parte_parte.numParte
             INNER JOIN datosAcalcular_datosacalcular ON ocupacionMq_ocupacionmq.id = datosAcalcular_datosacalcular.idOcupacionMq
             INNER JOIN resultadoCalculo_resultadocalculo ON datosAcalcular_datosacalcular.id = resultadoCalculo_resultadocalculo.idDatosAcalcular
-            WHERE ocupacionMq_ocupacionmq.funcion = %s AND ocupacionMq_ocupacionmq.estatus = 1 AND ocupacionMq_ocupacionmq.codInternoMq = %s;
+            WHERE ocupacionMq_ocupacionmq.funcion = %s AND ocupacionMq_ocupacionmq.estatus = 1 AND ocupacionMq_ocupacionmq.codInternoMq = %s
+            ORDER BY id DESC;
         """, [funcion, codMaquina])    
 
         # Obtener los resultados como un diccionario
