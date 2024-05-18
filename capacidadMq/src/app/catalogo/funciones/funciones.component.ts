@@ -1,48 +1,64 @@
-import { Component, ElementRef, HostListener } from '@angular/core';
+import { Component} from '@angular/core';
+import {CurrencyPipe} from '@angular/common';
+import {MatTableModule} from '@angular/material/table';
+
+export interface Transaction {
+  item: string;
+  cost: number;
+}
 
 @Component({
   selector: 'app-funciones',
   templateUrl: './funciones.component.html',
-  styleUrl: './funciones.component.css'
+  styleUrl: './funciones.component.css',
+  standalone: true,
+  imports: [MatTableModule, CurrencyPipe],
 })
 export class FuncionesComponent {
 
-  constructor() { }
-  dropdownMenuVisible: boolean = false;
+  displayedColumns = ['item', 'cost'];
+  transactions: Transaction[] = [
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 10},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 10},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 10},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 10},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 10},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+    {item: 'Beach ball', cost: 4},
+    {item: 'Towel', cost: 10},
+    {item: 'Frisbee', cost: 2},
+    {item: 'Sunscreen', cost: 4},
+    {item: 'Cooler', cost: 25},
+    {item: 'Swim suit', cost: 15},
+  ];
 
-  ngOnInit(): void {
-  }
-
-  @HostListener('document:click', ['$event'])
-  toggleDropdown(event: Event) {
-    const clickedElement = event.target as HTMLElement;
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const dropdownButton = document.getElementById('dropdownButton');
-
-    if (dropdownMenu && dropdownButton) {
-      if (clickedElement === dropdownButton || dropdownButton.contains(clickedElement)) {
-        this.dropdownMenuVisible = !this.dropdownMenuVisible;
-      } else if (!dropdownMenu.contains(clickedElement)) {
-        this.dropdownMenuVisible = false;
-      }
-    }
-  }
-  
-
-  toggleMenu() {
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    if (dropdownMenu) {
-      dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
-    }
-  }
-  
-  verTarjeta:boolean=false;
-
-  mostrarTarjeta(){
-    this.verTarjeta=!this.verTarjeta;
-  }
-  ocultarTarjeta(){
-    this.verTarjeta=false;
+  /** Gets the total cost of all transactions. */
+  getTotalCost() {
+    return this.transactions.map(t => t.cost).reduce((acc, value) => acc + value, 0);
   }
 
 }

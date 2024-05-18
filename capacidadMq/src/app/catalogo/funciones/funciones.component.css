@@ -1,3 +1,14 @@
+.example-container {
+  max-height: 400px; /* ajusta esto según sea necesario */
+  overflow-y: auto;
+}
+
+.table-wrapper {
+  max-height: inherit;
+  overflow-y: inherit;
+}
+
+
 /*.bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -104,43 +115,42 @@
 .nav-link:hover {
     background-color: #f0f0f0; /* Cambia el color de fondo al pasar el mouse */
 }
+
 /*esto es para el logo de la imagen*/
-.navbar-buttons{
-	margin-right: 5%;
-}  
-.navbar-logo img {
-	height: 33%; /* El logo tendrá un 15% de la altura de su contenedor */
+.navbar-brand{
+  height: 5%; /* El logo tendrá un 5% de la altura de su contenedor */
 	width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
-	max-width: 33%; /* Limita el ancho máximo al 15% del contenedor */
-	margin-left: 2%;
+	max-width: 5%; /* Limita el ancho máximo al 5% del contenedor */
+	margin-left: 1%;
 }
 
 /*Estilos para pantallas medianas*/
 @media screen and (max-width: 992px) {
-    .navbar-logo img {
-        height: 33%; /* El logo tendrá un 15% de la altura de su contenedor */
-        width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
-        max-width: 33%; /* Limita el ancho máximo al 15% del contenedor */
-        margin-left: 2%;
-    }
+  .navbar-brand{
+    height: 10%; /* El logo tendrá un 5% de la altura de su contenedor */
+    width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
+    max-width: 10%; /* Limita el ancho máximo al 5% del contenedor */
+    margin-left: 1%;
+  }
 
 }
 /* Estilos para dispositivos con una pantalla más pequeña */
 @media screen and (max-width: 768px) {
-    .navbar-logo img {
-        height: 33%; /* El logo tendrá un 15% de la altura de su contenedor */
-        width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
-        max-width: 33%; /* Limita el ancho máximo al 15% del contenedor */
-        margin-left: 2%;
-    }
+  .navbar-brand{
+    height: 15%; /* El logo tendrá un 5% de la altura de su contenedor */
+    width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
+    max-width: 15%; /* Limita el ancho máximo al 5% del contenedor */
+    margin-left: 1%;
+  }
 }
 
 /* Estilos para pantallas extra pequeñas */
 @media screen and (max-width: 576px) {
-    .navbar-logo img {
-        height: 15%; /* El logo tendrá un 15% de la altura de su contenedor */
-        width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
-        max-width: 15%; /* Limita el ancho máximo al 15% del contenedor */
-        margin-left: 2%;
-    }
+  .navbar-brand{
+    height: 15%; /* El logo tendrá un 5% de la altura de su contenedor */
+    width: auto; /* El ancho se ajustará automáticamente para mantener la proporción */
+    max-width: 15%; /* Limita el ancho máximo al 5% del contenedor */
+    margin-left: 1%;
+  }
+
 }

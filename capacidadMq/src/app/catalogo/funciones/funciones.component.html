@@ -2,9 +2,10 @@
 <body>
   <header class="navbar sticky-top flex-md-nowrap p-0 shadow" style="background-color: #005ba2;" data-bs-theme="primary">
     <!--<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" >Company name</a>-->
-    <div class="navbar-logo">
-      <img src="assets/img-logo/Letras_Airtemp.png" alt="LogoLetras" >
-    </div>
+    <!--<div class="navbar-logo">
+      <img src="assets/img-logo/Logo_pegasus_sin_fondo.png" alt="LogoLetras" >
+    </div>-->
+    <img class="navbar-brand" src="assets/img-logo/Logo_pegasus_sin_fondo.png" alt="LogoLetras" >
     <ul class="navbar-nav flex-row d-md-none">
       <li class="nav-item text-nowrap"> <!--solo se muestra cuando esta en panatalla pequeña es el buscador-->
         <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
@@ -47,6 +48,7 @@
                   INICIO
                 </a>
               </li>
+              <hr class="my-3">
               <li class="nav-item">
                 <a class="nav-link d-flex align-items-center gap-2" style="cursor: pointer;">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter-square-fill" viewBox="0 0 16 16">
@@ -106,26 +108,20 @@
 
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Dashboard</h1>
+          <h1 class="h2">Reportes - Capacidad</h1>
           <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group me-2" role="group" aria-label="First group">
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
-                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-                  </svg>
-                  Inicio
-                </button>
+                <div class="btn-group me-2 fw-bold" role="group" aria-label="Second group">
+                  Del
+                </div>
+                <input type="date" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1">
+              </div>
+              <div class="btn-group me-2 fw-bold" role="group" aria-label="Second group">
+                al
               </div>
               <div class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16">
-                    <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857z"/>
-                    <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
-                  </svg>
-                  Fin
-                </button>
+                <input type="date" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1">
               </div>
               <div class="btn-group" role="group" aria-label="Third group">
                 <button type="button" class="btn btn-sm btn-outline-success">
@@ -140,12 +136,31 @@
         </div>
 
         <!--<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>-->
-        <div class="my-4 w-100" id="myChart" width="900" height="380">
-          aqui xd
-        </div>
+        <section class="example-container mat-elevation-z8" tabindex="0">
+          <table mat-table [dataSource]="transactions">
+            <!-- Item Column -->
+            <ng-container matColumnDef="item">
+              <th mat-header-cell *matHeaderCellDef> Item </th>
+              <td mat-cell *matCellDef="let transaction"> {{transaction.item}} </td>
+              <td mat-footer-cell *matFooterCellDef> Total </td>
+            </ng-container>
+        
+            <!-- Cost Column -->
+            <ng-container matColumnDef="cost">
+              <th mat-header-cell *matHeaderCellDef> Cost </th>
+              <td mat-cell *matCellDef="let transaction"> {{transaction.cost | currency}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" style="background-color: #005ca26c; color: white;"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true" style="font-weight: bold;"></tr>
+          </table>
+        </section>
+        
 
-        <h2>Section title</h2>
-        <div class="table-responsive small">
+        <h2>Más Información</h2>
+        <!--<div class="table-responsive small">
           <table class="table table-striped table-sm">
             <thead>
               <tr>
@@ -173,7 +188,7 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </div>-->
       </main>
     </div>
   </div>

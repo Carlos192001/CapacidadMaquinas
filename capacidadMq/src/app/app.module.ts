@@ -22,6 +22,17 @@ import { DatogeneralComponent } from './catalogo/datogeneral/datogeneral.compone
 import { CapacidadMqComponent } from './panels/capacidad-mq/capacidad-mq.component';
 import { RealizarCalculosComponent } from './header/realizar-calculos/realizar-calculos.component';
 import { LoginComponent } from './login/login.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -30,7 +41,6 @@ import { LoginComponent } from './login/login.component';
     MaquinasComponent,
     PlantasComponent,
     PartesComponent,
-    FuncionesComponent,
     DepartamentosComponent,
     CalcularCapacidadComponent,
     InyectorasComponent,
@@ -48,9 +58,19 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
