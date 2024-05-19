@@ -5,5 +5,5 @@ pip install mssql-django==1.4
 pip install django-cors-headers
 pip install PyJWT
 pip install djangorestframework
-echo Instalación completada.
+echo Instalación completada con exito
 pause
