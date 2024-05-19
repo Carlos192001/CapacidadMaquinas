@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 import {CurrencyPipe} from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 
+
 export interface Transaction {
   item: string;
   cost: number;
@@ -11,8 +12,6 @@ export interface Transaction {
   selector: 'app-funciones',
   templateUrl: './funciones.component.html',
   styleUrl: './funciones.component.css',
-  standalone: true,
-  imports: [MatTableModule, CurrencyPipe],
 })
 export class FuncionesComponent {
 

@@ -22,7 +22,7 @@ export class ProcesosComponent {
   plantasForm:boolean=false;
   departamentosForm:boolean=false;
   parteForm:boolean=false;
-  funcionForm:boolean=false;
+  //funcionForm:boolean=false;
   clienteForm:boolean=false;
 
   toggleMenu() {
@@ -90,7 +90,7 @@ export class ProcesosComponent {
     this.plantasForm = !estado;
     this.departamentosForm = !estado;
     this.parteForm = !estado;
-    this.funcionForm = !estado;
+    //this.funcionForm = !estado;
     this.menuAbierto = !estado;
     this.clienteForm = !estado;
   }
@@ -101,7 +101,7 @@ export class ProcesosComponent {
     this.plantasForm = !estado;
     this.departamentosForm = !estado;
     this.parteForm = !estado;
-    this.funcionForm = !estado;
+    //this.funcionForm = !estado;
     this.menuAbierto = !estado;
     this.clienteForm = !estado;
   }
@@ -111,7 +111,7 @@ export class ProcesosComponent {
     this.plantasForm = estado;
     this.departamentosForm = !estado;
     this.parteForm = !estado;
-    this.funcionForm = !estado;
+    //this.funcionForm = !estado;
     this.menuAbierto = !estado;
     this.clienteForm = !estado;
   }
@@ -121,7 +121,7 @@ export class ProcesosComponent {
     this.plantasForm = !estado;
     this.departamentosForm = estado;
     this.parteForm = !estado;
-    this.funcionForm = !estado;
+    //this.funcionForm = !estado;
     this.menuAbierto = !estado;
     this.clienteForm = !estado;
   }
@@ -131,7 +131,7 @@ export class ProcesosComponent {
     this.plantasForm = !estado;
     this.departamentosForm = !estado;
     this.parteForm = estado;
-    this.funcionForm = !estado;
+    //this.funcionForm = !estado;
     this.menuAbierto = !estado;
     this.clienteForm = !estado;
   }
@@ -141,7 +141,7 @@ export class ProcesosComponent {
     this.plantasForm = !estado;
     this.departamentosForm = !estado;
     this.parteForm = !estado;
-    this.funcionForm = estado;
+    //this.funcionForm = estado;
     this.menuAbierto = !estado;
     this.clienteForm = !estado;
   }
@@ -151,7 +151,7 @@ export class ProcesosComponent {
     this.plantasForm = !estado;
     this.departamentosForm = !estado;
     this.parteForm = !estado;
-    this.funcionForm = !estado;
+    //this.funcionForm = !estado;
     this.menuAbierto = !estado;
     this.clienteForm = estado;
   }

@@ -39,11 +39,11 @@
       <div class="clientes">
         <button class="btn" (click)="catalogoClientes(true)">Clientes</button>
       </div>
-      
+
     </section>
-    
+
   </div>
-  
+
   <!-- Contenido -->
   <div class="contenido" [ngClass]="{'desplazado': menuAbierto}">
     <!--<img src="assets\img-logo\Letras_Airtemp.png" alt="Logo" >-->
@@ -57,7 +57,7 @@
   <app-plantas *ngIf="plantasForm"></app-plantas>
   <app-departamentos *ngIf="departamentosForm"></app-departamentos>
   <app-partes *ngIf="parteForm"></app-partes>
-  <app-funciones *ngIf="funcionForm"></app-funciones>
+  <!--<app-funciones *ngIf="funcionForm"></app-funciones>-->
   <app-cliente *ngIf="clienteForm"></app-cliente>
 </div>
 
